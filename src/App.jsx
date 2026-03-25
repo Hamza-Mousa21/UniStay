@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import AllResidence from "./Component/allResedince"  // Note: filename still has typo, but component name fixed
-import ResDetails from "./Component/ResDetails"
+import AllResidence from "./Container/AllResedintPage"
+import ResDetails from "./Container/ResDetailsPage"
 
 function App() {
   return (

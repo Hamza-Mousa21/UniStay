@@ -1,0 +1,292 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  direction: ltr;
+  gap: 0;
+}
+
+/* القسم اليسار */
+.form-section {
+  width: 48%;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px 20px;
+  overflow-y: auto;
+}
+
+.form-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.form-section::-webkit-scrollbar-thumb {
+  background-color: #d0d0d0;
+  border-radius: 10px;
+}
+
+.form-box {
+  width: 100%;
+  max-width: 500px;
+  direction: rtl;
+}
+
+.form-box h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #1B2A41;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #abaaaa;
+  margin-bottom: 14px;
+}
+
+/* أزرار النوع */
+.user-type {
+  display: flex;
+  background-color: #e7e7e7;
+  border-radius: 12px;
+  padding: 4px;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.type-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #1B2A41;
+  font-size: 15px;
+  font-weight: 700;
+  height: 42px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.type-btn.active {
+  background-color: #1B2A41;
+  color: #ffffff;
+}
+
+/* الحقول */
+.input-group {
+  margin-bottom: 11px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #1B2A41;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.input-group input {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  padding: 0 13px;
+  font-size: 14px;
+  color: #1B2A41;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: #abaaaa;
+  font-size: 13px;
+}
+
+.password-box {
+  position: relative;
+}
+
+.password-box input {
+  padding-left: 38px;
+}
+
+.toggle-password {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #abaaaa;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* الزر */
+.submit-btn {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background-color: #1B2A41;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #243754;
+}
+
+/* القسم اليمين */
+.image-section {
+  width: 52%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -1px;
+}
+
+.bg-image {
+  position: absolute;
+  inset: 0;
+  width: calc(100% + 2px);
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  left: -1px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(27, 42, 65, 0.30),
+    rgba(171, 170, 170, 0.10)
+  );
+  z-index: 1;
+}
+
+.image-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  direction: rtl;
+  padding: 20px;
+}
+
+.icon-box {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.image-content h1 {
+  font-size: 37px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.image-content p {
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+/* شاشات أصغر */
+@media (max-width: 1200px) {
+  .form-box {
+    max-width: 450px;
+  }
+
+  .form-box h2 {
+    font-size: 21px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .type-btn {
+    height: 39px;
+    font-size: 14px;
+  }
+
+  .input-group {
+    margin-bottom: 9px;
+  }
+
+  .input-group label {
+    font-size: 13px;
+  }
+
+  .input-group input {
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .submit-btn {
+    height: 41px;
+    font-size: 15px;
+  }
+
+  .image-content h1 {
+    font-size: 32px;
+  }
+
+  .image-content p {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+    overflow: auto;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .form-section,
+  .image-section {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+  }
+
+  .form-section {
+    overflow: visible;
+    padding: 20px 14px;
+  }
+
+  .image-section {
+    min-height: 260px;
+  }
+
+  .bg-image {
+    width: 100%;
+    left: 0;
+  }
+}

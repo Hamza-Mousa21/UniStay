@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إضافة سكن</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alyamama:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <section>
+      <h2 class="section-title">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>الموقع والسعر</span>
+      </h2>
+
+      <div class="grid">
+        <input type="text" placeholder="العنوان الكامل">
+        <input type="text" placeholder="الحي">
+        <input type="number" placeholder="السعر الشهري">
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">
+        <i class="fa-solid fa-bed"></i>
+        <span>المواصفات</span>
+      </h2>
+
+      <div class="grid">
+        <div class="spec-card">
+          <label>سعة السكن</label>
+          <input type="number" placeholder="أدخل السعة">
+        </div>
+
+        <div class="spec-card">
+          <label>عدد الغرف</label>
+          <input type="number" placeholder="أدخل عدد الغرف">
+        </div>
+
+        <div class="spec-card">
+          <label>عدد الحمامات</label>
+          <input type="number" placeholder="أدخل عدد الحمامات">
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">
+        <i class="fa-solid fa-paperclip"></i>
+        <span>المرفقات والخدمات</span>
+      </h2>
+
+      <div class="services-grid">
+        <div class="service-card" onclick="toggle(this)">
+          <i class="fa-solid fa-wifi"></i>
+          <p>إنترنت WiFi</p>
+        </div>
+
+        <div class="service-card" onclick="toggle(this)">
+          <i class="fa-solid fa-car"></i>
+          <p>موقف سيارات</p>
+        </div>
+
+        <div class="service-card" onclick="toggle(this)">
+          <i class="fa-solid fa-shield-halved"></i>
+          <p>أمن وحراسة</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">
+        <i class="fa-regular fa-image"></i>
+        <span>صور السكن</span>
+      </h2>
+
+      <div class="upload-box">
+        <i class="fa-regular fa-images upload-icon"></i>
+        <p>اضغط لتحميل الصور أو اسحبها هنا</p>
+        <small>PNG, JPG حتى 5MB</small>
+        <input type="file" multiple>
+        <p id="file-name"></p>
+      </div>
+    </section>
+
+    <p id="error-message"></p>
+
+    <button class="btn" onclick="submitForm()">نشر الإعلان</button>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

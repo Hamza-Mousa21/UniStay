@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/loginstudent.css" />
+    <script defer src="./java/loginstudent.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alyamama:wght@300..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <title>تسجيل دخول الطالب</title>
+  </head>
+
+  <body>
+    <section class="hero">
+      <div class="hero-background">
+        <img
+          src="../images/bwb_jm_lnjh.jpg__1320x740_q95_crop_subsampling-2_upscale.jpg"
+          alt="صورة سكن طلابي"
+        />
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <header class="navbar">
+          <div class="nav-right">
+            <a href="Home.html" class="logo">UniStay</a>
+            <a href="Home.html" class="logo-icon" aria-label="الشعار">
+              <img
+                src="../images/5409f3b3-b085-4d42-8652-580678be8b8f.jpg"
+                alt="شعار الموقع"
+              />
+            </a>
+          </div>
+
+          <nav class="nav-center" id="nav-actaion">
+            <ul class="nav-links">
+              <li><a href="Home.html">الرئيسية</a></li>
+              <li><a href="Home.html#hero">ابحث عن سكن</a></li>
+              <li><a href="Home.html#why-us">لماذا تختار منصتنا</a></li>
+              <li><a href="Home.html#how-it-works">كيف تعمل منصتنا</a></li>
+            </ul>
+          </nav>
+
+          <div class="nav-left">
+            <a href="loginstudent.html" class="login-link active-link"
+              >تسجيل الدخول</a
+            >
+            <a href="#" class="add-property-btn">أضف عقارك</a>
+          </div>
+        </header>
+
+        <main class="login-wrapper">
+          <section class="login-card">
+            <h2>أهلًا بك في UniStay</h2>
+            <p class="subtitle">سجّل الدخول كطالب للوصول إلى حسابك</p>
+
+            <div class="user-type">
+              <button type="button" class="type-btn active" id="studentBtn">
+                طالب
+              </button>
+              <button type="button" class="type-btn" id="ownerBtn">
+                صاحب سكن
+              </button>
+            </div>
+
+            <form id="loginForm">
+              <div class="input-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="example@student.najah.edu"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="password">كلمة المرور</label>
+                <div class="password-box">
+                  <span class="toggle-password">
+                    <i class="fa-regular fa-eye"></i>
+                  </span>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="أدخل كلمة المرور"
+                  />
+                </div>
+              </div>
+
+              <div class="options-row">
+                <a href="#" class="forgot-password">هل نسيت كلمة المرور؟</a>
+              </div>
+
+              <button type="submit" class="submit-btn">تسجيل الدخول</button>
+
+              <p class="switch-text">
+                ليس لديك حساب؟
+                <a href="#" id="createAccountLink"> إنشاء حساب </a>
+              </p>
+            </form>
+          </section>
+        </main>
+      </div>
+    </section>
+   
+  </body>
+  
+<footer class="login-footer">
+      <p>© 2026 UniStay . جميع الحقوق محفوظة</p>
+      <p>صُمم بعناية لطلاب جامعة النجاح الوطنية</p>
+    </footer>
+
+</html>

@@ -3,12 +3,17 @@ import { useParams } from "react-router-dom"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { TextField } from "@mui/material";
 import ContactSidebar from "../Component/ContactSidebar";
+import MobileContactBar from "../Component/MobileContactBar";
+
 
 
 
 const ResDetails = () => {
     const { id } = useParams()
     const [hotel, setHotel] = useState(null)
+    const [isMobile,setIsMobile]=useState(window.innerWidth>=768)
+
+  
 
     useEffect(() => {
         const getHotel = async () => {
@@ -23,6 +28,17 @@ const ResDetails = () => {
         if (id) getHotel()
     }, [id])
 
+
+   
+
+   useEffect(()=>{
+        const handleIsMobileState=()=>{
+            setIsMobile(window.innerWidth>=768)
+        }
+
+        window.addEventListener("resize",handleIsMobileState)
+        return ()=> window.removeEventListener("resize",handleIsMobileState)
+    },[])
     if (!hotel) return <div className="text-center">Loading</div>
 
     const images=[
@@ -36,8 +52,8 @@ const ResDetails = () => {
 
         
     ]
-    console.log(images.length)
-    let restImages=0;
+
+     let restImages=0;
     if(images.length-5===0){
         restImages=false;
         
@@ -45,18 +61,20 @@ const ResDetails = () => {
     else{
         restImages=images.length-5;
     }
+
+   
 return (
 <>
 
         
-    <div className="mt-4 col-12 col-md-12 col-lg-12 " style={{padding:"2.5rem"}}>
+    <div className="container mt-4 col-12 col-md-12 col-lg-12 ">
         <div className="mb-3">
             <ArrowBackIcon sx={{color:"#1b2a41"}}></ArrowBackIcon>  
             <a href="/" className="mb-3" style={{textDecoration:"none", color:"#1b2a41"}}><b> Back to previous page</b></a>
         </div>
 
         <div className="d-flex">
-            <div className="col-8 col-md-6 col-lg-7 me-2">
+            <div className="col-12 col-md-6 col-lg-7 me-2">
                 <div className="card">
                     <img src={images[0]} style={{
                             aspectRatio:"5/4",
@@ -66,9 +84,9 @@ return (
                 
             </div>
         
-            <div className="col-4 col-md-6 col-lg-5 ">
+            <div className="col-md-6 col-lg-5 ">
                
-                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gridTemplateRows:"1fr 1fr", gap:"8px",height:"100%" }}>
+                {isMobile &&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gridTemplateRows:"1fr 1fr", gap:"8px",height:"100%" }}>
                         
                   
                     {images.slice(1,4).map((img,index)=>(
@@ -81,14 +99,15 @@ return (
                             <img src={images[4]} style={{ width: "100%", height: "100%", objectFit: "cover", position:"relative"}} />
                             {restImages&&<p style={{position:"absolute",top:"50%", left:"50%", transform:"translate(-50%,-50%)"}}>+{restImages}</p>}
                         </div>}
-                </div>
+                </div>}
                 
             </div>
         </div>
 
 
 
-      <ContactSidebar></ContactSidebar>
+      {isMobile && <ContactSidebar></ContactSidebar>}
+      {!isMobile &&<MobileContactBar></MobileContactBar> }
     </div>
 </>
 )

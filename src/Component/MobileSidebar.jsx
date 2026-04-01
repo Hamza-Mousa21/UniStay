@@ -58,7 +58,8 @@ const MobileSidebar=()=>{
                         <button className="btn text-center mt-4 w-100" style={{ width: "80%", backgroundColor: "#1b2a41", color: "white" }}>Apply filter</button>
                        
 
-                    </div><div className="mt-4">
+                    </div>
+                    <div className="mt-4">
                     
                     <h4 className="mb-3"><b>Ask AI</b></h4>
                     <div className="position-relative ">

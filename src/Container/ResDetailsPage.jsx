@@ -53,6 +53,16 @@ const ResDetails = () => {
         
     ]
 
+    const Amenities = [
+    "Wi-Fi",
+    "Air Conditioning",
+    "Swimming Pool",
+    "Gym",
+    "Room Service",
+    "Parking"
+    ];
+
+
      let restImages=0;
     if(images.length-5===0){
         restImages=false;
@@ -62,6 +72,7 @@ const ResDetails = () => {
         restImages=images.length-5;
     }
 
+   
    
 return (
 <>
@@ -106,8 +117,35 @@ return (
 
      <div className="row mt-4">
       <div className="col-12 col-md-6 col-lg-8">
-        <h2>{hotel?.price}</h2>
+       <div className="d-flex" style={{alignItems:"baseline", color:"#1b2a41"}}>
+         
+        <h2>300JD</h2>
+        <p style={{color:"gray"}}>/month</p>
+       </div>
+       <h5 style={{color:"#1b2a41"}}>description</h5>
+       <p style={{color:"gray"}}>A hotel is a commercial establishment that provides temporary
+         accommodation, meals, and various services to guests 
+         such as travelers and tourists. Hotels typically offer a range 
+         of room types, from standard rooms to luxury suites, along with 
+         facilities like restaurants, reception services, housekeeping, Wi-Fi,
+          and sometimes recreational amenities such as swimming pools, gyms, and
+           conference halls. The main goal of a hotel is to ensure comfort, convenience
+           , and a pleasant experience for its guests during their stay.</p> 
+
+       <h5 style={{color:"#1b2a41"}}>Amenities</h5>
+        <div className="d-flex " style={{flexWrap:"wrap"}}>
+            {Amenities.map((A)=>(
+                <div className="bg-light p-2 m-2" style={{
+                    margin:"5",
+                    borderRadius:"15px",
+                    color:"#1b1241"
+                }}>{A}</div>
+            
+            ))}
+        </div>
       </div>
+
+      
 
 
 
@@ -115,8 +153,11 @@ return (
         {isMobile && <ContactSidebar></ContactSidebar>}
         {!isMobile &&<MobileContactBar></MobileContactBar> }
       </div> 
-     </div>  
+     </div> 
+     <h2 style={{color:"#1b2a41"}}>comments</h2> 
     </div>
+
+    
    
   
 </>

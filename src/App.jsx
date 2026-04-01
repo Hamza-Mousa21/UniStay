@@ -3,7 +3,7 @@ import AllResidence from "./Container/AllResedintPage"
 import ResDetails from "./Container/ResDetailsPage"
 
 function App() {
-  return (
+  return ( 
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AllResidence />} />

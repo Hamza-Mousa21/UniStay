@@ -1,104 +1,126 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إضافة سكن</title>
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إضافة العقار</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alyamama:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alyamama:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <div class="container">
-
-    <section>
-      <h2 class="section-title">
-        <i class="fa-solid fa-location-dot"></i>
-        <span>الموقع والسعر</span>
-      </h2>
-
-      <div class="grid">
-        <input type="text" placeholder="العنوان الكامل">
-        <input type="text" placeholder="الحي">
-        <input type="number" placeholder="السعر الشهري">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-right">
+        <a href="home.html" class="logo">UniStay</a>
+        <a href="home.html" class="logo-icon" aria-label="الشعار">
+          <img
+            src="../images/5409f3b3-b085-4d42-8652-580678be8b8f.jpg"
+            alt="شعار الموقع"
+          />
+        </a>
       </div>
-    </section>
 
-    <section>
-      <h2 class="section-title">
-        <i class="fa-solid fa-bed"></i>
-        <span>المواصفات</span>
-      </h2>
+      <nav class="nav-center">
+        <ul class="nav-links">
+          <li><a href="home.html">الرئيسية</a></li>
+          <li><a href="#" class="active">إضافة العقار</a></li>
+          <li><a href="loginstudent.html">تسجيل الدخول</a></li>
+        </ul>
+      </nav>
+    </header>
 
-      <div class="grid">
-        <div class="spec-card">
-          <label>سعة السكن</label>
-          <input type="number" placeholder="أدخل السعة">
+    <div class="container">
+      <section>
+        <h2 class="section-title">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>الموقع والسعر</span>
+        </h2>
+
+        <div class="grid">
+          <input type="text" placeholder="العنوان الكامل" />
+          <input type="text" placeholder="الحي" />
+          <input type="number" placeholder="السعر الشهري" min="1" />
         </div>
+      </section>
 
-        <div class="spec-card">
-          <label>عدد الغرف</label>
-          <input type="number" placeholder="أدخل عدد الغرف">
+      <section>
+        <h2 class="section-title">
+          <i class="fa-solid fa-bed"></i>
+          <span>المواصفات</span>
+        </h2>
+
+        <div class="grid">
+          <div class="spec-card">
+            <label>سعة السكن</label>
+            <input type="number" placeholder="أدخل السعة" min="1" />
+          </div>
+
+          <div class="spec-card">
+            <label>عدد الغرف</label>
+            <input type="number" placeholder="أدخل عدد الغرف" min="1" />
+          </div>
+
+          <div class="spec-card">
+            <label>عدد الحمامات</label>
+            <input type="number" placeholder="أدخل عدد الحمامات" min="1" />
+          </div>
         </div>
+      </section>
 
-        <div class="spec-card">
-          <label>عدد الحمامات</label>
-          <input type="number" placeholder="أدخل عدد الحمامات">
+      <section>
+        <h2 class="section-title">
+          <i class="fa-solid fa-paperclip"></i>
+          <span>المرفقات والخدمات</span>
+        </h2>
+
+        <div class="services-grid">
+          <div class="service-card" onclick="toggle(this)">
+            <i class="fa-solid fa-wifi"></i>
+            <p>إنترنت WiFi</p>
+          </div>
+
+          <div class="service-card" onclick="toggle(this)">
+            <i class="fa-solid fa-car"></i>
+            <p>موقف سيارات</p>
+          </div>
+
+          <div class="service-card" onclick="toggle(this)">
+            <i class="fa-solid fa-shield-halved"></i>
+            <p>أمن وحراسة</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section>
-      <h2 class="section-title">
-        <i class="fa-solid fa-paperclip"></i>
-        <span>المرفقات والخدمات</span>
-      </h2>
+      <section>
+        <h2 class="section-title">
+          <i class="fa-regular fa-image"></i>
+          <span>صور العقار</span>
+        </h2>
 
-      <div class="services-grid">
-        <div class="service-card" onclick="toggle(this)">
-          <i class="fa-solid fa-wifi"></i>
-          <p>إنترنت WiFi</p>
+        <div class="upload-box">
+          <i class="fa-regular fa-images upload-icon"></i>
+          <p>اضغط لتحميل الصور أو اسحبها هنا</p>
+          <small>PNG, JPG حتى 5MB</small>
+          <input type="file" multiple />
+          <p id="file-name"></p>
         </div>
+      </section>
 
-        <div class="service-card" onclick="toggle(this)">
-          <i class="fa-solid fa-car"></i>
-          <p>موقف سيارات</p>
-        </div>
+      <p id="error-message"></p>
 
-        <div class="service-card" onclick="toggle(this)">
-          <i class="fa-solid fa-shield-halved"></i>
-          <p>أمن وحراسة</p>
-        </div>
-      </div>
-    </section>
+      <button class="btn" onclick="submitForm()">نشر الإعلان</button>
+    </div>
 
-    <section>
-      <h2 class="section-title">
-        <i class="fa-regular fa-image"></i>
-        <span>صور السكن</span>
-      </h2>
-
-      <div class="upload-box">
-        <i class="fa-regular fa-images upload-icon"></i>
-        <p>اضغط لتحميل الصور أو اسحبها هنا</p>
-        <small>PNG, JPG حتى 5MB</small>
-        <input type="file" multiple>
-        <p id="file-name"></p>
-      </div>
-    </section>
-
-    <p id="error-message"></p>
-
-    <button class="btn" onclick="submitForm()">نشر الإعلان</button>
-
-  </div>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

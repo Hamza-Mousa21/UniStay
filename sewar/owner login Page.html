@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Owner Login Page</title>
+    <title>تسجيل صاحب السكن | UniStay</title>
 
     <link rel="stylesheet" href="css/owner login Page.css" />
 
@@ -43,7 +43,7 @@
         </nav>
 
         <div class="nav-left">
-          <a href="student login Page.html" class="login-link active"
+          <a href="owner login Page.html" class="login-link active"
             >تسجيل الدخول</a
           >
           <a href="add-property.html" class="add-property-btn">أضف عقارك</a>
@@ -53,27 +53,27 @@
 
     <main class="page-wrapper">
       <div class="container">
-        <div class="form-section">
+        <section class="form-section">
           <div class="form-box">
-            <h2>إنشاء حساب صاحب سكن</h2>
-            <p class="subtitle">أدخل البيانات المطلوبة لإكمال التسجيل</p>
+            <div class="form-head">
+              <span class="form-badge">حساب جديد</span>
+              <h1>إنشاء حساب صاحب سكن</h1>
+              <p class="subtitle">أدخل بياناتك لبدء عرض السكن المناسب للطلبة</p>
+            </div>
 
             <div class="user-type">
               <button
                 type="button"
                 class="type-btn"
-                id="studentBtn"
                 onclick="window.location.href = 'student login Page.html'"
               >
                 طالب
               </button>
 
-              <button type="button" class="type-btn active" id="ownerBtn">
-                صاحب سكن
-              </button>
+              <button type="button" class="type-btn active">صاحب سكن</button>
             </div>
 
-            <form id="ownerForm">
+            <form id="ownerForm" novalidate>
               <div class="input-group">
                 <label for="fullName">الاسم الكامل</label>
                 <input
@@ -124,7 +124,11 @@
                   >
                     <i class="fa-regular fa-eye"></i>
                   </span>
-                  <input type="password" id="password" placeholder="**" />
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="أدخل كلمة المرور"
+                  />
                 </div>
               </div>
 
@@ -140,7 +144,7 @@
                   <input
                     type="password"
                     id="confirmPassword"
-                    placeholder="**"
+                    placeholder="أعد إدخال كلمة المرور"
                   />
                 </div>
               </div>
@@ -150,27 +154,28 @@
               </button>
             </form>
           </div>
-        </div>
+        </section>
 
-        <div class="image-section">
+        <section class="image-section">
           <img
             src="../images/login-bg.jpg"
-            alt="Background Image"
+            alt="صورة سكن طلابي"
             class="bg-image"
           />
           <div class="overlay"></div>
 
           <div class="image-content">
-            <div class="icon-box">
-              <i class="fa-regular fa-building"></i>
-            </div>
-            <h1>انضم إلينا</h1>
-            <p>ابدأ رحلتك في عرض السكن المناسب للطلبة</p>
+            <span class="image-badge">منصة سكن طلبة جامعة النجاح الوطنية</span>
+            <h2>اعرض عقارك <span>بثقة ووضوح</span></h2>
+            <p>
+              أنشئ حسابك كصاحب سكن، وابدأ بعرض وحداتك السكنية للطلبة بطريقة
+              منظمة وسهلة وتجربة أكثر احترافية.
+            </p>
           </div>
-        </div>
+        </section>
       </div>
     </main>
 
-    <script src="java/owner login Page..js"></script>
+    <script src="java/owner login Page.js"></script>
   </body>
 </html>

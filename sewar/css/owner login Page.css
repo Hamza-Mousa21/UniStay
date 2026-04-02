@@ -1,32 +1,148 @@
+:root {
+  --primary-color: #1B2A41;
+  --secondary-color: #abaaaa;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Tahoma, Arial, sans-serif;
+  font-family: "Alyamama", Tahoma, Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: #f5f5f5;
-  overflow: hidden;
+  background-color: #f5f7fa;
+  direction: rtl;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 999;
+  padding: 16px 24px;
+  background: rgba(27, 42, 65, 0.94);
+  backdrop-filter: blur(8px);
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  font-size: 34px;
+  font-weight: 800;
+  color: white;
+  text-decoration: none;
+}
+
+.logo-icon img {
+  width: 38px;
+  height: 38px;
+  display: block;
+  border-radius: 8px;
+}
+
+.nav-center {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--secondary-color);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-self: end;
+}
+
+.login-link {
+  color: white;
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login-link:hover,
+.login-link.active {
+  color: var(--secondary-color);
+}
+
+.add-property-btn {
+  background-color: white;
+  color: var(--primary-color);
+  padding: 8px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.add-property-btn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* ===== Page Layout ===== */
+.page-wrapper {
+  padding-top: 86px;
 }
 
 .container {
   width: 100%;
-  height: 100vh;
+  min-height: calc(100vh - 86px);
   display: flex;
   direction: ltr;
   gap: 0;
 }
 
-/* القسم اليسار */
 .form-section {
   width: 48%;
-  height: 100vh;
+  min-height: calc(100vh - 86px);
   background-color: #ffffff;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 12px 20px;
+  align-items: center;
+  padding: 28px 24px;
   overflow-y: auto;
 }
 
@@ -47,74 +163,79 @@ body {
 
 .form-box h2 {
   text-align: center;
-  font-size: 24px;
-  color: #1B2A41;
+  font-size: 30px;
+  color: var(--primary-color);
   margin-bottom: 5px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .subtitle {
   text-align: center;
-  font-size: 13px;
-  color: #abaaaa;
-  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-bottom: 16px;
 }
 
-/* أزرار النوع */
 .user-type {
   display: flex;
   background-color: #e7e7e7;
   border-radius: 12px;
   padding: 4px;
   gap: 5px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .type-btn {
   flex: 1;
   border: none;
   background: transparent;
-  color: #1B2A41;
+  color: var(--primary-color);
   font-size: 15px;
   font-weight: 700;
-  height: 42px;
+  height: 44px;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .type-btn.active {
-  background-color: #1B2A41;
+  background-color: var(--primary-color);
   color: #ffffff;
 }
 
-/* الحقول */
 .input-group {
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 }
 
 .input-group label {
   display: block;
   margin-bottom: 5px;
-  color: #1B2A41;
+  color: var(--primary-color);
   font-size: 14px;
   font-weight: 700;
 }
 
 .input-group input {
   width: 100%;
-  height: 42px;
+  height: 44px;
   border: 1px solid #d8d8d8;
   border-radius: 10px;
   background-color: #f7f7f7;
   padding: 0 13px;
   font-size: 14px;
-  color: #1B2A41;
+  color: var(--primary-color);
   outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: var(--primary-color);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(27, 42, 65, 0.08);
 }
 
 .input-group input::placeholder {
-  color: #abaaaa;
+  color: var(--secondary-color);
   font-size: 13px;
 }
 
@@ -131,21 +252,20 @@ body {
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #abaaaa;
+  color: var(--secondary-color);
   font-size: 14px;
   cursor: pointer;
 }
 
-/* الزر */
 .submit-btn {
   width: 100%;
-  height: 44px;
+  height: 46px;
   border: none;
   border-radius: 10px;
-  background-color: #1B2A41;
+  background-color: var(--primary-color);
   color: #ffffff;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   margin-top: 6px;
   transition: 0.3s;
@@ -155,26 +275,23 @@ body {
   background-color: #243754;
 }
 
-/* القسم اليمين */
 .image-section {
   width: 52%;
-  height: 100vh;
+  min-height: calc(100vh - 86px);
   position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: -1px;
 }
 
 .bg-image {
   position: absolute;
   inset: 0;
-  width: calc(100% + 2px);
+  width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  left: -1px;
 }
 
 .overlay {
@@ -182,8 +299,8 @@ body {
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(27, 42, 65, 0.30),
-    rgba(171, 170, 170, 0.10)
+    rgba(27, 42, 65, 0.38),
+    rgba(171, 170, 170, 0.14)
   );
   z-index: 1;
 }
@@ -203,90 +320,12 @@ body {
 }
 
 .image-content h1 {
-  font-size: 37px;
+  font-size: 38px;
   margin-bottom: 8px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .image-content p {
   font-size: 19px;
-  line-height: 1.5;
-}
-
-/* شاشات أصغر */
-@media (max-width: 1200px) {
-  .form-box {
-    max-width: 450px;
-  }
-
-  .form-box h2 {
-    font-size: 21px;
-  }
-
-  .subtitle {
-    font-size: 12px;
-  }
-
-  .type-btn {
-    height: 39px;
-    font-size: 14px;
-  }
-
-  .input-group {
-    margin-bottom: 9px;
-  }
-
-  .input-group label {
-    font-size: 13px;
-  }
-
-  .input-group input {
-    height: 38px;
-    font-size: 13px;
-  }
-
-  .submit-btn {
-    height: 41px;
-    font-size: 15px;
-  }
-
-  .image-content h1 {
-    font-size: 32px;
-  }
-
-  .image-content p {
-    font-size: 17px;
-  }
-}
-
-@media (max-width: 992px) {
-  body {
-    overflow: auto;
-  }
-
-  .container {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .form-section,
-  .image-section {
-    width: 100%;
-    height: auto;
-    margin-left: 0;
-  }
-
-  .form-section {
-    overflow: visible;
-    padding: 20px 14px;
-  }
-
-  .image-section {
-    min-height: 260px;
-  }
-
-  .bg-image {
-    width: 100%;
-    left: 0;
-  }
+  line-height: 1.6;
 }

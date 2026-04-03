@@ -7,6 +7,7 @@ import Owner from "./pages/Owner/Owner";
 
 import StudentRegister from "./page/Student/studentRegister";
 import OwnerRegister from "./page/Owner/ownerRegister";
+import AddProperty from "./page/Owner/addProperty"; 
 
 function App() {
   return (

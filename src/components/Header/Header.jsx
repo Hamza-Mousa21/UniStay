@@ -15,16 +15,28 @@ function Header() {
 
         <nav className="nav-center">
           <ul className="nav-links">
-            <li><Link to="/">الرئيسية</Link></li>
-            <li><a href="/#search-section">ابحث عن سكن</a></li>
-            <li><a href="/#why-us">لماذا تختار منصتنا</a></li>
-            <li><a href="/#how-it-works">كيف تعمل منصتنا</a></li>
+            <li>
+              <Link to="/">الرئيسية</Link>
+            </li>
+            <li>
+              <a href="/#search-section">ابحث عن سكن</a>
+            </li>
+            <li>
+              <a href="/#why-us">لماذا تختار منصتنا</a>
+            </li>
+            <li>
+              <a href="/#how-it-works">كيف تعمل منصتنا</a>
+            </li>
           </ul>
         </nav>
 
         <div className="nav-left">
-          <Link to="/student" className="login-link">تسجيل الدخول</Link>
-          <Link to="/owner" className="add-btn">أضف عقارك</Link>
+          <Link to="/student" className="login-link">
+            تسجيل الدخول
+          </Link>
+          <Link to="/add-property" className="add-btn">
+            أضف عقارك
+          </Link>
         </div>
       </div>
     </header>

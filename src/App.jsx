@@ -1,19 +1,20 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/home/Home";
-import Student from "./pages/student/student";
-import Owner from "./pages/owner/owner";
+import Home from "./pages/Home/Home";
+import Student from "./pages/Student/Student";
+import Owner from "./pages/Owner/Owner";
 
 import StudentRegister from "./page/Student/studentRegister";
 import OwnerRegister from "./page/Owner/ownerRegister";
-
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<StudentRegister />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/student" element={<Student />} />
+        <Route path="/owner" element={<Owner />} />
         <Route path="/student-register" element={<StudentRegister />} />
         <Route path="/owner-register" element={<OwnerRegister />} />
       </Routes>

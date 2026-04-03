@@ -121,12 +121,28 @@ html {
   font-size: 22px;
 }
 
-.property-grid {
+.basic-info-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
+.full-width-field {
+  grid-column: 1 / -1;
+}
+
+.full-width-field label,
+.select-field label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.full-width-field input,
+.full-width-field textarea,
+.select-field select,
 .property-grid input,
 .spec-card input {
   width: 100%;
@@ -139,6 +155,14 @@ html {
   color: var(--primary-color);
 }
 
+.full-width-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.full-width-field input:focus,
+.full-width-field textarea:focus,
+.select-field select:focus,
 .property-grid input:focus,
 .spec-card input:focus {
   outline: none;
@@ -147,9 +171,21 @@ html {
   background-color: #fff;
 }
 
+.full-width-field input::placeholder,
+.full-width-field textarea::placeholder,
 .property-grid input::placeholder,
 .spec-card input::placeholder {
   color: #98a0aa;
+}
+
+.select-field select {
+  appearance: none;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 .spec-card {

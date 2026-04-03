@@ -11,13 +11,19 @@ import {
   FaCar,
   FaShieldHalved,
   FaImages,
+  FaCircleInfo,
 } from "react-icons/fa6";
 
 function AddProperty() {
   const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    housingType: "",
+    availableFor: "",
     address: "",
     neighborhood: "",
     monthlyPrice: "",
+    distanceFromUniversity: "",
     capacity: "",
     rooms: "",
     bathrooms: "",
@@ -57,8 +63,18 @@ function AddProperty() {
     event.preventDefault();
     setErrorMessage("");
 
-    if (!formData.address.trim() || !formData.monthlyPrice.trim()) {
-      setErrorMessage("يرجى تعبئة العنوان والسعر قبل النشر");
+    if (
+      !formData.title.trim() ||
+      !formData.description.trim() ||
+      !formData.housingType.trim() ||
+      !formData.availableFor.trim() ||
+      !formData.address.trim() ||
+      !formData.monthlyPrice.trim() ||
+      !formData.distanceFromUniversity.trim()
+    ) {
+      setErrorMessage(
+        "يرجى تعبئة المعلومات الأساسية والعنوان والسعر والمسافة قبل النشر"
+      );
       return;
     }
 
@@ -88,6 +104,65 @@ function AddProperty() {
           <form onSubmit={handleSubmit} className="add-property-form">
             <section className="property-section">
               <h2 className="section-title">
+                <FaCircleInfo />
+                <span>المعلومات الأساسية</span>
+              </h2>
+
+              <div className="basic-info-grid">
+                <div className="full-width-field">
+                  <label>عنوان الإعلان</label>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="مثال: شقة مفروشة قريبة من جامعة النجاح"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="full-width-field">
+                  <label>الوصف</label>
+                  <textarea
+                    name="description"
+                    placeholder="اكتب وصفًا تفصيليًا للسكن..."
+                    value={formData.description}
+                    onChange={handleInputChange}
+                  ></textarea>
+                </div>
+
+                <div className="select-field">
+                  <label>نوع السكن</label>
+                  <select
+                    name="housingType"
+                    value={formData.housingType}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">اختر نوع السكن</option>
+                    <option value="شقة">شقة</option>
+                    <option value="غرفة">غرفة</option>
+                    <option value="استوديو">استوديو</option>
+                    <option value="منزل">منزل</option>
+                  </select>
+                </div>
+
+                <div className="select-field">
+                  <label>متاح لـ</label>
+                  <select
+                    name="availableFor"
+                    value={formData.availableFor}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">اختر الفئة</option>
+                    <option value="طلاب">طلاب</option>
+                    <option value="طالبات">طالبات</option>
+                    <option value="الكل">الكل</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <section className="property-section">
+              <h2 className="section-title">
                 <FaLocationDot />
                 <span>الموقع والسعر</span>
               </h2>
@@ -115,6 +190,15 @@ function AddProperty() {
                   placeholder="السعر الشهري"
                   min="1"
                   value={formData.monthlyPrice}
+                  onChange={handleInputChange}
+                />
+
+                <input
+                  type="number"
+                  name="distanceFromUniversity"
+                  placeholder="المسافة عن الجامعة بالدقائق"
+                  min="1"
+                  value={formData.distanceFromUniversity}
                   onChange={handleInputChange}
                 />
               </div>

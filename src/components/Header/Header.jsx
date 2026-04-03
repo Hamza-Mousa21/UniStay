@@ -16,7 +16,9 @@ function Header() {
         <nav className="nav-center">
           <ul className="nav-links">
             <li>
-              <Link to="/">الرئيسية</Link>
+              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+  الرئيسية
+</Link>
             </li>
             <li>
               <a href="/#search-section">ابحث عن سكن</a>

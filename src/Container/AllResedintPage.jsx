@@ -31,7 +31,7 @@ const AllResidence = () => {
         <>
              
             
-            <div className="d-flex p-4" style={{ minHeight: "100vh", color: "#1b2a41" }}>
+            <div className="d-flex p-4" style={{ minHeight: "100vh", color: "#1b2a41" ,backgroundColor:"white"}}>
       
 
                 <div className="col-12 col-md-12 col-lg-9">

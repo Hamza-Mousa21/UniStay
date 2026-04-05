@@ -78,7 +78,7 @@ return (
 <>
 
         
-    <div className="container mt-4 col-12 col-md-12 col-lg-12 ">
+    <div className="container mt-4 col-12 col-md-12 col-lg-12 " style={{backgroundColor:"white"}}>
         <div className="mb-3">
             <ArrowBackIcon sx={{color:"#1b2a41"}}></ArrowBackIcon>  
             <a href="/" className="mb-3" style={{textDecoration:"none", color:"#1b2a41"}}><b> Back to previous page</b></a>

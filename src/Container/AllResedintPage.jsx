@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import SideBar from "../Component/SideBar"
 import MobileSidebar from "../Component/MobileSidebar"
 import Header from "../components/Header/Header"
+import Footer from "../components/Footer/Footer"
 
 const AllResidence = () => {
     const navigate = useNavigate()
@@ -30,9 +31,10 @@ const AllResidence = () => {
     
     return (
         <>
-             <div style={{  padding: '40px' }}>
+             {/* <div style={{  padding: '40px' }}>
                 <Header></Header>
-            </div>
+            </div> */}
+            
             <div className="d-flex p-4" style={{ minHeight: "100vh", color: "#1b2a41" ,backgroundColor:"white"}}>
                 {smallScreen &&<SideBar></SideBar>}
 
@@ -62,6 +64,7 @@ const AllResidence = () => {
                    
             
             </div>
+            <Footer></Footer>
         </>
     )
 }

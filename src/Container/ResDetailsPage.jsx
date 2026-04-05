@@ -4,6 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { TextField } from "@mui/material";
 import ContactSidebar from "../Component/ContactSidebar";
 import MobileContactBar from "../Component/MobileContactBar";
+import Footer from "../components/Footer/Footer";
 
 
 
@@ -159,7 +160,7 @@ return (
 
     
    
-  
+  <Footer></Footer>
 </>
 )
 }

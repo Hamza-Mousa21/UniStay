@@ -32,10 +32,7 @@ const AllResidence = () => {
              
             
             <div className="d-flex p-4" style={{ minHeight: "100vh", color: "#1b2a41" }}>
-                
-                
-                {smallScreen &&<SideBar></SideBar>}
-                
+      
 
                 <div className="col-12 col-md-12 col-lg-9">
                     
@@ -57,7 +54,7 @@ const AllResidence = () => {
                 </div>
                 
                     
-                
+                {smallScreen &&<SideBar></SideBar>}
                 
                 
                    

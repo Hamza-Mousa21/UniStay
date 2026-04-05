@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import SideBar from "../Component/SideBar"
 import MobileSidebar from "../Component/MobileSidebar"
+import Header from "../components/Header/Header"
 
 const AllResidence = () => {
     const navigate = useNavigate()
@@ -29,10 +30,11 @@ const AllResidence = () => {
     
     return (
         <>
-             
-            
+             <div style={{  padding: '40px' }}>
+                <Header></Header>
+            </div>
             <div className="d-flex p-4" style={{ minHeight: "100vh", color: "#1b2a41" ,backgroundColor:"white"}}>
-      
+                {smallScreen &&<SideBar></SideBar>}
 
                 <div className="col-12 col-md-12 col-lg-9">
                     
@@ -54,7 +56,7 @@ const AllResidence = () => {
                 </div>
                 
                     
-                {smallScreen &&<SideBar></SideBar>}
+                
                 
                 
                    

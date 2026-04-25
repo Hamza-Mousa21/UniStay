@@ -82,7 +82,7 @@ return (
     <div className="container mt-4 col-12 col-md-12 col-lg-12 " style={{backgroundColor:"white"}}>
         <div className="mb-3">
             <ArrowBackIcon sx={{color:"#1b2a41"}}></ArrowBackIcon>  
-            <a href="/" className="mb-3" style={{textDecoration:"none", color:"#1b2a41"}}><b> Back to previous page</b></a>
+            <a href="/all-residence" className="mb-3" style={{textDecoration:"none", color:"#1b2a41"}}><b> Back to previous page</b></a>
         </div>
 
         <div className="d-flex">
@@ -91,6 +91,7 @@ return (
                     <img src={images[0]} style={{
                             aspectRatio:"5/4",
                             height:"58vh"
+                           
                     }} />
                 </div>
                 
@@ -139,7 +140,7 @@ return (
                 <div className="bg-light p-2 m-2" style={{
                     margin:"5",
                     borderRadius:"15px",
-                    color:"#1b1241"
+                    color:"#1b2a41"
                 }}>{A}</div>
             
             ))}

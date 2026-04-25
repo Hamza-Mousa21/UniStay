@@ -87,7 +87,7 @@ const AllResidence = () => {
                     </div>
                 </div>
                 {smallScreen &&<SideBar></SideBar>}
-                    
+                
                 
                 
                 

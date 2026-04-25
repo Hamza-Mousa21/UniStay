@@ -5,6 +5,7 @@ import { TextField } from "@mui/material";
 import ContactSidebar from "../Component/ContactSidebar";
 import MobileContactBar from "../Component/MobileContactBar";
 import Footer from "../components/Footer/Footer";
+import Comments from "../Component/comments";
 
 
 
@@ -13,6 +14,7 @@ const ResDetails = () => {
     const { id } = useParams()
     const [hotel, setHotel] = useState(null)
     const [isMobile,setIsMobile]=useState(window.innerWidth>=768)
+    
 
   
 
@@ -73,7 +75,9 @@ const ResDetails = () => {
         restImages=images.length-5;
     }
 
+
    
+ 
    
 return (
 <>
@@ -150,13 +154,21 @@ return (
       
 
 
+       
 
-      <div className="col-md-6 col-lg-4">             
+
+
+
+      <div className="col-md-6 col-lg-4 ">             
         {isMobile && <ContactSidebar></ContactSidebar>}
         {!isMobile &&<MobileContactBar></MobileContactBar> }
       </div> 
-     </div> 
-     <h2 style={{color:"#1b2a41"}}>comments</h2> 
+     </div>
+
+     <Comments></Comments> 
+     
+            
+
     </div>
 
     

@@ -14,6 +14,7 @@ const ResDetails = () => {
     const { id } = useParams()
     const [hotel, setHotel] = useState(null)
     const [isMobile,setIsMobile]=useState(window.innerWidth>=768)
+    const [selected,setSelected]=useState(0)
     
 
   
@@ -49,12 +50,16 @@ const ResDetails = () => {
         hotel?.image,
         hotel?.image,
         hotel?.image,
-        hotel?.image,
-        hotel?.image,
-        hotel?.image,
+        // hotel?.image,
+        // hotel?.image,
+        // hotel?.image,
 
         
     ]
+
+    const handleSelectedPic=(i)=>{
+        setSelected(i)
+    }
 
     const Amenities = [
     "Wi-Fi",
@@ -92,13 +97,45 @@ return (
         <div className="d-flex">
             <div className="col-12 col-md-6 col-lg-7 me-2">
                 <div className="card">
-                    <img src={images[0]} style={{
+                    <img src={images[selected]} style={{
                             aspectRatio:"5/4",
                             height:"58vh"
                            
                     }} />
+                    
+
+
+                  <p style={{
+                    position: "absolute",
+                    top: "20px",
+                    right: "20px",
+                    border: "1px solid transparent",
+                    padding: "5px",
+                    width: "auto",
+                    borderRadius: "8px",
+                    background: "rgba(0,0,0,0.4)", 
+                    backdropFilter: "blur(8px)",      
+                    WebkitBackdropFilter: "blur(8px)", 
+                    color: "white",
+                    }}> 
+                        {selected+1}/{images.length}
+                    </p>
                 </div>
-                
+                {!isMobile&&
+                <div className="d-flex" style={{width:"100%",height:"100px"}}>
+                    {images.map((img,i)=>(
+                         <div style={{height:"14vh",
+                            border:selected===i?"3.5px solid #1b2a41":"none",
+                            borderRadius:"8px"
+                         }} onClick={()=>handleSelectedPic(i)} key={i}>
+                            <img src={img}  className="card" style={{  height:"100%",position:"relative"}} />
+                           
+                        </div>
+                        
+                    ))}
+                </div>
+                }
+               
             </div>
         
             <div className="col-md-6 col-lg-5 ">
@@ -107,7 +144,7 @@ return (
                         
                   
                     {images.slice(1,4).map((img,index)=>(
-                        <div className="card overflow-hidden" key={index}>
+                        <div className="card " key={index} >
                             <img src={img} style={{ width: "100%", height: "100%", objectFit: "cover", position:"relative"}} />
                         </div>
                     ))}

@@ -180,10 +180,14 @@ return (
 
      <div className="row mt-4">
       <div className="col-12 col-md-6 col-lg-8">
-       <div className="d-flex" style={{alignItems:"baseline", color:"#1b2a41"}}>
-         
-        <h2>300JD</h2>
-        <p style={{color:"gray"}}>/month</p>
+        <div className="d-flex justify-content-between">
+            <div className="d-flex" style={{alignItems:"baseline", color:"#1b2a41"}}>
+                
+                <h2>300JD</h2>
+                <p style={{color:"gray"}}>/month</p>
+            </div>
+
+            <i className="bi bi-heart" style={{ fontSize: "35px", position:"relative",bottom:"10px" }}></i>         
        </div>
        <h5 style={{color:"#1b2a41"}}>description</h5>
        <p style={{color:"gray"}}>A hotel is a commercial establishment that provides temporary

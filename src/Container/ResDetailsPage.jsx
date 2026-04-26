@@ -50,9 +50,9 @@ const ResDetails = () => {
         hotel?.image,
         hotel?.image,
         hotel?.image,
-        // hotel?.image,
-        // hotel?.image,
-        // hotel?.image,
+        hotel?.image,
+        hotel?.image,
+        hotel?.image,
 
         
     ]
@@ -121,21 +121,41 @@ return (
                         {selected+1}/{images.length}
                     </p>
                 </div>
-                {!isMobile&&
-                <div className="d-flex" style={{width:"100%",height:"100px"}}>
-                    {images.map((img,i)=>(
-                         <div style={{height:"14vh",
-                            border:selected===i?"3.5px solid #1b2a41":"none",
-                            borderRadius:"8px"
-                         }} onClick={()=>handleSelectedPic(i)} key={i}>
-                            <img src={img}  className="card" style={{  height:"100%",position:"relative"}} />
-                           
-                        </div>
-                        
-                    ))}
-                </div>
+               {!isMobile &&
+                    <div
+                        className="d-flex mt-2"
+                        style={{
+                            width: "100%",
+                            height: "150px",
+                            overflowX: "auto",
+                            scrollbarWidth: "none",  
+                            msOverflowStyle: "none", 
+                            gap: "6px",
+                            cursor: "grab",
+                            
+                        }}
+                    >
+                        {images.map((img, i) => (
+                            <div
+                                key={i}
+                                onClick={() => handleSelectedPic(i)}
+                                style={{
+                                    flexShrink: 0,
+                                    height: "14vh",
+                                    border: selected === i ? "3.5px solid #1b2a41" : "none",
+                                    borderRadius: "8px",
+                                    overflow: "hidden",
+                                }}
+                            >
+                                <img
+                                    src={img}
+                                    className="card"
+                                    style={{ height: "100%", pointerEvents: "none" }}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 }
-               
             </div>
         
             <div className="col-md-6 col-lg-5 ">

@@ -6,6 +6,7 @@ import ContactSidebar from "../Component/ContactSidebar";
 import MobileContactBar from "../Component/MobileContactBar";
 import Footer from "../components/Footer/Footer";
 import Comments from "../Component/comments";
+import ImagesCarousel from "../Component/Carousel";
 
 
 
@@ -15,6 +16,7 @@ const ResDetails = () => {
     const [hotel, setHotel] = useState(null)
     const [isMobile,setIsMobile]=useState(window.innerWidth>=768)
     const [selected,setSelected]=useState(0)
+    const [moreImagesButton,setMoreImagesButton]=useState(false)
     
 
   
@@ -81,12 +83,39 @@ const ResDetails = () => {
     }
 
 
-   
+   const handleMoreImagesButton=()=>{
+        setMoreImagesButton(true)
+
+   }
  
    
 return (
 <>
+    {moreImagesButton&&<div style={{position:"absolute",
+            width:"100%",
+            backgroundColor:"black",
+            
+            zIndex:"555",
+            padding:"20px",
+            top:"3.5%",
+            left:"50%",
+            transform:"translate(-50%)"
 
+    }}>
+                <p style={{position:"absolute",top:0,right:"18px",color:"white",pointerEvents:"curser"}}
+                onClick={()=>setMoreImagesButton(false)}
+                
+                >
+                    X</p>
+                <div style={{width:"82%",
+                    position:"relative",
+                    left:"50%",
+                    transform:"translate(-50%)",
+                    borderRadius:"8px"
+                }}>
+                    <ImagesCarousel image={images[0]}></ImagesCarousel>
+                </div>    
+            </div>}
         
     <div className="container mt-4 col-12 col-md-12 col-lg-12 " style={{backgroundColor:"white"}}>
         <div className="mb-3">
@@ -95,6 +124,7 @@ return (
         </div>
 
         <div className="d-flex">
+           
             <div className="col-12 col-md-6 col-lg-7 me-2">
                 <div className="card">
                     <img src={images[selected]} style={{
@@ -103,9 +133,9 @@ return (
                            
                     }} />
                     
+                      
 
-
-                  <p style={{
+                  {!isMobile && <p style={{
                     position: "absolute",
                     top: "20px",
                     right: "20px",
@@ -119,7 +149,7 @@ return (
                     color: "white",
                     }}> 
                         {selected+1}/{images.length}
-                    </p>
+                    </p>}
                 </div>
                {!isMobile &&
                     <div
@@ -169,10 +199,28 @@ return (
                         </div>
                     ))}
                         
-                    {images.length>4&& <div className="card overflow-hidden" key={4} style={{backgroundColor:"#474545"}}>
-                            <img src={images[4]} style={{ width: "100%", height: "100%", objectFit: "cover", position:"relative"}} />
-                            {restImages&&<p style={{position:"absolute",top:"50%", left:"50%", transform:"translate(-50%,-50%)" ,color:"white"}}>+{restImages}</p>}
-                        </div>}
+                <div
+                    className="card overflow-hidden"
+                       key={4}
+                    style={{ backgroundColor: "#474545", position: "relative", cursor: "pointer" }}
+                    onClick={() => setShowModal(true)}
+                    >
+                    <img src={images[4]} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    {restImages && (
+                        <div style={{
+                        position: "absolute", inset: 0,
+                        backgroundColor: "rgba(0,0,0,0.5)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+
+                        }}
+                        onClick={()=>handleMoreImagesButton()}
+                        >
+                        <p style={{ color: "white", fontSize: "1.5rem", fontWeight: "bold" }}>
+                            +{restImages}
+                        </p>
+                        </div>
+                    )}
+                </div>
                 </div>}
                 
             </div>

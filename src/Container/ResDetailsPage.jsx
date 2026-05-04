@@ -102,7 +102,7 @@ return (
             transform:"translate(-50%)"
 
     }}>
-                <p style={{position:"absolute",top:0,right:"18px",color:"white",pointerEvents:"curser"}}
+                <p style={{position:"absolute",top:0,right:"18px",color:"white",cursor:"pointer"}}
                 onClick={()=>setMoreImagesButton(false)}
                 
                 >
@@ -110,8 +110,8 @@ return (
                 <div style={{width:"82%",
                     position:"relative",
                     left:"50%",
-                    transform:"translate(-50%)",
-                    borderRadius:"8px"
+                    transform:"translate(-50%)"
+                   
                 }}>
                     <ImagesCarousel image={images[0]}></ImagesCarousel>
                 </div>    
@@ -226,7 +226,7 @@ return (
             </div>
         </div>
 
-     <div className="row mt-4">
+     <div className="row mt-5">
       <div className="col-12 col-md-6 col-lg-8">
         <div className="d-flex justify-content-between">
             <div className="d-flex" style={{alignItems:"baseline", color:"#1b2a41"}}>

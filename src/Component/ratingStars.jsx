@@ -16,7 +16,7 @@ const RatingStars = () => {
     setClicked(index);
   };
 
-  // decide what to show
+
   const activeIndex = hoveredIndex !== -1 ? hoveredIndex : clicked;
 
   const getStarClass = (index) => {

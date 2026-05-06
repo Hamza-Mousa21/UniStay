@@ -60,12 +60,12 @@ const Comments = () => {
                 </li>
               ))}
             </ul> */}
-            <InputField content="Add a comment..."></InputField>
+            <InputField content="Add a comment..." tab="comment"></InputField>
           </>
         )}
 
         {activeTab === "issues" && (
-          <InputField content="Add an issue"></InputField>
+          <InputField content="Add an issue" tab="issues"></InputField>
         )}
 
         {activeTab === "ratings" && (

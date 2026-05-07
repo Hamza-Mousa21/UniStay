@@ -58,7 +58,8 @@ const MobileSidebar=()=>{
                         <button className="btn text-center mt-4 w-100" style={{ width: "80%", backgroundColor: "#1b2a41", color: "white" }}>Apply filter</button>
                        
 
-                    </div><div className="mt-4">
+                    </div>
+                    <div className="mt-4">
                     
                     <h4 className="mb-3"><b>Ask AI</b></h4>
                     <div className="position-relative ">
@@ -66,13 +67,13 @@ const MobileSidebar=()=>{
                        className="form-control"
                       rows="3"
                       placeholder="e.g. a resedince with 2 rooms and less than 300 per month ..."
-                     style={{ resize: "none", paddingRight: "45px", fontSize: "13px" }}
+                     style={{ resize: "none", paddingLeft: "45px", fontSize: "13px" }}
                     ></textarea>
                      <button
                       className="btn position-absolute"
                       style={{
                        bottom: "8px",
-                       right: "1.5rem",
+                       left: "1.5rem",
                        width: "30px",
                        height: "30px",
                        borderRadius: "8px",

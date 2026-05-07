@@ -2,11 +2,14 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import SideBar from "../Component/SideBar"
 import MobileSidebar from "../Component/MobileSidebar"
+import Header from "../components/Header/Header"
+import Footer from "../components/Footer/Footer"
 
 const AllResidence = () => {
     const navigate = useNavigate()
     const [data, setData] = useState([])
     const [smallScreen,setSmallScreen]=useState(window.innerWidth>=1000)
+    const [liked, setLiked] = useState({})
     useEffect(() => {
      
 
@@ -26,15 +29,15 @@ const AllResidence = () => {
         window.addEventListener("resize",handelSmallScreen)
         return () => window.removeEventListener("resize", handelSmallScreen)
     },[])
+  
     
     return (
         <>
-             
+             {/* <div style={{  padding: '40px' }}>
+                <Header></Header>
+            </div> */}
             
-            <div className="d-flex p-4" style={{ minHeight: "100vh", color: "#1b2a41" }}>
-                
-                
-                {smallScreen &&<SideBar></SideBar>}
+            <div className="d-flex p-4" style={{ minHeight: "100vh", color: "#1b2a41" ,backgroundColor:"white"}}>
                 
 
                 <div className="col-12 col-md-12 col-lg-9">
@@ -44,25 +47,54 @@ const AllResidence = () => {
                     <div className="row">
                         {data.map((hotel) => (
                             <div className="col-6 col-md-4 col-lg-4 mb-4" key={hotel?.id}>
-                                <div className="card me-2" style={{ cursor: "pointer", color: "#1b2a41" }} onClick={() => navigate(`/details/${hotel?.id}`)}>
+                                <div className="card me-2" style={{ cursor: "pointer", color: "#1b2a41" }} >
                                     <img src={hotel?.image} style={{ aspectRatio: "14/15" }} alt={hotel?.name} />
                                     <div className="card-body bg-light">
                                         <h5 className="card-title">{hotel?.name}</h5>
-                                        <p className="card-text">Test</p>
+                                        <div className="d-flex w-100 justify-content-around ">
+
+                                             <button className="btn" style={{width:"80%",
+                                                                            height: "40px",
+                                                                            borderRadius: "8px",
+                                                                            backgroundColor: "#1b2a41",
+                                                                            color:"white"}}
+                                                                            onClick={() => navigate(`/details/${hotel?.id}`)}
+                                             >info</button>
+
+{/* 
+                                            <button className="bg-light" style={{width:"15%",
+                                                                            height: "40px",
+                                                                            borderRadius: "8px",
+                                                                            backgroundColor: "lightgrey",
+                                                                            color:"#1b2a41"}}>
+                                                <i className="" class="bi bi-heart" style={{fontSize:"30px"}}></i>
+                                            </button> */}
+                                            <div onClick={() => setLiked(prev => ({ ...prev, [hotel.id]: !prev[hotel.id] }))}>
+                                                {liked[hotel.id]
+                                                    ? <i className="bi bi-heart-fill" style={{ fontSize: "35px", position:"relative",bottom:"3.5px" }}></i>
+                                                    : <i className="bi bi-heart" style={{ fontSize: "35px", position:"relative",bottom:"3.5px"  }}></i>
+                                                }
+                                            </div>
+                                            
+                                            
+                                           
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
+                {smallScreen &&<SideBar></SideBar>}
                 
-                    
                 
                 
                 
                    
             
             </div>
+            <Footer></Footer>
         </>
     )
 }

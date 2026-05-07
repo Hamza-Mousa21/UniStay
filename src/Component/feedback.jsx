@@ -11,7 +11,7 @@ const Feedback = () => {
 
   const tabStyle = (tab) => ({
     color: "#1b2a41",
-    backgroundColor: activeTab === tab ? "white" : "#faf7f7",
+    backgroundColor: activeTab === tab ? "white" : "#f8f9fa",
     //boxShadow: activeTab === tab ? "-3px -3px 6px rgba(0,0,0,0.08), 3px -3px 6px rgba(0,0,0,0.08)" : "none",
     borderRadius:activeTab===tab? "6px 6px 0 0":"4px 4px 0 0",
     border:activeTab===tab? "1px solid #f1efef":"transparent",

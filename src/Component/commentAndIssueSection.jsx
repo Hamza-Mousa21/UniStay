@@ -5,55 +5,28 @@ import IssueSection from "./issueSection"
 
 const InputField = (props) => {
   const [data,setData]=useState([])
-  // const [comment, setComment] = useState("")
-  // const [comments, setComments] = useState([])
+  
   const [commentSetting, setCommentSetting] = useState(null)
-  // const [editingIndex, setEditingIndex] = useState(null)
-  // const [editValue, setEditValue] = useState("")
-
-  // const handleAddComment = () => {
-  //   if (comment.trim() === "") return
-  //   setComments([...comments, comment])
-  //   setComment("")
-  // }
+ 
 
   const handleCommentSettings = (index) => {
     setCommentSetting(commentSetting === index ? null : index)
   }
 
-  // const handleUpdate = (index) => {
-  //   setEditingIndex(index)
-  //   setEditValue(comments[index])
-  //   setCommentSetting(null)
-  // }
 
-  // const handleSaveEdit = (index) => {
-  //   if (editValue.trim() === "") return
-  //   const updated = [...comments]
-  //   updated[index] = editValue
-  //   setComments(updated)
-  //   setEditingIndex(null)
-  //   setEditValue("")
-  // }
-
-  // const handleDelete = (index) => {
-  //   setComments(comments.filter((_, i) => i !== index))
-  //   setCommentSetting(null)
-  
-  // }
 const handleDeleteComment=async(id)=>{
     try{
-      //console.log("API")
+     
       const response=await fetch(`http://localhost:3000/Ratings/${id}/comment`,{
         method:"DELETE"
         
       })
-        //console.log("1")
+       
       if (!response.ok) {
         throw new Error("Failed to delete comment");
         console.log("Error")
       }
-      //console.log("2")
+      
       setData(prev => prev.filter(c => c.id !== id));
     }
     catch(error){
@@ -65,7 +38,7 @@ const handleDeleteComment=async(id)=>{
 
 const handleDeleteIssue=async(id)=>{
     try{
-      //console.log("API")
+     
       const response=await fetch(`http://localhost:3000/Ratings/${id}/issue`,{
         method:"DELETE"
         
@@ -75,7 +48,7 @@ const handleDeleteIssue=async(id)=>{
         throw new Error("Failed to delete issue");
         console.log("Error")
       }
-      //console.log("2")
+      
       setData(prev => prev.filter(c => c.id !== id));
     }
     catch(error){
@@ -107,36 +80,23 @@ const handleDeleteIssue=async(id)=>{
 
     <ul className="list-unstyled">
       {data.map((comm,i)=>(
+  
+          <div  key={i} >
 
-        <div  key={i} >
-
-         {props.tab==="comment"&&comm.comment!==null && <CommentSection data={comm} i={i}></CommentSection> }
-
-
+          {props.tab==="comments"&&comm.comment!==null && <CommentSection data={comm} i={i} setData={setData}></CommentSection> }
 
 
 
-
-
-          {props.tab==="issues" && comm.issues!==null&& <IssueSection data={comm} i={i}></IssueSection> }
-          
-          
-          </div>      
-          
-
-          
+          {props.tab==="issues" && comm.issues!==null&& <IssueSection data={comm} i={i} setData={setData} ></IssueSection> }
+            
+            
+          </div>
 
       ))}
-      
-
-
-
-      
-      
 
     </ul>
     
-
+      <InputAndSubmet content={props.content} tab={props.tab} data={data} setData={setData} ></InputAndSubmet>
       
     </>
   )

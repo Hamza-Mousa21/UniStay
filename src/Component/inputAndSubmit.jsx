@@ -1,4 +1,76 @@
+import { useState } from "react";
+
+
+
 const InputAndSubmet=(props)=>{
+    const [inputValue, setInputValue] = useState("");
+
+    const handlePostMethod=async()=>{
+      try{
+      if(inputValue==="") return ;
+
+
+      if(props.tab==="comments"){
+        const rate=await fetch(`http://localhost:3000/Ratings`,{
+          method:"POST",
+          headers:{
+            "Content-Type": "application/json"
+          },
+          body:JSON.stringify({
+            userId:1,
+            residentId:1,
+            starCount:null,
+            comment:inputValue,
+            issues:null
+          })
+          
+        }
+        
+       
+      )
+        const response=await rate.json()
+        
+        props.setData((prev) => [...prev, response]);
+        setInputValue("")
+
+    }
+
+
+
+
+      else{
+            const rate=await fetch(`http://localhost:3000/Ratings`,{
+            method:"POST",
+            headers:{
+              "Content-Type": "application/json"
+            },
+            body:JSON.stringify({
+              userId:1,
+              residentId:1,
+              starCount:null,
+              comment:null,
+              issues:inputValue
+            })
+            
+          }
+          
+        
+        )
+        const response=await rate.json()
+        
+        props.setData((prev) => [...prev, response]);
+        setInputValue("")
+        }
+
+      
+      }
+      catch(error){
+        console.error(error)
+      }
+
+    }
+  
+
     return(
         <>
             <div className="d-flex gap-2">
@@ -6,8 +78,11 @@ const InputAndSubmet=(props)=>{
           type="text"
           className="form-control"
           placeholder={props?.content}
+          value={inputValue}
+          onChange={(e)=>setInputValue(e.target.value)}
          
         />
+        
         <button
           className="btn"
           
@@ -20,8 +95,12 @@ const InputAndSubmet=(props)=>{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            
           }}
+          
+          onClick={()=>handlePostMethod()}
         >
+          
           <svg
             width="13"
             height="13"
@@ -37,9 +116,11 @@ const InputAndSubmet=(props)=>{
           </svg>
         </button>
       </div>
+
         
         </>
     )
 }
+
 
 export default InputAndSubmet;

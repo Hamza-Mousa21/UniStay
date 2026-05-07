@@ -22,7 +22,7 @@ const CommentSection=(props)=>{
         console.log("Error")
       }
       //console.log("2")
-      setData(prev => prev.filter(c => c.id !== id));
+      props.setData(prev => prev.filter(c => c.id !== props.data.id));
     }
     catch(error){
       console.log("E")
@@ -71,7 +71,7 @@ const CommentSection=(props)=>{
                     <div
                       className="d-flex p-1 mt-1 justify-content-between align-items-baseline"
                       style={{ cursor: "pointer" }}
-                      onClick={()=>handleDeleteComment(comm.id)}
+                      onClick={()=>handleDeleteComment(props.data.id)}
                     >
                       <i className="bi bi-trash3" />
                       <span>Delete</span>
@@ -81,7 +81,7 @@ const CommentSection=(props)=>{
 
 
           </div>  
-          <InputAndSubmet content="post a comment here ..."></InputAndSubmet>
+          {/* <InputAndSubmet content="post a comment here ..." tab="comment" data={props.data}></InputAndSubmet> */}
 
         </>
     )

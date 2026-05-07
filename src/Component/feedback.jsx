@@ -7,11 +7,7 @@ const Feedback = () => {
 //   const [comments, setComments] = useState([])
   const [activeTab, setActiveTab] = useState("comments")
 
-//   const handleAddComment = () => {
-//     if (comment.trim() === "") return
-//     setComments([...comments, comment])
-//     setComment("")
-//   }
+
 
   const tabStyle = (tab) => ({
     color: "#1b2a41",
@@ -52,20 +48,11 @@ const Feedback = () => {
       }}>
 
         {activeTab === "comments" && (
-          <>
-            {/* <ul className="list-unstyled">
-              {comments.map((c, i) => (
-                <li key={i} className="mb-2 p-2 rounded" style={{ backgroundColor: "#f5f5f5", color: "#1b2a41" }}>
-                  {c}
-                </li>
-              ))}
-            </ul> */}
-            <InputField content="Add a comment..." tab="comment"></InputField>
-          </>
+            <InputField content="Add a comment here..." tab="comments"></InputField>
         )}
 
         {activeTab === "issues" && (
-          <InputField content="Add an issue" tab="issues"></InputField>
+          <InputField content="Add an issue here..." tab="issues"></InputField>
         )}
 
         {activeTab === "ratings" && (

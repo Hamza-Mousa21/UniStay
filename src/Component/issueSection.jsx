@@ -17,8 +17,7 @@ const handleDeleteIssue=async(id)=>{
         throw new Error("Failed to delete issue");
         console.log("Error")
       }
-      //console.log("2")
-      setData(prev => prev.filter(c => c.id !== id));
+      props.setData(prev => prev.filter(c => c.id !== props.data.id));
     }
     catch(error){
       
@@ -82,7 +81,7 @@ const handleCommentSettings = (index) => {
 
                 
           </div>  
-          <InputAndSubmet content="post an issue here ..."></InputAndSubmet>
+          {/* <InputAndSubmet content="post an issue here ..." tab="issue"></InputAndSubmet> */}
           
         </>
     )

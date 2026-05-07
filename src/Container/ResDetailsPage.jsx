@@ -5,7 +5,7 @@ import { TextField } from "@mui/material";
 import ContactSidebar from "../Component/ContactSidebar";
 import MobileContactBar from "../Component/MobileContactBar";
 import Footer from "../components/Footer/Footer";
-import Comments from "../Component/comments";
+import Feedback from "../Component/feedback";
 import ImagesCarousel from "../Component/Carousel";
 
 
@@ -274,7 +274,7 @@ return (
       </div> 
      </div>
 
-     <Comments></Comments> 
+     <Feedback></Feedback> 
      
             
 

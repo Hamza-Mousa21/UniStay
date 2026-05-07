@@ -1,8 +1,8 @@
 import { useState } from "react"
-import InputField from "./inputField"
+import InputField from "./commentAndIssueSection"
 import RatingStars from "./ratingStars"
 
-const Comments = () => {
+const Feedback = () => {
 //   const [comment, setComment] = useState("")
 //   const [comments, setComments] = useState([])
   const [activeTab, setActiveTab] = useState("comments")
@@ -77,4 +77,4 @@ const Comments = () => {
   )
 }
 
-export default Comments
+export default Feedback

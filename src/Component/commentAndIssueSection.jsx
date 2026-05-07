@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react"
+import InputAndSubmet from "./inputAndSubmit"
+import CommentSection from "./commentSection"
+import IssueSection from "./issueSection"
 
 const InputField = (props) => {
   const [data,setData]=useState([])
@@ -107,54 +110,7 @@ const handleDeleteIssue=async(id)=>{
 
         <div  key={i} >
 
-         {props.tab==="comment"&&comm.comment!==null &&<div className="d-flex mb-2 p-2 rounded d-flex justify-content-between align-items-center"
-          style={{ listStyle: "none",backgroundColor: "#faf7f7", color: "#1b2a41" ,position:"relative"}}
-
-          >
-            
-            
-            <li>{comm?.comment}</li>
-
-            {/* <li>{comm?.issues}</li> */}
-            
-            <i className="bi bi-three-dots-vertical" style={{cursor:"pointer"}} onClick={() => handleCommentSettings(i)}></i>
-            {commentSetting === i && (
-                  <div
-                    style={{
-                      width: "90px",
-                      height: "auto",
-                      backgroundColor: "#1b2a41",
-                      color: "lightgray",
-                      position: "absolute",
-                      top: "30px",
-                      right:"0px",
-                      zIndex: 10,
-                      padding: "2px",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    <div
-                      className="d-flex p-1 justify-content-between align-items-baseline"
-                      style={{ cursor: "pointer" }}
-                      
-                    >
-                      <i className="bi bi-pencil" />
-                      <span>Update</span>
-                    </div>
-
-                    <div
-                      className="d-flex p-1 mt-1 justify-content-between align-items-baseline"
-                      style={{ cursor: "pointer" }}
-                      onClick={()=>handleDeleteComment(comm.id)}
-                    >
-                      <i className="bi bi-trash3" />
-                      <span>Delete</span>
-                    </div>
-                  </div>
-                )} 
-
-
-          </div>  }
+         {props.tab==="comment"&&comm.comment!==null && <CommentSection data={comm} i={i}></CommentSection> }
 
 
 
@@ -162,105 +118,26 @@ const handleDeleteIssue=async(id)=>{
 
 
 
-          {props.tab==="issues" && comm.issues!==null&&<div className="d-flex mb-2 p-2 rounded d-flex justify-content-between align-items-center"
-          style={{ listStyle: "none",backgroundColor: "#faf7f7", color: "#1b2a41" ,position:"relative"}}
-
-          >
-            
-            
-            <li>{comm?.issues}</li>
-
-            {/* <li>{comm?.issues}</li> */}
-            
-            <i className="bi bi-three-dots-vertical" style={{cursor:"pointer"}} onClick={() => handleCommentSettings(i)}></i>
-            {commentSetting === i && (
-                  <div
-                    style={{
-                      width: "90px",
-                      height: "auto",
-                      backgroundColor: "#1b2a41",
-                      color: "lightgray",
-                      position: "absolute",
-                      top: "30px",
-                      right:"0px",
-                      zIndex: 10,
-                      padding: "2px",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    <div
-                      className="d-flex p-1 justify-content-between align-items-baseline"
-                      style={{ cursor: "pointer" }}
-                      
-                    >
-                      <i className="bi bi-pencil" />
-                      <span>Update</span>
-                    </div>
-
-                    <div
-                      className="d-flex p-1 mt-1 justify-content-between align-items-baseline"
-                      style={{ cursor: "pointer" }}
-                      
-                      onClick={()=>handleDeleteIssue(comm.id)}
-                    >
-                      <i className="bi bi-trash3" />
-                      <span>Delete</span>
-                    </div>
-                  </div>
-                )} 
-
-
-          </div>  }
+          {props.tab==="issues" && comm.issues!==null&& <IssueSection data={comm} i={i}></IssueSection> }
+          
+          
           </div>      
+          
 
           
 
       ))}
+      
 
 
 
-
+      
       
 
     </ul>
     
 
-      <div className="d-flex gap-2">
-        <input
-          type="text"
-          className="form-control"
-          placeholder={props?.content}
-         
-        />
-        <button
-          className="btn"
-          
-          style={{
-            width: "30px",
-            height: "37px",
-            borderRadius: "8px",
-            backgroundColor: "#1b2a41",
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="22" y1="2" x2="11" y2="13" />
-            <polygon points="22 2 15 22 11 13 2 9 22 2" />
-          </svg>
-        </button>
-      </div>
+      
     </>
   )
 }

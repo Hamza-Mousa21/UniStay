@@ -5,11 +5,11 @@ import Home from "./pages/Home/Home";
 import Student from "./pages/Student/student";
 import Owner from "./pages/Owner/owner";
 
-import StudentRegister from "./page/Student/studentRegister";
-import OwnerRegister from "./page/Owner/ownerRegister";
-import AddProperty from "./page/AddProperty";
-import AllResidence from "./Container/AllResedintPage";
-import ResDetails from "./Container/ResDetailsPage";
+import StudentRegister from "./pages/Student/studentRegister";
+import OwnerRegister from "./pages/Owner/ownerRegister";
+import AddProperty from "./pages/Owner/AddProperty";
+import AllResidence from "./pages/Residence/AllResedintPage";
+import ResDetails from "./pages/Residence/ResDetailsPage";
 
 function App() {
   return (

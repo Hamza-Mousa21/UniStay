@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./AddProperty.css";
-import Header from "../component/Header/Header";
-import Footer from "../component/Footer/Footer";
-import heroImage from "../assets/images/478239244_1021199110043927_4451689171410494361_n.jpg";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/FooterPages";
+import heroImage from "../../assets/images/478239244_1021199110043927_4451689171410494361_n.jpg";
 import {
   FaLocationDot,
   FaBed,

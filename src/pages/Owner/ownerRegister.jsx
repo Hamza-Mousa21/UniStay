@@ -1,14 +1,15 @@
 import { useState } from "react";
-import "../Student/Register.css";
-import Header from "../../component/Header/Header";
-import FooterPages from "../../component/Footer/Footer";
+import "../student/Register.css";
+import Header from "../../components/Header/Header";
+import FooterPages from "../../components/Footer/Footer";
 import heroImage from "../../assets/images/login-bg.jpg";
 
-function StudentRegister() {
+function OwnerRegister() {
   const [fullName, setFullName] = useState("");
-  const [idNumber, setIdNumber] = useState("");
+  const [identityNumber, setIdentityNumber] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [housingAddress, setHousingAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -27,9 +28,10 @@ function StudentRegister() {
 
     if (
       !fullName.trim() ||
-      !idNumber.trim() ||
+      !identityNumber.trim() ||
       !email.trim() ||
       !phone.trim() ||
+      !housingAddress.trim() ||
       !password.trim() ||
       !confirmPassword.trim()
     ) {
@@ -42,8 +44,8 @@ function StudentRegister() {
       return;
     }
 
-    if (!/^[0-9]+$/.test(idNumber) || idNumber.trim().length < 6) {
-      alert("يرجى إدخال رقم جامعي صحيح");
+    if (!/^[0-9]+$/.test(identityNumber) || identityNumber.trim().length < 6) {
+      alert("يرجى إدخال رقم هوية صحيح");
       return;
     }
 
@@ -57,6 +59,11 @@ function StudentRegister() {
       return;
     }
 
+    if (housingAddress.trim().length < 4) {
+      alert("يرجى إدخال عنوان سكن صحيح");
+      return;
+    }
+
     if (password.trim().length < 6) {
       alert("كلمة المرور يجب أن تكون 6 خانات على الأقل");
       return;
@@ -67,12 +74,13 @@ function StudentRegister() {
       return;
     }
 
-    alert("تم إنشاء حساب الطالب بنجاح");
+    alert("تم إنشاء حساب صاحب السكن بنجاح");
 
     setFullName("");
-    setIdNumber("");
+    setIdentityNumber("");
     setEmail("");
     setPhone("");
+    setHousingAddress("");
     setPassword("");
     setConfirmPassword("");
   };
@@ -91,15 +99,15 @@ function StudentRegister() {
 
           <main className="login-wrapper">
             <section className="login-card">
-              <h2>إنشاء حساب طالب</h2>
+              <h2>إنشاء حساب صاحب سكن</h2>
               <p className="subtitle">
-                أكمل بياناتك للبدء باستخدام منصة UniStay بسهولة ووضوح
+                أدخل بياناتك لبدء عرض السكن المناسب للطلبة
               </p>
 
               <div className="user-type">
                 <button
                   type="button"
-                  className="type-btn active"
+                  className="type-btn"
                   onClick={handleStudentClick}
                 >
                   طالب
@@ -107,7 +115,7 @@ function StudentRegister() {
 
                 <button
                   type="button"
-                  className="type-btn"
+                  className="type-btn active"
                   onClick={handleOwnerClick}
                 >
                   صاحب سكن
@@ -128,24 +136,24 @@ function StudentRegister() {
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="idNumber">الرقم الجامعي</label>
+                  <label htmlFor="identityNumber">رقم الهوية</label>
                   <input
                     type="text"
-                    id="idNumber"
-                    name="idNumber"
-                    placeholder="مثال: 11912345"
-                    value={idNumber}
-                    onChange={(event) => setIdNumber(event.target.value)}
+                    id="identityNumber"
+                    name="identityNumber"
+                    placeholder="مثال: 123456789"
+                    value={identityNumber}
+                    onChange={(event) => setIdentityNumber(event.target.value)}
                   />
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="email">البريد الإلكتروني الجامعي</label>
+                  <label htmlFor="email">البريد الإلكتروني</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="example@student.najah.edu"
+                    placeholder="example@email.com"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                   />
@@ -160,6 +168,18 @@ function StudentRegister() {
                     placeholder="0599123456"
                     value={phone}
                     onChange={(event) => setPhone(event.target.value)}
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="housingAddress">عنوان السكن</label>
+                  <input
+                    type="text"
+                    id="housingAddress"
+                    name="housingAddress"
+                    placeholder="المنطقة والشارع"
+                    value={housingAddress}
+                    onChange={(event) => setHousingAddress(event.target.value)}
                   />
                 </div>
 
@@ -212,7 +232,7 @@ function StudentRegister() {
                 </div>
 
                 <button type="submit" className="submit-btn">
-                  إنشاء حساب طالب
+                  إنشاء حساب صاحب سكن
                 </button>
               </form>
             </section>
@@ -225,4 +245,4 @@ function StudentRegister() {
   );
 }
 
-export default StudentRegister;
+export default OwnerRegister;

@@ -1,15 +1,14 @@
 import { useState } from "react";
-import "../student/Register.css";
-import Header from "../../component/Header/Header";
-import FooterPages from "../../component/Footer/Footer";
+import "../Student/Register.css";
+import Header from "../../components/Header/Header";
+import FooterPages from "../../components/Footer/Footer";
 import heroImage from "../../assets/images/login-bg.jpg";
 
-function OwnerRegister() {
+function StudentRegister() {
   const [fullName, setFullName] = useState("");
-  const [identityNumber, setIdentityNumber] = useState("");
+  const [idNumber, setIdNumber] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [housingAddress, setHousingAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -28,10 +27,9 @@ function OwnerRegister() {
 
     if (
       !fullName.trim() ||
-      !identityNumber.trim() ||
+      !idNumber.trim() ||
       !email.trim() ||
       !phone.trim() ||
-      !housingAddress.trim() ||
       !password.trim() ||
       !confirmPassword.trim()
     ) {
@@ -44,8 +42,8 @@ function OwnerRegister() {
       return;
     }
 
-    if (!/^[0-9]+$/.test(identityNumber) || identityNumber.trim().length < 6) {
-      alert("يرجى إدخال رقم هوية صحيح");
+    if (!/^[0-9]+$/.test(idNumber) || idNumber.trim().length < 6) {
+      alert("يرجى إدخال رقم جامعي صحيح");
       return;
     }
 
@@ -59,11 +57,6 @@ function OwnerRegister() {
       return;
     }
 
-    if (housingAddress.trim().length < 4) {
-      alert("يرجى إدخال عنوان سكن صحيح");
-      return;
-    }
-
     if (password.trim().length < 6) {
       alert("كلمة المرور يجب أن تكون 6 خانات على الأقل");
       return;
@@ -74,13 +67,12 @@ function OwnerRegister() {
       return;
     }
 
-    alert("تم إنشاء حساب صاحب السكن بنجاح");
+    alert("تم إنشاء حساب الطالب بنجاح");
 
     setFullName("");
-    setIdentityNumber("");
+    setIdNumber("");
     setEmail("");
     setPhone("");
-    setHousingAddress("");
     setPassword("");
     setConfirmPassword("");
   };
@@ -99,15 +91,15 @@ function OwnerRegister() {
 
           <main className="login-wrapper">
             <section className="login-card">
-              <h2>إنشاء حساب صاحب سكن</h2>
+              <h2>إنشاء حساب طالب</h2>
               <p className="subtitle">
-                أدخل بياناتك لبدء عرض السكن المناسب للطلبة
+                أكمل بياناتك للبدء باستخدام منصة UniStay بسهولة ووضوح
               </p>
 
               <div className="user-type">
                 <button
                   type="button"
-                  className="type-btn"
+                  className="type-btn active"
                   onClick={handleStudentClick}
                 >
                   طالب
@@ -115,7 +107,7 @@ function OwnerRegister() {
 
                 <button
                   type="button"
-                  className="type-btn active"
+                  className="type-btn"
                   onClick={handleOwnerClick}
                 >
                   صاحب سكن
@@ -136,24 +128,24 @@ function OwnerRegister() {
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="identityNumber">رقم الهوية</label>
+                  <label htmlFor="idNumber">الرقم الجامعي</label>
                   <input
                     type="text"
-                    id="identityNumber"
-                    name="identityNumber"
-                    placeholder="مثال: 123456789"
-                    value={identityNumber}
-                    onChange={(event) => setIdentityNumber(event.target.value)}
+                    id="idNumber"
+                    name="idNumber"
+                    placeholder="مثال: 11912345"
+                    value={idNumber}
+                    onChange={(event) => setIdNumber(event.target.value)}
                   />
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="email">البريد الإلكتروني</label>
+                  <label htmlFor="email">البريد الإلكتروني الجامعي</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="example@email.com"
+                    placeholder="example@student.najah.edu"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                   />
@@ -168,18 +160,6 @@ function OwnerRegister() {
                     placeholder="0599123456"
                     value={phone}
                     onChange={(event) => setPhone(event.target.value)}
-                  />
-                </div>
-
-                <div className="input-group">
-                  <label htmlFor="housingAddress">عنوان السكن</label>
-                  <input
-                    type="text"
-                    id="housingAddress"
-                    name="housingAddress"
-                    placeholder="المنطقة والشارع"
-                    value={housingAddress}
-                    onChange={(event) => setHousingAddress(event.target.value)}
                   />
                 </div>
 
@@ -232,7 +212,7 @@ function OwnerRegister() {
                 </div>
 
                 <button type="submit" className="submit-btn">
-                  إنشاء حساب صاحب سكن
+                  إنشاء حساب طالب
                 </button>
               </form>
             </section>
@@ -245,4 +225,4 @@ function OwnerRegister() {
   );
 }
 
-export default OwnerRegister;
+export default StudentRegister;

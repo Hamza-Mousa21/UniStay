@@ -10,6 +10,7 @@ import OwnerRegister from "./pages/Owner/ownerRegister";
 import AddProperty from "./pages/Owner/AddProperty";
 import AllResidence from "./pages/Residence/AllResedintPage";
 import ResDetails from "./pages/Residence/ResDetailsPage";
+import WishList from "./pages/Residence/wishList";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/owner-register" element={<OwnerRegister />} />
         <Route path="/add-property" element={<AddProperty />} />
         <Route path="/all-residence" element={<AllResidence />} />
+        <Route path="/wishlist" element={<WishList></WishList>}></Route>
         <Route path="/details/:id" element={<ResDetails />} />
       </Routes>
     </BrowserRouter>

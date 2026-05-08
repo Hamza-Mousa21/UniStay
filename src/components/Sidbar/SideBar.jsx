@@ -2,9 +2,9 @@ const SideBar=()=>{
     return (
         <>
          <div className="col-7 col-md-3 col-lg-3 p-4" style={{ position: "sticky", top: 0, height: "fit-content", alignSelf: "flex-start",flex:"none" }}>
-                    <h4 className="mb-3"><b>Recommendation system</b></h4>
+                    <h4 className="mb-3"><b>نظام اقتراحات</b></h4>
                     <div className=" bg-light p-4" style={{ borderRadius: 5 }}>
-                        <h4><b>Filters</b></h4>
+                        <h4><b>فلترة النتائج</b></h4>
                         <h5>Price Range</h5>
                         <select className="form-select form-select-sm w-80" aria-label="Small select example">
                             <option selected>Any Price</option>
@@ -12,14 +12,14 @@ const SideBar=()=>{
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
-                        <h5 className="mt-4">Distance</h5>
+                        <h5 className="mt-4">المسافة</h5>
                         <select className="form-select form-select-sm w-100" aria-label="Small select example">
                             <option selected>Any Distance</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
-                        <h5 className="mt-4">Amenities</h5>
+                        <h5 className="mt-4">الميزات</h5>
                         <div className="form-check" style={{ color: "#1b2a41" }}>
                             <input className="form-check-input" type="checkbox" id="wifi" value="wifi" />
                             <label className="form-check-label" htmlFor="wifi">Wi-fi</label>
@@ -46,14 +46,14 @@ const SideBar=()=>{
                      <textarea
                        className="form-control"
                       rows="3"
-                      placeholder="e.g. a resedince with 2 rooms and less than 300 per month ..."
-                     style={{ resize: "none", paddingRight: "45px", fontSize: "13px" }}
+                      placeholder="بدي سكن كذا كذا ..."
+                     style={{ resize: "none", paddingLeft: "45px", fontSize: "16px" }}
                     ></textarea>
                      <button
                       className="btn position-absolute"
                       style={{
                        bottom: "8px",
-                       right: "1.5rem",
+                       left: "1.5rem",
                        width: "30px",
                        height: "30px",
                        borderRadius: "8px",

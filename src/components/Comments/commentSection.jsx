@@ -92,7 +92,7 @@ const CommentSection = (props) => {
               color: "lightgray",
               position: "absolute",
               top: "30px",
-              right: "0px",
+              left: "0px",
               zIndex: 10,
               padding: "2px",
               borderRadius: "4px",

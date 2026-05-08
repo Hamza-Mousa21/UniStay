@@ -16,5 +16,5 @@ html {
 
 body {
   direction: rtl;
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
 }

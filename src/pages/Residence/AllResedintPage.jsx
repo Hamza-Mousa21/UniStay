@@ -39,12 +39,14 @@ const AllResidence = () => {
             
             <div className="d-flex p-4" style={{ minHeight: "100vh", color: "#1b2a41" ,backgroundColor:"white"}}>
                 
-
+                {smallScreen &&<SideBar></SideBar>}
                 <div className="col-12 col-md-12 col-lg-9">
                     
                     <p className="pt-4" style={{ color: "gray" }}>{data.length} results</p>
                     {!smallScreen&&<MobileSidebar></MobileSidebar>}
+                    
                     <div className="row">
+                        
                         {data.map((hotel) => (
                             <div className="col-6 col-md-4 col-lg-4 mb-4" key={hotel?.id}>
                                 <div className="card me-2" style={{ cursor: "pointer", color: "#1b2a41" }} >
@@ -86,7 +88,7 @@ const AllResidence = () => {
                         ))}
                     </div>
                 </div>
-                {smallScreen &&<SideBar></SideBar>}
+                
                 
                 
                 

@@ -27,13 +27,13 @@ const Feedback = () => {
     <>
       <div className="d-flex mt-4" style={{ alignItems: "flex-end" }}>
         <span style={tabStyle("comments")} onClick={() => setActiveTab("comments")}>
-          <b>Comments</b>
+          <b>تعليقات</b>
         </span>
         <span style={tabStyle("issues")} onClick={() => setActiveTab("issues")}>
-          <b>Issues</b>
+          <b>مشاكل</b>
         </span>
         <span style={tabStyle("ratings")} onClick={() => setActiveTab("ratings")}>
-          <b>Ratings</b>
+          <b>تقييم</b>
         </span>
       </div>
 

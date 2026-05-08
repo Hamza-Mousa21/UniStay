@@ -4,25 +4,25 @@ const ContactSidebar=()=>{
        
         
         <div className="bg-light p-4  col-md-12 col-lg-12 " style={{height:"fit-content",borderRadius:"5px",color:"#1b2a41"}}>
-            <h4><b>Contact owner</b></h4>
-            <p className="mb-3">Owner name</p>
-            <h5>Your Name</h5>
+            <h4><b>تواصل مع المالك</b></h4>
+            <p className="mb-3">اسم المالك</p>
+            <h5>اسمك</h5>
             <input  type="text" className="form-control" style={{width:"100%"}}></input>
-            <h5 className="mt-3">phone number</h5>
+            <h5 className="mt-3">رقم جوالك</h5>
             <input className="form-control" type="tel" style={{width:"100%"}}></input>
-            <h5 className="mt-3">your message</h5>
+            <h5 className="mt-3">نص الرسالة</h5>
             <div className="position-relative ">
                      <textarea
                        className="form-control"
                       rows="3"
-                      placeholder="e.g."
-                     style={{ resize: "none", paddingRight: "45px", fontSize: "13px", }}
+                      placeholder="بدي سكن كذا كذا"
+                     style={{ resize: "none", paddingLeft: "45px", fontSize: "16px", }}
                     ></textarea>
                      <button
                       className="btn position-absolute"
                       style={{
                        bottom: "12px",
-                       right: "1rem",
+                       left: "1rem",
                        width: "30px",
                        height: "30px",
                        borderRadius: "8px",

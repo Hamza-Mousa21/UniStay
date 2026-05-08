@@ -109,8 +109,8 @@ return (
                     X</p>
                 <div style={{width:"82%",
                     position:"relative",
-                    left:"50%",
-                    transform:"translate(-50%)"
+                    right:"5%",
+                    transform:"translate(-5%)"
                    
                 }}>
                     <ImagesCarousel image={images[0]}></ImagesCarousel>
@@ -120,10 +120,47 @@ return (
     <div className="container mt-4 col-12 col-md-12 col-lg-12 " style={{backgroundColor:"white"}}>
         <div className="mb-3">
             <ArrowBackIcon sx={{color:"#1b2a41"}}></ArrowBackIcon>  
-            <a href="/all-residence" className="mb-3" style={{textDecoration:"none", color:"#1b2a41"}}><b> Back to previous page</b></a>
+            <a href="/all-residence" className="mb-3" style={{textDecoration:"none", color:"#1b2a41"}}><b> العودة لكل السكنات</b></a>
         </div>
 
         <div className="d-flex">
+
+            <div className="col-md-6 col-lg-5 ">
+               
+                {isMobile &&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gridTemplateRows:"1fr 1fr", gap:"8px",height:"65vh" }}>
+                        
+                  
+                    {images.slice(1,4).map((img,index)=>(
+                        <div className="card " key={index} >
+                            <img src={img} style={{ width: "100%", height: "100%", objectFit: "cover", position:"relative"}} />
+                        </div>
+                    ))}
+                        
+                <div
+                    className="card overflow-hidden"
+                       key={4}
+                    style={{ backgroundColor: "#474545", position: "relative", cursor: "pointer" }}
+                    onClick={() => setShowModal(true)}
+                    >
+                    <img src={images[4]} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    {restImages && (
+                        <div style={{
+                        position: "absolute", inset: 0,
+                        backgroundColor: "rgba(0,0,0,0.5)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+
+                        }}
+                        onClick={()=>handleMoreImagesButton()}
+                        >
+                        <p style={{ color: "white", fontSize: "1.5rem", fontWeight: "bold" }}>
+                            +{restImages}
+                        </p>
+                        </div>
+                    )}
+                </div>
+                </div>}
+                
+            </div>
            
             <div className="col-12 col-md-6 col-lg-7 me-2">
                 <div className="card">
@@ -188,56 +225,27 @@ return (
                 }
             </div>
         
-            <div className="col-md-6 col-lg-5 ">
-               
-                {isMobile &&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gridTemplateRows:"1fr 1fr", gap:"8px",height:"65vh" }}>
-                        
-                  
-                    {images.slice(1,4).map((img,index)=>(
-                        <div className="card " key={index} >
-                            <img src={img} style={{ width: "100%", height: "100%", objectFit: "cover", position:"relative"}} />
-                        </div>
-                    ))}
-                        
-                <div
-                    className="card overflow-hidden"
-                       key={4}
-                    style={{ backgroundColor: "#474545", position: "relative", cursor: "pointer" }}
-                    onClick={() => setShowModal(true)}
-                    >
-                    <img src={images[4]} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    {restImages && (
-                        <div style={{
-                        position: "absolute", inset: 0,
-                        backgroundColor: "rgba(0,0,0,0.5)",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-
-                        }}
-                        onClick={()=>handleMoreImagesButton()}
-                        >
-                        <p style={{ color: "white", fontSize: "1.5rem", fontWeight: "bold" }}>
-                            +{restImages}
-                        </p>
-                        </div>
-                    )}
-                </div>
-                </div>}
-                
-            </div>
+            
         </div>
+        
 
      <div className="row mt-5">
+       <div className="col-md-6 col-lg-4 ">             
+        {isMobile && <ContactSidebar></ContactSidebar>}
+        {!isMobile &&<MobileContactBar></MobileContactBar> }
+      </div>          
+
+
       <div className="col-12 col-md-6 col-lg-8">
         <div className="d-flex justify-content-between">
-            <div className="d-flex" style={{alignItems:"baseline", color:"#1b2a41"}}>
-                
+            <i className="bi bi-heart" style={{ fontSize: "35px", position:"relative",bottom:"10px" }}></i>       
+             <div className="d-flex" style={{alignItems:"baseline", color:"#1b2a41"}}>
+                <p style={{color:"gray"}}>شهريا/</p>
                 <h2>300JD</h2>
-                <p style={{color:"gray"}}>/month</p>
-            </div>
-
-            <i className="bi bi-heart" style={{ fontSize: "35px", position:"relative",bottom:"10px" }}></i>         
+                
+            </div>  
        </div>
-       <h5 style={{color:"#1b2a41"}}>description</h5>
+       <h5 style={{color:"#1b2a41"}}>الوصف</h5>
        <p style={{color:"gray"}}>A hotel is a commercial establishment that provides temporary
          accommodation, meals, and various services to guests 
          such as travelers and tourists. Hotels typically offer a range 
@@ -268,10 +276,7 @@ return (
 
 
 
-      <div className="col-md-6 col-lg-4 ">             
-        {isMobile && <ContactSidebar></ContactSidebar>}
-        {!isMobile &&<MobileContactBar></MobileContactBar> }
-      </div> 
+      
      </div>
 
      <Feedback></Feedback> 

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "../Student/Register.css";
-import Header from "../../components/Header/Header";
-import FooterPages from "../../components/Footer/Footer";
-import heroImage from "../../assets/images/login-bg.jpg";
+import "./Register.css";
+import Header from "../../components/Header/Header.jsx";
+import FooterPages from "../../components/Footer/Footer.jsx";
+import heroImage from "../../../dist/assets/images/bwb_jm_lnjh.jpg__1320x740_q95_crop_subsampling-2_upscale.jpg"
 
 function StudentRegister() {
   const [fullName, setFullName] = useState("");

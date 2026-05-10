@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import InputAndSubmet from "./inputAndSubmit"
-import CommentSection from "./commentSection"
-import IssueSection from "./issueSection"
+import InputAndSubmet from "./inputAndSubmit.jsx"
+import CommentSection from "./commentSection.jsx"
+import IssueSection from "./issueSection.jsx"
 
 const InputField = (props) => {
   const [data,setData]=useState([])

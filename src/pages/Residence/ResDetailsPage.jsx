@@ -2,11 +2,11 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { TextField } from "@mui/material";
-import ContactSidebar from "../../components/Contact/ContactSidebar";
-import MobileContactBar from "../../components/Contact/MobileContactBar";
-import Footer from "../../components/Footer/Footer";
-import Feedback from "../../components/Comments/feedback";
-import ImagesCarousel from "../../components/Carousel/Carousel";
+import ContactSidebar from "../../components/Contact/ContactSidebar.jsx";
+import MobileContactBar from "../../components/Contact/MobileContactBar.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
+import Feedback from "../../components/Comments/feedback.jsx";
+import ImagesCarousel from "../../components/Carousel/Carousel.jsx";
 
 
 

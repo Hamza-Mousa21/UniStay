@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import SideBar from "../../components/Sidbar/SideBar"
-import MobileSidebar from "../../components/Contact/MobileSidebar"
-import Header from "../../components/Header/Header"
-import Footer from "../../components/Footer/Footer"
+import SideBar from "../../components/Sidbar/SideBar.jsx"
+import MobileSidebar from "../../components/Contact/MobileSidebar.jsx"
+import Header from "../../components/Header/Header.jsx"
+import Footer from "../../components/Footer/Footer.jsx"
 
 const AllResidence = () => {
     const navigate = useNavigate()

@@ -1,7 +1,7 @@
 // import { useState, useEffect } from "react"
 // import { useNavigate } from "react-router-dom"
-// import SideBar from "./SideBar"
-// import MobileSidebar from "./MobileSidebar"
+// import SideBar from "../Sidbar/SideBar.jsx"
+// import MobileSidebar from "../Contact/MobileSidebar.jsx"
 
 // const AllResidence = () => {
 //     const navigate = useNavigate()

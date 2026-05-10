@@ -1,6 +1,6 @@
 import { useState } from "react"
-import InputField from "./commentAndIssueSection"
-import RatingStars from "./ratingStars"
+import InputField from "./commentAndIssueSection.jsx"
+import RatingStars from "./ratingStars.jsx"
 
 const Feedback = () => {
 //   const [comment, setComment] = useState("")

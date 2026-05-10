@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import DashHome from "./Container/DashHome";
-import OwnersPage from "./Container/ownersPages";
-import PropertiesPage from "./Container/Propertiespage";
-import StudentsPage from "./Container/Studentspage";
-import RequestsPage from "./Container/Requestspage";
-import DashboardLayout from "./Container/DashboardLayout";
+import DashHome from "./pages/dashboard/DashHome";
+import OwnersPage from "./pages/owners/ownersPages";
+import PropertiesPage from "./pages/properties/Propertiespage";
+import StudentsPage from "./pages/students/Studentspage";
+import RequestsPage from "./pages/requests/Requestspage";
+import DashboardLayout from "./components/layout/DashboardLayout";
 
 function App() {
   return (

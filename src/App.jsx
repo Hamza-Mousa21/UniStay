@@ -1,8 +1,4 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 /* ================= HOME ================= */
 
@@ -10,25 +6,25 @@ import Home from "./pages/Home/Home.jsx";
 
 /* ================= STUDENT ================= */
 
+import Student from "./pages/Student/StudenLogin.jsx";
+
 import StudentRegister from "./pages/Student/studentRegister.jsx";
-
-import StudentLogin from "./pages/Student/StudenLogin.jsx";
-
-/* ================= OWNER ================= */
-
-import OwnerRegister from "./pages/Owner/ownerRegister.jsx";
-
-import OwnerLogin from "./pages/Owner/owner.jsx";
-
-import AddProperty from "./pages/Owner/AddProperty.jsx";
 
 /* ================= RESIDENCE ================= */
 
 import AllResidence from "./pages/Residence/AllResedintPage.jsx";
 
-import ResDetailsPage from "./pages/Residence/ResDetailsPage.jsx";
+import ResDetails from "./pages/Residence/ResDetailsPage.jsx";
 
 import WishList from "./pages/Residence/wishList.jsx";
+
+/* ================= OWNER ================= */
+
+import Owner from "./pages/Owner/owner.jsx";
+
+import OwnerRegister from "./pages/Owner/ownerRegister.jsx";
+
+import AddProperty from "./pages/Owner/AddProperty.jsx";
 
 /* ================= DASHBOARD ================= */
 
@@ -45,50 +41,24 @@ import OwnersPage from "./pages/Owner/ownersPages.jsx";
 import StudentsPage from "./pages/Student/Studentspage.jsx";
 
 function App() {
-
   return (
-
     <BrowserRouter>
-
       <Routes>
 
-        {/* ================= MAIN ROUTES ================= */}
+        {/* ================= HOME ================= */}
 
-        <Route
-          path="/"
-          element={<Home />}
-        />
+        <Route path="/" element={<Home />} />
 
-        {/* ================= STUDENT ROUTES ================= */}
+        {/* ================= STUDENT ================= */}
+
+        <Route path="/student" element={<Student />} />
 
         <Route
           path="/student-register"
           element={<StudentRegister />}
         />
 
-        <Route
-          path="/student-login"
-          element={<StudentLogin />}
-        />
-
-        {/* ================= OWNER ROUTES ================= */}
-
-        <Route
-          path="/owner-register"
-          element={<OwnerRegister />}
-        />
-
-        <Route
-          path="/owner-login"
-          element={<OwnerLogin />}
-        />
-
-        <Route
-          path="/add-property"
-          element={<AddProperty />}
-        />
-
-        {/* ================= RESIDENCE ROUTES ================= */}
+        {/* ================= RESIDENCE ================= */}
 
         <Route
           path="/all-residence"
@@ -102,20 +72,31 @@ function App() {
 
         <Route
           path="/details/:id"
-          element={<ResDetailsPage />}
+          element={<ResDetails />}
         />
 
-        {/* ================= DASHBOARD ROUTES ================= */}
+        {/* ================= OWNER ================= */}
+
+        <Route path="/owner" element={<Owner />} />
+
+        <Route
+          path="/owner-register"
+          element={<OwnerRegister />}
+        />
+
+        <Route
+          path="/add-property"
+          element={<AddProperty />}
+        />
+
+        {/* ================= DASHBOARD ================= */}
 
         <Route
           path="/dashboard"
           element={<DashboardLayout />}
         >
 
-          <Route
-            index
-            element={<DashHome />}
-          />
+          <Route index element={<DashHome />} />
 
           <Route
             path="properties"
@@ -140,11 +121,8 @@ function App() {
         </Route>
 
       </Routes>
-
     </BrowserRouter>
-
   );
-
 }
 
 export default App;

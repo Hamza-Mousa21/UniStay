@@ -4,17 +4,25 @@ import {
   Route,
 } from "react-router-dom";
 
-/* ==================================================
-   MAIN WEBSITE PAGES
-================================================== */
+/* ================= HOME ================= */
 
 import Home from "./pages/Home/Home.jsx";
 
+/* ================= STUDENT ================= */
+
 import StudentRegister from "./pages/Student/studentRegister.jsx";
+
+import StudentLogin from "./pages/Student/StudenLogin.jsx";
+
+/* ================= OWNER ================= */
 
 import OwnerRegister from "./pages/Owner/ownerRegister.jsx";
 
+import OwnerLogin from "./pages/Owner/owner.jsx";
+
 import AddProperty from "./pages/Owner/AddProperty.jsx";
+
+/* ================= RESIDENCE ================= */
 
 import AllResidence from "./pages/Residence/AllResedintPage.jsx";
 
@@ -22,9 +30,7 @@ import ResDetailsPage from "./pages/Residence/ResDetailsPage.jsx";
 
 import WishList from "./pages/Residence/wishList.jsx";
 
-/* ==================================================
-   DASHBOARD PAGES
-================================================== */
+/* ================= DASHBOARD ================= */
 
 import DashboardLayout from "./components/layout/DashboardLayout.jsx";
 
@@ -46,12 +52,14 @@ function App() {
 
       <Routes>
 
-        {/* ================= MAIN WEBSITE ROUTES ================= */}
+        {/* ================= MAIN ROUTES ================= */}
 
         <Route
           path="/"
           element={<Home />}
         />
+
+        {/* ================= STUDENT ROUTES ================= */}
 
         <Route
           path="/student-register"
@@ -59,14 +67,28 @@ function App() {
         />
 
         <Route
+          path="/student-login"
+          element={<StudentLogin />}
+        />
+
+        {/* ================= OWNER ROUTES ================= */}
+
+        <Route
           path="/owner-register"
           element={<OwnerRegister />}
+        />
+
+        <Route
+          path="/owner-login"
+          element={<OwnerLogin />}
         />
 
         <Route
           path="/add-property"
           element={<AddProperty />}
         />
+
+        {/* ================= RESIDENCE ROUTES ================= */}
 
         <Route
           path="/all-residence"

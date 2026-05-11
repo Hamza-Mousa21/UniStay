@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./AddProperty.css";
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/FooterPages.jsx";
-import heroImage from "../../../dist/assets/images/IMG_6971 (1).jpg";
+import heroImage from "../../assets/images/IMG_6971 (1).jpg";
 import {
   FaLocationDot,
   FaBed,

@@ -1,8 +1,8 @@
 import "./Home.css";
-import "../../index.css";
-import "../../app.css"
-import Header from "../../components/Header/Header.jsx";
-import Footer from "../../components/Footer/Footer.jsx";
+import "../../App.css"
+import "../../index.css"
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import heroImage from "../../assets/images/bwb_jm_lnjh.jpg__1320x740_q95_crop_subsampling-2_upscale.jpg";
 
 function Home() {
@@ -33,7 +33,7 @@ function Home() {
 
             <p className="hero-description">
               UniStay تساعدك في العثور على أفضل خيارات السكن بالقرب من جامعة
-              النجاح الوطنية، شقق، غرف، واستوديوهات بأسعار مناسبة للطلاب.
+              النجاح الوطنية، شقق، غرف  واستوديوهات بأسعار مناسبة للطلاب.
             </p>
           </div>
 

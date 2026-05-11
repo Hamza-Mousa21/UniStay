@@ -1,8 +1,9 @@
 import { useState } from "react";
-import "../student/Register.css";
-import Header from "../../components/Header/Header.jsx";
-import FooterPages from "../../components/Footer/Footer.jsx";
-import heroImage from "../../../dist/assets/images/bwb_jm_lnjh.jpg__1320x740_q95_crop_subsampling-2_upscale.jpg";
+import "../Student/Register.css";
+import Header from "../../components/Header/Header";
+import FooterPages from "../../components/Footer/FooterPages";
+import heroImage from "../../assets/images/IMG_6971 (1).jpg";
+
 
 function OwnerRegister() {
   const [fullName, setFullName] = useState("");

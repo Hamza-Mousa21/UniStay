@@ -1,6 +1,6 @@
 import "./Footer.css";
-import logoImage from "../../../dist/assets/images/5409f3b3-b085-4d42-8652-580678be8b8f.jpg";
-import footerBg from "../../../dist/assets/images/IMG_6971.jpg";
+import logoImage from "../../assets/images/5409f3b3-b085-4d42-8652-580678be8b8f.jpg";
+import footerBg from "../../assets/images/IMG_6971 (1).jpg";
 
 function Footer() {
   return (

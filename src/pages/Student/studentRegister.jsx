@@ -1,17 +1,25 @@
 import { useState } from "react";
+import axios from "axios";
+
 import "./Register.css";
+
 import Header from "../../components/Header/Header.jsx";
 import FooterPages from "../../components/Footer/Footer.jsx";
-import heroImage from "../../assets/images/bwb_jm_lnjh.jpg__1320x740_q95_crop_subsampling-2_upscale.jpg"
+
+import heroImage from "../../assets/images/bwb_jm_lnjh.jpg__1320x740_q95_crop_subsampling-2_upscale.jpg";
 
 function StudentRegister() {
-  const [fullName, setFullName] = useState("");
-  const [idNumber, setIdNumber] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [studentId, setStudentId] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNum, setPhoneNum] = useState("");
   const [password, setPassword] = useState("");
+
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
+
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleStudentClick = () => {
@@ -22,14 +30,17 @@ function StudentRegister() {
     window.location.href = "/owner-register";
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
+    /* ================= VALIDATION ================= */
+
     if (
-      !fullName.trim() ||
-      !idNumber.trim() ||
+      !firstName.trim() ||
+      !lastName.trim() ||
+      !studentId.trim() ||
       !email.trim() ||
-      !phone.trim() ||
+      !phoneNum.trim() ||
       !password.trim() ||
       !confirmPassword.trim()
     ) {
@@ -37,27 +48,12 @@ function StudentRegister() {
       return;
     }
 
-    if (fullName.trim().length < 4) {
-      alert("يرجى إدخال اسم كامل صحيح");
-      return;
-    }
-
-    if (!/^[0-9]+$/.test(idNumber) || idNumber.trim().length < 6) {
-      alert("يرجى إدخال رقم جامعي صحيح");
-      return;
-    }
-
-    if (!email.includes("@") || !email.includes(".")) {
+    if (!email.includes("@")) {
       alert("يرجى إدخال بريد إلكتروني صحيح");
       return;
     }
 
-    if (!/^[0-9]+$/.test(phone) || phone.trim().length < 10) {
-      alert("يرجى إدخال رقم هاتف صحيح");
-      return;
-    }
-
-    if (password.trim().length < 6) {
+    if (password.length < 6) {
       alert("كلمة المرور يجب أن تكون 6 خانات على الأقل");
       return;
     }
@@ -67,14 +63,47 @@ function StudentRegister() {
       return;
     }
 
-    alert("تم إنشاء حساب الطالب بنجاح");
+    try {
+      /* ================= API REQUEST ================= */
 
-    setFullName("");
-    setIdNumber("");
-    setEmail("");
-    setPhone("");
-    setPassword("");
-    setConfirmPassword("");
+      const response = await axios.post(
+        "http://localhost:3000/api/student/register",
+        {
+          first_name: firstName,
+
+          last_name: lastName,
+
+          student_id: studentId,
+
+          email,
+
+          password,
+
+          phone_num: phoneNum,
+        }
+      );
+
+      /* ================= SUCCESS ================= */
+
+      alert(response.data.message);
+
+      setFirstName("");
+      setLastName("");
+      setStudentId("");
+      setEmail("");
+      setPhoneNum("");
+      setPassword("");
+      setConfirmPassword("");
+
+      window.location.href = "/student";
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        error.response?.data?.message ||
+          "حدث خطأ أثناء إنشاء الحساب"
+      );
+    }
   };
 
   return (
@@ -92,8 +121,9 @@ function StudentRegister() {
           <main className="login-wrapper">
             <section className="login-card">
               <h2>إنشاء حساب طالب</h2>
+
               <p className="subtitle">
-                أكمل بياناتك للبدء باستخدام منصة UniStay بسهولة ووضوح
+                أكمل بياناتك للبدء باستخدام منصة UniStay
               </p>
 
               <div className="user-type">
@@ -115,103 +145,174 @@ function StudentRegister() {
               </div>
 
               <form onSubmit={handleSubmit}>
+                {/* ================= FIRST NAME ================= */}
+
                 <div className="input-group">
-                  <label htmlFor="fullName">الاسم الكامل</label>
+                  <label htmlFor="firstName">
+                    الاسم الأول
+                  </label>
+
                   <input
                     type="text"
-                    id="fullName"
-                    name="fullName"
-                    placeholder="أدخل اسمك الكامل"
-                    value={fullName}
-                    onChange={(event) => setFullName(event.target.value)}
+                    id="firstName"
+                    placeholder="أدخل الاسم الأول"
+                    value={firstName}
+                    onChange={(event) =>
+                      setFirstName(event.target.value)
+                    }
                   />
                 </div>
 
+                {/* ================= LAST NAME ================= */}
+
                 <div className="input-group">
-                  <label htmlFor="idNumber">الرقم الجامعي</label>
+                  <label htmlFor="lastName">
+                    اسم العائلة
+                  </label>
+
                   <input
                     type="text"
-                    id="idNumber"
-                    name="idNumber"
-                    placeholder="مثال: 11912345"
-                    value={idNumber}
-                    onChange={(event) => setIdNumber(event.target.value)}
+                    id="lastName"
+                    placeholder="أدخل اسم العائلة"
+                    value={lastName}
+                    onChange={(event) =>
+                      setLastName(event.target.value)
+                    }
                   />
                 </div>
 
+                {/* ================= STUDENT ID ================= */}
+
                 <div className="input-group">
-                  <label htmlFor="email">البريد الإلكتروني الجامعي</label>
+                  <label htmlFor="studentId">
+                    الرقم الجامعي
+                  </label>
+
+                  <input
+                    type="text"
+                    id="studentId"
+                    placeholder="11912345"
+                    value={studentId}
+                    onChange={(event) =>
+                      setStudentId(event.target.value)
+                    }
+                  />
+                </div>
+
+                {/* ================= EMAIL ================= */}
+
+                <div className="input-group">
+                  <label htmlFor="email">
+                    البريد الإلكتروني
+                  </label>
+
                   <input
                     type="email"
                     id="email"
-                    name="email"
                     placeholder="example@student.najah.edu"
                     value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    onChange={(event) =>
+                      setEmail(event.target.value)
+                    }
                   />
                 </div>
 
+                {/* ================= PHONE ================= */}
+
                 <div className="input-group">
-                  <label htmlFor="phone">رقم الهاتف</label>
+                  <label htmlFor="phone">
+                    رقم الهاتف
+                  </label>
+
                   <input
                     type="text"
                     id="phone"
-                    name="phone"
                     placeholder="0599123456"
-                    value={phone}
-                    onChange={(event) => setPhone(event.target.value)}
+                    value={phoneNum}
+                    onChange={(event) =>
+                      setPhoneNum(event.target.value)
+                    }
                   />
                 </div>
 
-                <div className="input-group">
-                  <label htmlFor="password">كلمة المرور</label>
-                  <div className="password-box">
-                    <button
-                      type="button"
-                      className="toggle-password"
-                      onClick={() => setShowPassword((prev) => !prev)}
-                    >
-                      {showPassword ? "إخفاء" : "إظهار"}
-                    </button>
-
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      id="password"
-                      name="password"
-                      placeholder="أدخل كلمة المرور"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                    />
-                  </div>
-                </div>
+                {/* ================= PASSWORD ================= */}
 
                 <div className="input-group">
-                  <label htmlFor="confirmPassword">تأكيد كلمة المرور</label>
+                  <label htmlFor="password">
+                    كلمة المرور
+                  </label>
+
                   <div className="password-box">
                     <button
                       type="button"
                       className="toggle-password"
                       onClick={() =>
-                        setShowConfirmPassword((prev) => !prev)
+                        setShowPassword((prev) => !prev)
                       }
                     >
-                      {showConfirmPassword ? "إخفاء" : "إظهار"}
+                      {showPassword ? "إخفاء" : "إظهار"}
                     </button>
 
                     <input
-                      type={showConfirmPassword ? "text" : "password"}
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      placeholder="أعد إدخال كلمة المرور"
-                      value={confirmPassword}
+                      type={
+                        showPassword ? "text" : "password"
+                      }
+                      id="password"
+                      placeholder="أدخل كلمة المرور"
+                      value={password}
                       onChange={(event) =>
-                        setConfirmPassword(event.target.value)
+                        setPassword(event.target.value)
                       }
                     />
                   </div>
                 </div>
 
-                <button type="submit" className="submit-btn">
+                {/* ================= CONFIRM PASSWORD ================= */}
+
+                <div className="input-group">
+                  <label htmlFor="confirmPassword">
+                    تأكيد كلمة المرور
+                  </label>
+
+                  <div className="password-box">
+                    <button
+                      type="button"
+                      className="toggle-password"
+                      onClick={() =>
+                        setShowConfirmPassword(
+                          (prev) => !prev
+                        )
+                      }
+                    >
+                      {showConfirmPassword
+                        ? "إخفاء"
+                        : "إظهار"}
+                    </button>
+
+                    <input
+                      type={
+                        showConfirmPassword
+                          ? "text"
+                          : "password"
+                      }
+                      id="confirmPassword"
+                      placeholder="أعد إدخال كلمة المرور"
+                      value={confirmPassword}
+                      onChange={(event) =>
+                        setConfirmPassword(
+                          event.target.value
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+
+                {/* ================= SUBMIT ================= */}
+
+                <button
+                  type="submit"
+                  className="submit-btn"
+                >
                   إنشاء حساب طالب
                 </button>
               </form>

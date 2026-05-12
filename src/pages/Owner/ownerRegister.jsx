@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import "../Student/Register.css";
 import Header from "../../components/Header/Header";
 import FooterPages from "../../components/Footer/FooterPages";
-import heroImage from "../../assets/images/IMG_6971 (1).jpg";
 
+import heroImage from "../../assets/images/bwb_jm_lnjh.jpg__1320x740_q95_crop_subsampling-2_upscale.jpg";
 
 function OwnerRegister() {
+  const navigate = useNavigate();
+
   const [fullName, setFullName] = useState("");
   const [identityNumber, setIdentityNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -17,14 +22,14 @@ function OwnerRegister() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleStudentClick = () => {
-    window.location.href = "/student-register";
+    navigate("/student-register");
   };
 
   const handleOwnerClick = () => {
-    window.location.href = "/owner-register";
+    navigate("/owner-register");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (
@@ -40,57 +45,61 @@ function OwnerRegister() {
       return;
     }
 
-    if (fullName.trim().length < 4) {
-      alert("يرجى إدخال اسم كامل صحيح");
-      return;
-    }
-
-    if (!/^[0-9]+$/.test(identityNumber) || identityNumber.trim().length < 6) {
-      alert("يرجى إدخال رقم هوية صحيح");
-      return;
-    }
-
-    if (!email.includes("@") || !email.includes(".")) {
-      alert("يرجى إدخال بريد إلكتروني صحيح");
-      return;
-    }
-
-    if (!/^[0-9]+$/.test(phone) || phone.trim().length < 10) {
-      alert("يرجى إدخال رقم هاتف صحيح");
-      return;
-    }
-
-    if (housingAddress.trim().length < 4) {
-      alert("يرجى إدخال عنوان سكن صحيح");
-      return;
-    }
-
-    if (password.trim().length < 6) {
-      alert("كلمة المرور يجب أن تكون 6 خانات على الأقل");
-      return;
-    }
-
     if (password !== confirmPassword) {
       alert("كلمتا المرور غير متطابقتين");
       return;
     }
 
-    alert("تم إنشاء حساب صاحب السكن بنجاح");
+    try {
+      const nameParts = fullName.trim().split(" ");
 
-    setFullName("");
-    setIdentityNumber("");
-    setEmail("");
-    setPhone("");
-    setHousingAddress("");
-    setPassword("");
-    setConfirmPassword("");
+      const first_name = nameParts[0];
+
+      const last_name =
+        nameParts.slice(1).join(" ") || " ";
+
+      await axios.post(
+        "http://localhost:3000/api/owner/register",
+        {
+          first_name,
+          last_name,
+          email,
+          password,
+          phone_num: phone,
+        }
+      );
+
+      alert("تم إنشاء حساب صاحب السكن بنجاح");
+
+      setFullName("");
+      setIdentityNumber("");
+      setEmail("");
+      setPhone("");
+      setHousingAddress("");
+      setPassword("");
+      setConfirmPassword("");
+
+      navigate("/owner");
+
+    } catch (error) {
+      console.error(error);
+
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("فشل الاتصال بالسيرفر");
+      }
+    }
   };
 
   return (
     <>
       <section className="student-hero">
         <div className="student-hero-background">
-          <img src={heroImage} alt="صورة سكن طلابي" />
+          <img
+            src={heroImage}
+            alt="صورة سكن طلابي"
+          />
         </div>
 
         <div className="student-hero-overlay"></div>
@@ -101,6 +110,7 @@ function OwnerRegister() {
           <main className="login-wrapper">
             <section className="login-card">
               <h2>إنشاء حساب صاحب سكن</h2>
+
               <p className="subtitle">
                 أدخل بياناتك لبدء عرض السكن المناسب للطلبة
               </p>
@@ -125,72 +135,102 @@ function OwnerRegister() {
 
               <form onSubmit={handleSubmit}>
                 <div className="input-group">
-                  <label htmlFor="fullName">الاسم الكامل</label>
+                  <label htmlFor="fullName">
+                    الاسم الكامل
+                  </label>
+
                   <input
                     type="text"
                     id="fullName"
                     name="fullName"
                     placeholder="أدخل اسمك الكامل"
                     value={fullName}
-                    onChange={(event) => setFullName(event.target.value)}
+                    onChange={(event) =>
+                      setFullName(event.target.value)
+                    }
                   />
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="identityNumber">رقم الهوية</label>
+                  <label htmlFor="identityNumber">
+                    رقم الهوية
+                  </label>
+
                   <input
                     type="text"
                     id="identityNumber"
                     name="identityNumber"
                     placeholder="مثال: 123456789"
                     value={identityNumber}
-                    onChange={(event) => setIdentityNumber(event.target.value)}
+                    onChange={(event) =>
+                      setIdentityNumber(event.target.value)
+                    }
                   />
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="email">البريد الإلكتروني</label>
+                  <label htmlFor="email">
+                    البريد الإلكتروني
+                  </label>
+
                   <input
                     type="email"
                     id="email"
                     name="email"
                     placeholder="example@email.com"
                     value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    onChange={(event) =>
+                      setEmail(event.target.value)
+                    }
                   />
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="phone">رقم الهاتف</label>
+                  <label htmlFor="phone">
+                    رقم الهاتف
+                  </label>
+
                   <input
                     type="text"
                     id="phone"
                     name="phone"
                     placeholder="0599123456"
                     value={phone}
-                    onChange={(event) => setPhone(event.target.value)}
+                    onChange={(event) =>
+                      setPhone(event.target.value)
+                    }
                   />
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="housingAddress">عنوان السكن</label>
+                  <label htmlFor="housingAddress">
+                    عنوان السكن
+                  </label>
+
                   <input
                     type="text"
                     id="housingAddress"
                     name="housingAddress"
                     placeholder="المنطقة والشارع"
                     value={housingAddress}
-                    onChange={(event) => setHousingAddress(event.target.value)}
+                    onChange={(event) =>
+                      setHousingAddress(event.target.value)
+                    }
                   />
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="password">كلمة المرور</label>
+                  <label htmlFor="password">
+                    كلمة المرور
+                  </label>
+
                   <div className="password-box">
                     <button
                       type="button"
                       className="toggle-password"
-                      onClick={() => setShowPassword((prev) => !prev)}
+                      onClick={() =>
+                        setShowPassword((prev) => !prev)
+                      }
                     >
                       {showPassword ? "إخفاء" : "إظهار"}
                     </button>
@@ -201,13 +241,18 @@ function OwnerRegister() {
                       name="password"
                       placeholder="أدخل كلمة المرور"
                       value={password}
-                      onChange={(event) => setPassword(event.target.value)}
+                      onChange={(event) =>
+                        setPassword(event.target.value)
+                      }
                     />
                   </div>
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="confirmPassword">تأكيد كلمة المرور</label>
+                  <label htmlFor="confirmPassword">
+                    تأكيد كلمة المرور
+                  </label>
+
                   <div className="password-box">
                     <button
                       type="button"
@@ -216,23 +261,34 @@ function OwnerRegister() {
                         setShowConfirmPassword((prev) => !prev)
                       }
                     >
-                      {showConfirmPassword ? "إخفاء" : "إظهار"}
+                      {showConfirmPassword
+                        ? "إخفاء"
+                        : "إظهار"}
                     </button>
 
                     <input
-                      type={showConfirmPassword ? "text" : "password"}
+                      type={
+                        showConfirmPassword
+                          ? "text"
+                          : "password"
+                      }
                       id="confirmPassword"
                       name="confirmPassword"
                       placeholder="أعد إدخال كلمة المرور"
                       value={confirmPassword}
                       onChange={(event) =>
-                        setConfirmPassword(event.target.value)
+                        setConfirmPassword(
+                          event.target.value
+                        )
                       }
                     />
                   </div>
                 </div>
 
-                <button type="submit" className="submit-btn">
+                <button
+                  type="submit"
+                  className="submit-btn"
+                >
                   إنشاء حساب صاحب سكن
                 </button>
               </form>

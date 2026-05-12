@@ -244,28 +244,3 @@
 .switch-text a:hover {
   text-decoration: underline;
 }
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 600px) {
-  .login-card {
-    padding: 28px 20px;
-    border-radius: 22px;
-  }
-
-  .login-card h2 {
-    font-size: 28px;
-  }
-
-  .subtitle {
-    font-size: 14px;
-  }
-
-  .type-btn {
-    font-size: 14px;
-  }
-
-  .submit-btn {
-    font-size: 16px;
-  }
-}

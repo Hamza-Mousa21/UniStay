@@ -21,7 +21,7 @@ function Header() {
 
       <div className="navbar-container">
 
-        {/* Logo */}
+        {/* LOGO */}
         <div className="nav-right">
 
           <Link
@@ -42,7 +42,7 @@ function Header() {
 
         </div>
 
-        {/* Navigation */}
+        {/* NAVIGATION */}
         <nav className="nav-center">
 
           <ul className="nav-links">
@@ -78,8 +78,15 @@ function Header() {
 
         </nav>
 
-        {/* Buttons */}
+        {/* LEFT SIDE */}
         <div className="nav-left">
+
+          <Link
+            to="/wishlist"
+            className="wishlist-btn"
+          >
+            ♡
+          </Link>
 
           <Link
             to="/student"

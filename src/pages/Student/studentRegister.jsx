@@ -67,7 +67,7 @@ function StudentRegister() {
       /* ================= API REQUEST ================= */
 
       const response = await axios.post(
-        "http://localhost:3000/api/student/register",
+        "http://localhost:3000/student/register",
         {
           first_name: firstName,
 

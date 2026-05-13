@@ -291,10 +291,10 @@ const ResDetails = () => {
                     </div>
                 </div>
 
-                {/* <Feedback /> */}
+                <Feedback res_id={id} />
             </div>
 
-            <Footer />
+            <Footer  />
         </>
     )
 }

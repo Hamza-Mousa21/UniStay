@@ -43,7 +43,7 @@ function Student() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/student/login",
+        "http://localhost:3000/student/login",
         {
           email,
           password,

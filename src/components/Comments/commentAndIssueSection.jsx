@@ -66,8 +66,9 @@ const handleDeleteIssue=async(id)=>{
   ]
   useEffect(()=>{
     const getData=async()=>{
-      const res=await fetch('http://localhost:3000/residence/1/Ratings')
+      const res=await fetch(`http://localhost:3000/Ratings/residence/${props.res_id}`)
       const data=await res.json()
+      console.log(`${props.res_id}`)
       setData(data)
     }
     getData()
@@ -79,7 +80,10 @@ const handleDeleteIssue=async(id)=>{
     
 
     <ul className="list-unstyled">
-      {data.map((comm,i)=>(
+      {data.length===0 &&<div>
+        {data.message}
+        </div>}
+      {data.length>0 && data.map((comm,i)=>(
   
           <div  key={i} >
 
@@ -119,7 +123,7 @@ const handleDeleteIssue=async(id)=>{
 
     </ul>
     
-      <InputAndSubmet content={props.content} tab={props.tab} data={data} setData={setData} ></InputAndSubmet>
+      <InputAndSubmet res_id={props?.res_id} content={props.content} tab={props.tab} data={data} setData={setData} ></InputAndSubmet>
       
     </>
   )

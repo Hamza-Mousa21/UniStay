@@ -66,7 +66,7 @@ const handleDeleteIssue=async(id)=>{
   ]
   useEffect(()=>{
     const getData=async()=>{
-      const res=await fetch('http://localhost:3000/Ratings')
+      const res=await fetch('http://localhost:3000/residence/1/Ratings')
       const data=await res.json()
       setData(data)
     }
@@ -83,11 +83,34 @@ const handleDeleteIssue=async(id)=>{
   
           <div  key={i} >
 
-          {props.tab==="comments"&&comm.comment!==null && <CommentSection data={comm} i={i} setData={setData}></CommentSection> }
+          {props.tab==="comments"&&comm.comment!==null && 
+          <div>
+            <CommentSection data={comm} i={i} setData={setData}></CommentSection> 
+            <span style={{color:"gray", fontSize:"0.9rem"}}>{new Date(comm.rateDate).toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>
+          </div>
+          }
 
 
 
-          {props.tab==="issues" && comm.issues!==null&& <IssueSection data={comm} i={i} setData={setData} ></IssueSection> }
+          {props.tab==="issues" && comm.issues!==null&& 
+          <div>
+
+            <IssueSection data={comm} i={i} setData={setData} ></IssueSection>
+            <span style={{color:"gray", fontSize:"0.9rem"}}>{new Date(comm.rateDate).toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>
+          </div>
+          }
             
             
           </div>

@@ -1,4 +1,13 @@
+import { useEffect } from "react";
+
 const ContactSidebar=()=>{
+    useEffect(()=>{
+      const getOwnerData=async()=>{
+        const owner=await fetch (`http://localhost:3000/`)
+      }
+    })
+
+
     return(
        <> 
        
@@ -7,9 +16,9 @@ const ContactSidebar=()=>{
             <h4><b>تواصل مع المالك</b></h4>
             <p className="mb-3">اسم المالك</p>
             <h5>اسمك</h5>
-            <input  type="text" className="form-control" style={{width:"100%"}}></input>
+            <input  type="text" className= "  form-control" placeholder="حمزة موسى.." style={{width:"100%",}}></input>
             <h5 className="mt-3">رقم جوالك</h5>
-            <input className="form-control" type="tel" style={{width:"100%"}}></input>
+            <input className="form-control" placeholder="+970123456789" type="tel" style={{width:"100%"}}></input>
             <h5 className="mt-3">نص الرسالة</h5>
             <div className="position-relative ">
                      <textarea

@@ -20,6 +20,7 @@ const InputAndSubmet=(props)=>{
             userId:1,
             residentId:1,
             starCount:null,
+            rateDate:new Date(),
             comment:inputValue,
             issues:null
           })
@@ -46,7 +47,8 @@ const InputAndSubmet=(props)=>{
             },
             body:JSON.stringify({
               userId:1,
-              residentId:1,
+              res_id:1,
+              rateDate:new Date(),
               starCount:null,
               comment:null,
               issues:inputValue

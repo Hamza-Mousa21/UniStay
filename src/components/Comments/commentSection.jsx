@@ -11,7 +11,7 @@ const CommentSection = (props) => {
 
   const handleDeleteComment = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/Ratings/${id}/comment`, {
+      const response = await fetch(`http://localhost:3000/residence/1/Ratings/${id}/student/1/`, {
         method: "DELETE"
       })
       if (!response.ok) throw new Error("Failed to delete comment");

@@ -28,19 +28,81 @@ export default function OwnersPage() {
 
   return (
     <div style={{ direction: "rtl", fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+
+      <style>{`
+        .own-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
+          margin-bottom: 28px;
+        }
+        .own-table-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 18px 22px;
+          border-bottom: 0.5px solid #e2e8f0;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+        .own-table-actions {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+        .own-search-input {
+          padding: 8px 14px;
+          border: 0.5px solid #e2e8f0;
+          border-radius: 8px;
+          font-size: 14px;
+          background: #f8fafc;
+          color: #0f172a;
+          outline: none;
+          width: 220px;
+        }
+        .own-table-wrap {
+          width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .own-table {
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 520px;
+        }
+        @media (max-width: 768px) {
+          .own-stats-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+          }
+          .own-search-input {
+            width: 160px;
+          }
+        }
+        @media (max-width: 480px) {
+          .own-stats-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+          .own-table-header {
+            padding: 14px 16px;
+          }
+          .own-search-input {
+            width: 100%;
+          }
+          .own-table-actions {
+            width: 100%;
+          }
+        }
+      `}</style>
+
       {/* Stats */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-          gap: 18,
-          marginBottom: 28,
-        }}
-      >
+      <div className="own-stats-grid">
         {[
-          { label: "إجمالي الملاك",  value: 89, change: "+5%", up: true, bg: "#fef3c7", icon: "👥" },
-          { label: "ملاك نشطون",     value: 76, change: "+3%", up: true, bg: "#ecfdf5", icon: "✅" },
-          { label: "ملاك جدد",       value: 13, change: "+8%", up: true, bg: "#eff6ff", icon: "🆕" },
+          { label: "إجمالي الملاك", value: 89, change: "+5%", up: true, bg: "#fef3c7", icon: "👥" },
+          { label: "ملاك نشطون",    value: 76, change: "+3%", up: true, bg: "#ecfdf5", icon: "✅" },
+          { label: "ملاك جدد",      value: 13, change: "+8%", up: true, bg: "#eff6ff", icon: "🆕" },
         ].map((s) => (
           <div
             key={s.label}
@@ -53,7 +115,7 @@ export default function OwnersPage() {
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
               <span style={{ fontSize: 15, color: "#64748b" }}>{s.label}</span>
-              <div style={{ width: 42, height: 42, borderRadius: 10, background: s.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>
+              <div style={{ width: 42, height: 42, borderRadius: 10, background: s.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>
                 {s.icon}
               </div>
             </div>
@@ -68,23 +130,14 @@ export default function OwnersPage() {
 
       {/* Table Card */}
       <div style={{ background: "#fff", border: "0.5px solid #e2e8f0", borderRadius: 14, overflow: "hidden" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 22px", borderBottom: "0.5px solid #e2e8f0" }}>
+        <div className="own-table-header">
           <span style={{ fontSize: 16, fontWeight: 500, color: "#0f172a" }}>قائمة أصحاب السكن</span>
-          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          <div className="own-table-actions">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="ابحث عن مالك..."
-              style={{
-                padding: "8px 14px",
-                border: "0.5px solid #e2e8f0",
-                borderRadius: 8,
-                fontSize: 14,
-                background: "#f8fafc",
-                color: "#0f172a",
-                outline: "none",
-                width: 220,
-              }}
+              className="own-search-input"
             />
             <button
               style={{
@@ -96,6 +149,7 @@ export default function OwnersPage() {
                 background: "#1d9e75",
                 color: "#fff",
                 fontWeight: 500,
+                whiteSpace: "nowrap",
               }}
             >
               + إضافة مالك
@@ -103,37 +157,39 @@ export default function OwnersPage() {
           </div>
         </div>
 
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr style={{ background: "#f8fafc" }}>
-              {["الاسم", "رقم الهاتف", "عدد العقارات", "إجمالي الدخل", "الحالة", "الإجراءات"].map((h) => (
-                <th key={h} style={{ textAlign: "right", padding: "12px 22px", fontSize: 13, fontWeight: 500, color: "#64748b", borderBottom: "0.5px solid #e2e8f0" }}>
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((o) => (
-              <tr key={o.id} style={{ borderBottom: "0.5px solid #e2e8f0" }}>
-                <td style={{ padding: "13px 22px", fontSize: 14, color: "#0f172a", fontWeight: 500 }}>{o.name}</td>
-                <td style={{ padding: "13px 22px", fontSize: 14, color: "#64748b" }}>{o.phone}</td>
-                <td style={{ padding: "13px 22px", fontSize: 14, color: "#0f172a" }}>{o.properties}</td>
-                <td style={{ padding: "13px 22px", fontSize: 14, color: "#0f172a" }}>{o.income}</td>
-                <td style={{ padding: "13px 22px" }}>
-                  <span style={{ ...statusStyle[o.status], display: "inline-flex", alignItems: "center", padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 500 }}>
-                    {o.status}
-                  </span>
-                </td>
-                <td style={{ padding: "13px 22px" }}>
-                  <button style={{ padding: "6px 14px", border: "0.5px solid #e2e8f0", borderRadius: 8, fontSize: 13, cursor: "pointer", background: "transparent", color: "#0f172a" }}>
-                    عرض
-                  </button>
-                </td>
+        <div className="own-table-wrap">
+          <table className="own-table">
+            <thead>
+              <tr style={{ background: "#f8fafc" }}>
+                {["الاسم", "رقم الهاتف", "عدد العقارات", "إجمالي الدخل", "الحالة", "الإجراءات"].map((h) => (
+                  <th key={h} style={{ textAlign: "right", padding: "12px 22px", fontSize: 13, fontWeight: 500, color: "#64748b", borderBottom: "0.5px solid #e2e8f0", whiteSpace: "nowrap" }}>
+                    {h}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map((o) => (
+                <tr key={o.id} style={{ borderBottom: "0.5px solid #e2e8f0" }}>
+                  <td style={{ padding: "13px 22px", fontSize: 14, color: "#0f172a", fontWeight: 500, whiteSpace: "nowrap" }}>{o.name}</td>
+                  <td style={{ padding: "13px 22px", fontSize: 14, color: "#64748b", whiteSpace: "nowrap" }}>{o.phone}</td>
+                  <td style={{ padding: "13px 22px", fontSize: 14, color: "#0f172a" }}>{o.properties}</td>
+                  <td style={{ padding: "13px 22px", fontSize: 14, color: "#0f172a", whiteSpace: "nowrap" }}>{o.income}</td>
+                  <td style={{ padding: "13px 22px" }}>
+                    <span style={{ ...statusStyle[o.status], display: "inline-flex", alignItems: "center", padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 500, whiteSpace: "nowrap" }}>
+                      {o.status}
+                    </span>
+                  </td>
+                  <td style={{ padding: "13px 22px" }}>
+                    <button style={{ padding: "6px 14px", border: "0.5px solid #e2e8f0", borderRadius: 8, fontSize: 13, cursor: "pointer", background: "transparent", color: "#0f172a", whiteSpace: "nowrap" }}>
+                      عرض
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

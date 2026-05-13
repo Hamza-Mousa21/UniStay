@@ -25,25 +25,54 @@ const usersData = months.map((m, i) => ({
 }));
 
 const stats = [
-  { label: "عدد العقارات", value: 156, change: "+12%", up: true, bg: "#eff6ff", icon: "🏢" },
-  { label: "عدد الطلاب", value: 524, change: "+8%", up: true, bg: "#ecfdf5", icon: "🎓" },
-  { label: "أصحاب السكن", value: 89, change: "+5%", up: true, bg: "#fef3c7", icon: "👥" },
-  { label: "طلبات جديدة", value: 23, change: "-3%", up: false, bg: "#fef2f2", icon: "📋" },
+  { label: "عدد العقارات", value: 156, change: "+12%", up: true,  bg: "#eff6ff", icon: "🏢" },
+  { label: "عدد الطلاب",   value: 524, change: "+8%",  up: true,  bg: "#ecfdf5", icon: "🎓" },
+  { label: "أصحاب السكن",  value: 89,  change: "+5%",  up: true,  bg: "#fef3c7", icon: "👥" },
+  { label: "طلبات جديدة",  value: 23,  change: "-3%",  up: false, bg: "#fef2f2", icon: "📋" },
 ];
 
 export default function DashHome() {
   return (
     <div style={{ padding: 28 }}>
 
+      <style>{`
+        .dash-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 18px;
+          margin-bottom: 28px;
+        }
+        .dash-charts-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 18px;
+        }
+        @media (max-width: 1024px) {
+          .dash-stats-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+          .dash-charts-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+        @media (max-width: 600px) {
+          .dash-stats-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+          }
+          .dash-charts-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 400px) {
+          .dash-stats-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+
       {/* Stat Cards */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-          gap: 18,
-          marginBottom: 28,
-        }}
-      >
+      <div className="dash-stats-grid">
         {stats.map((s) => (
           <div
             key={s.label}
@@ -65,19 +94,16 @@ export default function DashHome() {
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: 20,
+                flexShrink: 0,
               }}>
                 {s.icon}
               </div>
             </div>
-
             <div style={{ fontSize: 32, color: "#0f172a", marginBottom: 8 }}>
               {s.value}
             </div>
-
             <div style={{ fontSize: 13 }}>
-              <span style={{ color: s.up ? "#10b981" : "#ef4444" }}>
-                {s.change}
-              </span>
+              <span style={{ color: s.up ? "#10b981" : "#ef4444" }}>{s.change}</span>
               <span style={{ color: "#94a3b8" }}> من الشهر الماضي</span>
             </div>
           </div>
@@ -85,16 +111,16 @@ export default function DashHome() {
       </div>
 
       {/* Charts */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 18 }}>
+      <div className="dash-charts-grid">
 
         {/* Properties */}
         <div style={{ background: "#fff", borderRadius: 14, padding: 22 }}>
-          <h3>نمو العقارات</h3>
+          <h3 style={{ margin: "0 0 16px", fontSize: 15, color: "#0f172a" }}>نمو العقارات</h3>
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={propertiesData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" angle={-35} textAnchor="end" height={50} />
-              <YAxis />
+              <XAxis dataKey="name" angle={-35} textAnchor="end" height={50} tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
               <Tooltip />
               <Line type="monotone" dataKey="value" stroke="#1d9e75" />
             </LineChart>
@@ -103,12 +129,12 @@ export default function DashHome() {
 
         {/* Requests */}
         <div style={{ background: "#fff", borderRadius: 14, padding: 22 }}>
-          <h3>الطلبات الشهرية</h3>
+          <h3 style={{ margin: "0 0 16px", fontSize: 15, color: "#0f172a" }}>الطلبات الشهرية</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={requestsData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" angle={-35} textAnchor="end" height={50} />
-              <YAxis />
+              <XAxis dataKey="name" angle={-35} textAnchor="end" height={50} tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
               <Tooltip />
               <Bar dataKey="value" fill="#1d9e75" />
             </BarChart>
@@ -117,12 +143,12 @@ export default function DashHome() {
 
         {/* Users */}
         <div style={{ background: "#fff", borderRadius: 14, padding: 22 }}>
-          <h3>نمو المستخدمين</h3>
+          <h3 style={{ margin: "0 0 16px", fontSize: 15, color: "#0f172a" }}>نمو المستخدمين</h3>
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={usersData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" angle={-35} textAnchor="end" height={50} />
-              <YAxis />
+              <XAxis dataKey="name" angle={-35} textAnchor="end" height={50} tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
               <Tooltip />
               <Legend />
               <Line type="monotone" dataKey="students" stroke="#1d9e75" />

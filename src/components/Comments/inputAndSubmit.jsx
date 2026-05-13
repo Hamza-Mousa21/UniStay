@@ -1,106 +1,94 @@
 import { useState } from "react";
 
+const InputAndSubmet = (props) => {
+  const [inputValue, setInputValue] = useState("");
 
+  const handlePostMethod = async () => {
+    try {
+      if (inputValue === "") return;
 
-const InputAndSubmet=(props)=>{
-    const [inputValue, setInputValue] = useState("");
-
-    const handlePostMethod=async()=>{
-      try{
-      if(inputValue==="") return ;
-
-
-      if(props.tab==="comments"){
-        const rate=await fetch(`http://localhost:3000/Ratings`,{
-          method:"POST",
-          headers:{
-            "Content-Type": "application/json"
+      if (props.tab === "comments") {
+        const rate = await fetch(`http://localhost:3000/Ratings`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-          body:JSON.stringify({
-            userId:1,
-            residentId:1,
-            starCount:null,
-            comment:inputValue,
-            issues:null
-          })
-          
-        }
-        
-       
-      )
-        const response=await rate.json()
-        
+          body: JSON.stringify({
+            userId: 1,
+            residentId: 1,
+            starCount: null,
+            comment: inputValue,
+            issues: null,
+          }),
+        });
+
+        const response = await rate.json();
+
         props.setData((prev) => [...prev, response]);
-        setInputValue("")
+        setInputValue("");
+      } else {
+        const rate = await fetch(`http://localhost:3000/Ratings`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: 1,
+            residentId: 1,
+            starCount: null,
+            comment: null,
+            issues: inputValue,
+          }),
+        });
 
-    }
+        const response = await rate.json();
 
-
-
-
-      else{
-            const rate=await fetch(`http://localhost:3000/Ratings`,{
-            method:"POST",
-            headers:{
-              "Content-Type": "application/json"
-            },
-            body:JSON.stringify({
-              userId:1,
-              residentId:1,
-              starCount:null,
-              comment:null,
-              issues:inputValue
-            })
-            
-          }
-          
-        
-        )
-        const response=await rate.json()
-        
         props.setData((prev) => [...prev, response]);
-        setInputValue("")
-        }
-
-      
-      }
-      catch(error){
-        console.error(error)
+        setInputValue("");
       }
 
+    } catch (error) {
+      console.error(error);
     }
-  
+  };
 
-    return(
-        <>
-            <div className="d-flex gap-2">
+  return (
+    <>
+      <div
+        className="
+          d-flex
+          flex-column
+          flex-sm-row
+          gap-2
+          w-100
+        "
+      >
         <input
           type="text"
           className="form-control"
           placeholder={props?.content}
           value={inputValue}
-          onChange={(e)=>setInputValue(e.target.value)}
-         
+          onChange={(e) => setInputValue(e.target.value)}
         />
-        
+
         <button
-          className="btn"
-          
+          className="
+            btn
+            d-flex
+            align-items-center
+            justify-content-center
+            w-100
+            w-sm-auto
+          "
           style={{
-            width: "30px",
-            height: "37px",
+            minWidth: "45px",
+            height: "40px",
             borderRadius: "8px",
             backgroundColor: "#1b2a41",
             padding: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            
           }}
-          
-          onClick={()=>handlePostMethod()}
+          onClick={() => handlePostMethod()}
         >
-          
           <svg
             width="13"
             height="13"
@@ -117,10 +105,23 @@ const InputAndSubmet=(props)=>{
         </button>
       </div>
 
-        
-        </>
-    )
-}
+      {/* Responsive Fix */}
+      <style>
+        {`
+          @media (max-width: 576px) {
+            input.form-control {
+              font-size: 14px;
+              height: 42px;
+            }
 
+            button.btn {
+              height: 42px !important;
+            }
+          }
+        `}
+      </style>
+    </>
+  );
+};
 
 export default InputAndSubmet;

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../lib/api.js";
 
 import "../Student/Register.css";
+
 import Header from "../../components/Header/Header";
 import FooterPages from "../../components/Footer/FooterPages";
 
@@ -17,9 +18,16 @@ function OwnerRegister() {
   const [phone, setPhone] = useState("");
   const [housingAddress, setHousingAddress] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] =
+    useState("");
+
+  const [showPassword, setShowPassword] =
+    useState(false);
+
+  const [
+    showConfirmPassword,
+    setShowConfirmPassword,
+  ] = useState(false);
 
   const handleStudentClick = () => {
     navigate("/student-register");
@@ -51,7 +59,8 @@ function OwnerRegister() {
     }
 
     try {
-      const nameParts = fullName.trim().split(" ");
+      const nameParts =
+        fullName.trim().split(" ");
 
       const first_name = nameParts[0];
 
@@ -68,8 +77,6 @@ function OwnerRegister() {
           phone_num: phone,
         }
       );
-
-      alert("تم إنشاء حساب صاحب السكن بنجاح");
 
       setFullName("");
       setIdentityNumber("");
@@ -146,7 +153,9 @@ function OwnerRegister() {
                     placeholder="أدخل اسمك الكامل"
                     value={fullName}
                     onChange={(event) =>
-                      setFullName(event.target.value)
+                      setFullName(
+                        event.target.value
+                      )
                     }
                   />
                 </div>
@@ -163,7 +172,9 @@ function OwnerRegister() {
                     placeholder="مثال: 123456789"
                     value={identityNumber}
                     onChange={(event) =>
-                      setIdentityNumber(event.target.value)
+                      setIdentityNumber(
+                        event.target.value
+                      )
                     }
                   />
                 </div>
@@ -180,7 +191,9 @@ function OwnerRegister() {
                     placeholder="example@email.com"
                     value={email}
                     onChange={(event) =>
-                      setEmail(event.target.value)
+                      setEmail(
+                        event.target.value
+                      )
                     }
                   />
                 </div>
@@ -197,7 +210,9 @@ function OwnerRegister() {
                     placeholder="0599123456"
                     value={phone}
                     onChange={(event) =>
-                      setPhone(event.target.value)
+                      setPhone(
+                        event.target.value
+                      )
                     }
                   />
                 </div>
@@ -214,7 +229,9 @@ function OwnerRegister() {
                     placeholder="المنطقة والشارع"
                     value={housingAddress}
                     onChange={(event) =>
-                      setHousingAddress(event.target.value)
+                      setHousingAddress(
+                        event.target.value
+                      )
                     }
                   />
                 </div>
@@ -229,20 +246,30 @@ function OwnerRegister() {
                       type="button"
                       className="toggle-password"
                       onClick={() =>
-                        setShowPassword((prev) => !prev)
+                        setShowPassword(
+                          (prev) => !prev
+                        )
                       }
                     >
-                      {showPassword ? "إخفاء" : "إظهار"}
+                      {showPassword
+                        ? "إخفاء"
+                        : "إظهار"}
                     </button>
 
                     <input
-                      type={showPassword ? "text" : "password"}
+                      type={
+                        showPassword
+                          ? "text"
+                          : "password"
+                      }
                       id="password"
                       name="password"
                       placeholder="أدخل كلمة المرور"
                       value={password}
                       onChange={(event) =>
-                        setPassword(event.target.value)
+                        setPassword(
+                          event.target.value
+                        )
                       }
                     />
                   </div>
@@ -258,7 +285,9 @@ function OwnerRegister() {
                       type="button"
                       className="toggle-password"
                       onClick={() =>
-                        setShowConfirmPassword((prev) => !prev)
+                        setShowConfirmPassword(
+                          (prev) => !prev
+                        )
                       }
                     >
                       {showConfirmPassword

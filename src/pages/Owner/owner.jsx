@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import api from "../../lib/api.js";
 
 import "../Student/StudentLogin.css";
+
 import Header from "../../components/Header/Header";
 import FooterPages from "../../components/Footer/FooterPages";
+
 import heroImage from "../../assets/images/bwb_jm_lnjh.jpg__1320x740_q95_crop_subsampling-2_upscale.jpg";
 
 function Owner() {
@@ -52,11 +54,13 @@ function Owner() {
 
       localStorage.setItem("token", data.token);
 
-      localStorage.setItem("owner", JSON.stringify(data.user));
-
-      alert("تم تسجيل دخول صاحب السكن بنجاح");
+      localStorage.setItem(
+        "owner",
+        JSON.stringify(data.user)
+      );
 
       navigate("/add-property");
+
     } catch (error) {
       console.error(error);
 
@@ -72,7 +76,10 @@ function Owner() {
     <>
       <section className="student-hero">
         <div className="student-hero-background">
-          <img src={heroImage} alt="صورة سكن طلابي" />
+          <img
+            src={heroImage}
+            alt="صورة سكن طلابي"
+          />
         </div>
 
         <div className="student-hero-overlay"></div>
@@ -141,7 +148,11 @@ function Owner() {
                     </button>
 
                     <input
-                      type={showPassword ? "text" : "password"}
+                      type={
+                        showPassword
+                          ? "text"
+                          : "password"
+                      }
                       id="password"
                       name="password"
                       placeholder="أدخل كلمة المرور"

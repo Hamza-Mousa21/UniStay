@@ -35,12 +35,10 @@ function Student() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (!email.trim() || !password.trim()) {
       alert("يرجى تعبئة البريد الإلكتروني وكلمة المرور");
       return;
     }
-
     try {
       const response = await api.post(
         "/student/login",
@@ -49,23 +47,15 @@ function Student() {
           password,
         }
       );
-
       const data = response.data;
-
       localStorage.setItem("token", data.token);
-
       localStorage.setItem(
         "student",
         JSON.stringify(data.user)
       );
-
-      alert("تم تسجيل دخول الطالب بنجاح");
-
       navigate("/all-residence");
-
     } catch (error) {
       console.error(error);
-
       if (error.response) {
         alert(error.response.data.message);
       } else {

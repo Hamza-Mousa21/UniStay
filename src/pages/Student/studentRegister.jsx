@@ -32,9 +32,7 @@ function StudentRegister() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     /* ================= VALIDATION ================= */
-
     if (
       !firstName.trim() ||
       !lastName.trim() ||
@@ -47,46 +45,32 @@ function StudentRegister() {
       alert("يرجى تعبئة جميع الحقول");
       return;
     }
-
     if (!email.includes("@")) {
       alert("يرجى إدخال بريد إلكتروني صحيح");
       return;
     }
-
     if (password.length < 6) {
       alert("كلمة المرور يجب أن تكون 6 خانات على الأقل");
       return;
     }
-
     if (password !== confirmPassword) {
       alert("كلمتا المرور غير متطابقتين");
       return;
     }
-
     try {
       /* ================= API REQUEST ================= */
-
       const response = await api.post(
         "/student/register",
         {
           first_name: firstName,
-
           last_name: lastName,
-
           student_id: studentId,
-
           email,
-
           password,
-
           phone_num: phoneNum,
         }
       );
-
       /* ================= SUCCESS ================= */
-
-      alert(response.data.message);
-
       setFirstName("");
       setLastName("");
       setStudentId("");
@@ -94,11 +78,9 @@ function StudentRegister() {
       setPhoneNum("");
       setPassword("");
       setConfirmPassword("");
-
       window.location.href = "/student";
     } catch (error) {
       console.error(error);
-
       alert(
         error.response?.data?.message ||
           "حدث خطأ أثناء إنشاء الحساب"

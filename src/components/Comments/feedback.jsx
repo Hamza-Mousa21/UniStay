@@ -59,7 +59,7 @@ const Feedback = (props) => {
         )}
 
         {activeTab === "ratings" && (
-            <RatingStars></RatingStars>
+            <RatingStars res_id={props?.res_id}></RatingStars>
         )}
 
       </div>

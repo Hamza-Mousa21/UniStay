@@ -1,43 +1,104 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const RatingStars = () => {
+const RatingStars = (props) => {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [clicked, setClicked] = useState(-1);
+  const [submitted, setSubmitted] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const token = localStorage.getItem("token")
+  const user = JSON.parse(localStorage.getItem("student"))
+
+  useEffect(() => {
+    const getStarRating = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/Ratings/star/${props.res_id}`, {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        })
+        const data = await res.json()
+
+        if (data.starCount) {
+          setClicked(data.starCount - 1) 
+          setSubmitted(true)
+        }
+      } catch (error) {
+        console.error("Error fetching star rating:", error)
+      }
+    }
+    if (props.res_id) getStarRating()
+  }, [props.res_id])
 
   const handleOnHover = (index) => {
+    if (submitted && !isEditing) return;
     setHoveredIndex(index);
   };
 
   const handleLeave = () => {
+    if (submitted && !isEditing) return;
     setHoveredIndex(-1);
   };
 
-  const handleOnClick = (index) => {
+  const handleOnClick = async (index) => {
+    if (submitted && !isEditing) return;
     setClicked(index);
+    setSubmitted(true);
+    setIsEditing(false);
+
+    try {
+      await fetch(`http://localhost:3000/Ratings/star`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          res_id: props.res_id,
+          starCount: index + 1, // 👈 convert 0-4 back to 1-5
+        })
+      })
+    } catch (error) {
+      console.error("Error submitting star rating:", error)
+    }
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+    setHoveredIndex(-1);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await fetch(`http://localhost:3000/Ratings/star/${props.res_id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      setClicked(-1);
+      setSubmitted(false);
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error deleting star rating:", error)
+    }
   };
 
   const activeIndex = hoveredIndex !== -1 ? hoveredIndex : clicked;
 
   const getStarClass = (index) => {
-    return index <= activeIndex
-      ? "bi bi-star-fill"
-      : "bi bi-star";
+    return index <= activeIndex ? "bi bi-star-fill" : "bi bi-star";
   };
 
   return (
     <>
       <div
-        className="
-          d-flex
-          justify-content-center
-          align-items-center
-          flex-wrap
-          gap-2
-        "
+        className="d-flex justify-content-center align-items-center flex-wrap gap-2"
         style={{
           fontSize: "2rem",
-          cursor: "pointer",
+          cursor: submitted && !isEditing ? "not-allowed" : "pointer",
           padding: "10px 0",
+          opacity: submitted && !isEditing ? 0.7 : 1,
         }}
         onMouseLeave={handleLeave}
       >
@@ -49,22 +110,39 @@ const RatingStars = () => {
             onClick={() => handleOnClick(i)}
             style={{
               fontSize: "clamp(1.5rem, 4vw, 2rem)",
+              color: i <= activeIndex ? "#1b2a41" : "gray",
             }}
           />
         ))}
       </div>
 
-      {/* Responsive Fix */}
-      <style>
-        {`
-          @media (max-width: 576px) {
-            div {
-              font-size: 1.6rem !important;
-              gap: 6px !important;
-            }
-          }
-        `}
-      </style>
+      {submitted && !isEditing && (
+        <div className="d-flex justify-content-center gap-3 mt-1">
+          <p style={{ color: "gray", fontSize: "0.9rem", margin: 0 }}>
+            شكراً على تقييمك!
+          </p>
+
+          {/* Edit Button */}
+          <i
+            className="bi bi-pencil"
+            style={{ cursor: "pointer", color: "#1b2a41", fontSize: "1rem" }}
+            onClick={handleEdit}
+          />
+
+          {/* Delete Button */}
+          <i
+            className="bi bi-trash3"
+            style={{ cursor: "pointer", color: "#1b2a41", fontSize: "1rem" }}
+            onClick={handleDelete}
+          />
+        </div>
+      )}
+
+      {isEditing && (
+        <p className="text-center" style={{ color: "gray", fontSize: "0.9rem" }}>
+          اختر تقييماً جديداً
+        </p>
+      )}
     </>
   );
 };

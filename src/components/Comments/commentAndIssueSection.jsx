@@ -14,48 +14,48 @@ const InputField = (props) => {
   }
 
 
-const handleDeleteComment=async(id)=>{
-    try{
-     
-      const response=await fetch(`http://localhost:3000/Ratings/${id}/comment`,{
-        method:"DELETE"
+// const handleDeleteComment=async(id)=>{
+//     try{
+//      console.log(id)
+//       const response=await fetch(`http://localhost:3000/Ratings/residence/${props.res_id}/comment/1`,{
+//         method:"DELETE"
         
-      })
+//       })
        
-      if (!response.ok) {
-        throw new Error("Failed to delete comment");
-        console.log("Error")
-      }
+//       if (!response.ok) {
+//         throw new Error("Failed to delete comment");
+//         console.log("Error")
+//       }
       
-      setData(prev => prev.filter(c => c.id !== id));
-    }
-    catch(error){
-      console.log("E")
-      console.error("Error deleting comment:", error);
-    }
-}
+//       setData(prev => prev.filter(c => c.id !== id));
+//     }
+//     catch(error){
+//       console.log("E")
+//       console.error("Error deleting comment:", error);
+//     }
+// }
 
 
-const handleDeleteIssue=async(id)=>{
-    try{
+// const handleDeleteIssue=async(id)=>{
+//     try{
      
-      const response=await fetch(`http://localhost:3000/Ratings/${id}/issue`,{
-        method:"DELETE"
+//       const response=await fetch(`http://localhost:3000/Ratings/${id}/issue`,{
+//         method:"DELETE"
         
-      })
+//       })
         
-      if (!response.ok) {
-        throw new Error("Failed to delete issue");
-        console.log("Error")
-      }
+//       if (!response.ok) {
+//         throw new Error("Failed to delete issue");
+//         console.log("Error")
+//       }
       
-      setData(prev => prev.filter(c => c.id !== id));
-    }
-    catch(error){
+//       setData(prev => prev.filter(c => c.id !== id));
+//     }
+//     catch(error){
       
-      console.error("Error deleting comment:", error);
-    }
-}
+//       console.error("Error deleting comment:", error);
+//     }
+// }
 
 
 
@@ -89,7 +89,7 @@ const handleDeleteIssue=async(id)=>{
 
           {props.tab==="comments"&&comm.comment!==null && 
           <div>
-            <CommentSection data={comm} i={i} setData={setData}></CommentSection> 
+            <CommentSection  data={comm} i={i} setData={setData}></CommentSection> 
             <span style={{color:"gray", fontSize:"0.9rem"}}>{new Date(comm.rateDate).toLocaleString('en-US', {
                 year: 'numeric',
                 month: 'long',
@@ -105,7 +105,7 @@ const handleDeleteIssue=async(id)=>{
           {props.tab==="issues" && comm.issues!==null&& 
           <div>
 
-            <IssueSection data={comm} i={i} setData={setData} ></IssueSection>
+            <IssueSection  data={comm} i={i} setData={setData} ></IssueSection>
             <span style={{color:"gray", fontSize:"0.9rem"}}>{new Date(comm.rateDate).toLocaleString('en-US', {
                 year: 'numeric',
                 month: 'long',

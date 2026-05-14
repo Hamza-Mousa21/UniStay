@@ -4,18 +4,23 @@ const CommentSection = (props) => {
   const [commentSetting, setCommentSetting] = useState(null)
   const [isEditing, setIsEditing] = useState(false)       // 👈 toggle edit mode
   const [editValue, setEditValue] = useState(props.data?.comment) // 👈 edit input value
-
+  const token = localStorage.getItem("token")
   const handleCommentSettings = (index) => {
     setCommentSetting(commentSetting === index ? null : index)
   }
 
   const handleDeleteComment = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/residence/:residenceId/Ratings/${id}/student/:studentId/comment`, {
-        method: "DELETE"
+      
+      const response = await fetch(`http://localhost:3000/Ratings/comment/${id}`, {
+        method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}` 
+      }
+
       })
       if (!response.ok) throw new Error("Failed to delete comment");
-      props.setData(prev => prev.filter(c => c.id !== props.data.id));
+      props.setData(prev => prev.filter(c => c.id !== id));
     } catch (error) {
       console.error("Error deleting comment:", error);
     }
@@ -23,9 +28,11 @@ const CommentSection = (props) => {
 
   const handleUpdateComment = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/residence/1/Ratings/student/1/`, {
+      const response = await fetch(`http://localhost:3000/Ratings/${id}`, {
         method: "PUT",                                     
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" ,
+          "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify({ comment: editValue })       
       })
       if (!response.ok) throw new Error("Failed to update comment");

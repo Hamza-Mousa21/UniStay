@@ -5,6 +5,8 @@ const IssueSection = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(props.data?.issues);
 
+  const token = localStorage.getItem("token")
+
   const handleCommentSettings = (index) => {
     setCommentSetting(commentSetting === index ? null : index);
   };
@@ -12,10 +14,14 @@ const IssueSection = (props) => {
   const handleDeleteIssue = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/Ratings/${id}/issue`,
+        `http://localhost:3000/Ratings/issue/${id}`,
         {
           method: "DELETE",
-        }
+          headers: {
+            "Authorization": `Bearer ${token}` 
+          }
+        },
+        
       );
 
       if (!response.ok) {
@@ -36,7 +42,9 @@ const IssueSection = (props) => {
         `http://localhost:3000/Ratings/${id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" ,
+            "Authorization": `Bearer ${token}` 
+          },
           body: JSON.stringify({ issues: editValue }),
         }
       );
@@ -151,8 +159,8 @@ const IssueSection = (props) => {
               backgroundColor: "#1b2a41",
               color: "lightgray",
               position: "absolute",
-              top: "40px",
-              right: "10px",
+              top: "70px",
+              left: "0px",
               zIndex: 10,
               padding: "4px",
               borderRadius: "4px",

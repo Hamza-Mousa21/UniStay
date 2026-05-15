@@ -68,10 +68,11 @@ const InputField = (props) => {
       const res=await fetch(`http://localhost:3000/Ratings/residence/${props.res_id}`)
       const data=await res.json()
       console.log(`${props.res_id}`)
+      console.log(data)
       setData(data)
     }
     getData()
-  },[props.residenceId])
+  },[])
   
 
   return (

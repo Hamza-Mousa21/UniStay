@@ -1,129 +1,93 @@
-import { useState } from "react";
-import api from "../../lib/api.js";
+import { useState } from "react"
 
 const CommentSection = (props) => {
-  const [commentSetting, setCommentSetting] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editValue, setEditValue] = useState(props.data?.comment);
-
+  const [commentSetting, setCommentSetting] = useState(null)
+  const [isEditing, setIsEditing] = useState(false)       // 👈 toggle edit mode
+  const [editValue, setEditValue] = useState(props.data?.comment) // 👈 edit input value
+  const token = localStorage.getItem("token")
   const handleCommentSettings = (index) => {
-    setCommentSetting(commentSetting === index ? null : index);
-  };
+    setCommentSetting(commentSetting === index ? null : index)
+  }
 
   const handleDeleteComment = async (id) => {
     try {
-      const student = JSON.parse(localStorage.getItem("student"))
-      const studentId = student?.id
-      await api.delete(`/residence/${props.residenceId}/Ratings/${id}/student/${studentId}/comment`)
-      props.setData(prev => prev.filter(c => c.id !== props.data.id));
+      
+      const response = await fetch(`http://localhost:3000/Ratings/comment/${id}`, {
+        method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}` 
+      }
+
+      })
+      if (!response.ok) throw new Error("Failed to delete comment");
+      props.setData(prev => prev.filter(c => c.id !== id));
     } catch (error) {
       console.error("Error deleting comment:", error);
     }
-  };
+  }
 
   const handleUpdateComment = async (id) => {
     try {
-      await api.put(`/residence/${props.residenceId}/Ratings/${id}`, { comment: editValue })
+      const response = await fetch(`http://localhost:3000/Ratings/${id}`, {
+        method: "PUT",                                     
+        headers: { "Content-Type": "application/json" ,
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ comment: editValue })       
+      })
+      if (!response.ok) throw new Error("Failed to update comment");
 
-      props.setData((prev) =>
-        prev.map((c) =>
-          c.id === props.data.id
-            ? { ...c, comment: editValue }
-            : c
+      props.setData(prev =>
+        prev.map(c => c.id === props.data.id             
+          ? { ...c, comment: editValue }                   
+          : c
         )
       );
-
-      setIsEditing(false);
-      setCommentSetting(null);
-
+      setIsEditing(false)                                  
+      setCommentSetting(null)                              
     } catch (error) {
       console.error("Error updating comment:", error);
     }
-  };
+  }
 
   return (
     <>
       <div
-        className="
-          d-flex
-          flex-column
-          flex-sm-row
-          mb-2
-          p-2
-          rounded
-          justify-content-between
-          align-items-start
-          align-items-sm-center
-          gap-2
-        "
-        style={{
-          listStyle: "none",
-          backgroundColor: "#f8f9fa",
-          color: "#1b2a41",
-          position: "relative",
-          wordBreak: "break-word",
-        }}
+        className="d-flex mb-2 p-2 rounded justify-content-between align-items-center"
+        style={{ listStyle: "none", backgroundColor: "#f8f9fa", color: "#1b2a41", position: "relative" }}
       >
 
-        {isEditing ? (
-          <div
-            className="
-              d-flex
-              flex-column
-              flex-sm-row
-              gap-2
-              flex-grow-1
-              w-100
-              me-0
-              me-sm-2
-            "
-          >
+        {isEditing ? (                                     
+          <div className="d-flex gap-2 flex-grow-1 me-2">
             <input
               className="form-control form-control-sm"
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
             />
-
-            <div className="d-flex gap-2 w-100 w-sm-auto">
-              <button
-                className="btn btn-sm w-100 w-sm-auto"
-                style={{
-                  backgroundColor: "#1b2a41",
-                  color: "white",
-                  whiteSpace: "nowrap",
-                }}
-                onClick={() => handleUpdateComment(props.data.id)}
-              >
-                Save
-              </button>
-
-              <button
-                className="btn btn-sm btn-secondary w-100 w-sm-auto"
-                onClick={() => setIsEditing(false)}
-              >
-                Cancel
-              </button>
-            </div>
+            <button
+              className="btn btn-sm"
+              style={{ backgroundColor: "#1b2a41", color: "white", whiteSpace: "nowrap" }}
+              onClick={() => handleUpdateComment(props.data.id)}
+            >
+              Save
+            </button>
+            <button
+              className="btn btn-sm btn-secondary"
+              onClick={() => setIsEditing(false)}           
+            >
+              Cancel
+            </button>
           </div>
         ) : (
-          <li
-            className="flex-grow-1 pe-2"
-            style={{
-              overflowWrap: "break-word",
-            }}
-          >
-            {props.data?.comment}
-          </li>
+          <li>{props.data?.comment}</li>                   
         )}
 
         {!isEditing && (
-          <div className="align-self-end align-self-sm-center">
-            <i
-              className="bi bi-three-dots-vertical"
-              style={{ cursor: "pointer" }}
-              onClick={() => handleCommentSettings(props.i)}
-            />
-          </div>
+          <i
+            className="bi bi-three-dots-vertical"
+            style={{ cursor: "pointer" }}
+            onClick={() => handleCommentSettings(props.i)}
+          />
         )}
 
         {commentSetting === props.i && (
@@ -134,20 +98,18 @@ const CommentSection = (props) => {
               backgroundColor: "#1b2a41",
               color: "lightgray",
               position: "absolute",
-              top: "40px",
-              right: "10px",
+              top: "30px",
+              left: "0px",
+              left: "0px",
               zIndex: 10,
-              padding: "4px",
+              padding: "2px",
               borderRadius: "4px",
             }}
           >
             <div
               className="d-flex p-1 justify-content-between align-items-baseline"
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                setIsEditing(true);
-                setCommentSetting(null);
-              }}
+              onClick={() => { setIsEditing(true); setCommentSetting(null) }} 
             >
               <i className="bi bi-pencil" />
               <span>Update</span>
@@ -165,7 +127,7 @@ const CommentSection = (props) => {
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
 export default CommentSection;

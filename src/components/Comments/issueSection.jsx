@@ -6,15 +6,28 @@ const IssueSection = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(props.data?.issues);
 
+  const token = localStorage.getItem("token")
+
   const handleCommentSettings = (index) => {
     setCommentSetting(commentSetting === index ? null : index);
   };
 
   const handleDeleteIssue = async (id) => {
     try {
-      const student = JSON.parse(localStorage.getItem("student"))
-      const studentId = student?.id
-      await api.delete(`/residence/${props.residenceId}/Ratings/${id}/student/${studentId}/issue`)
+      const response = await fetch(
+        `http://localhost:3000/Ratings/issue/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${token}` 
+          }
+        },
+        
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete issue");
+      }
 
       props.setData((prev) =>
         prev.filter((c) => c.id !== props.data.id)
@@ -26,7 +39,20 @@ const IssueSection = (props) => {
 
   const handleUpdateIssue = async (id) => {
     try {
-      await api.put(`/residence/${props.residenceId}/Ratings/${id}`, { issues: editValue })
+      const response = await fetch(
+        `http://localhost:3000/Ratings/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" ,
+            "Authorization": `Bearer ${token}` 
+          },
+          body: JSON.stringify({ issues: editValue }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update issue");
+      }
 
       props.setData((prev) =>
         prev.map((c) =>
@@ -134,8 +160,8 @@ const IssueSection = (props) => {
               backgroundColor: "#1b2a41",
               color: "lightgray",
               position: "absolute",
-              top: "40px",
-              right: "10px",
+              top: "70px",
+              left: "0px",
               zIndex: 10,
               padding: "4px",
               borderRadius: "4px",

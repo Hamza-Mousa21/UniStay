@@ -7,11 +7,68 @@ import api from "../../lib/api.js"
 const InputField = (props) => {
   const [data,setData]=useState([])
 
+  const handleCommentSettings = (index) => {
+    setCommentSetting(commentSetting === index ? null : index)
+  }
+
+
+// const handleDeleteComment=async(id)=>{
+//     try{
+//      console.log(id)
+//       const response=await fetch(`http://localhost:3000/Ratings/residence/${props.res_id}/comment/1`,{
+//         method:"DELETE"
+        
+//       })
+       
+//       if (!response.ok) {
+//         throw new Error("Failed to delete comment");
+//         console.log("Error")
+//       }
+      
+//       setData(prev => prev.filter(c => c.id !== id));
+//     }
+//     catch(error){
+//       console.log("E")
+//       console.error("Error deleting comment:", error);
+//     }
+// }
+
+
+// const handleDeleteIssue=async(id)=>{
+//     try{
+     
+//       const response=await fetch(`http://localhost:3000/Ratings/${id}/issue`,{
+//         method:"DELETE"
+        
+//       })
+        
+//       if (!response.ok) {
+//         throw new Error("Failed to delete issue");
+//         console.log("Error")
+//       }
+      
+//       setData(prev => prev.filter(c => c.id !== id));
+//     }
+//     catch(error){
+      
+//       console.error("Error deleting comment:", error);
+//     }
+// }
+
+
+
+  const ratingType=[
+    "comments",
+    "issues",
+    "stars"
+  ]
   useEffect(()=>{
     if (!props.residenceId) return
     const getData=async()=>{
-      const res = await api.get(`/residence/${props.residenceId}/Ratings`)
-      setData(res.data.ratings || [])
+      const res=await fetch(`http://localhost:3000/Ratings/residence/${props.res_id}`)
+      const data=await res.json()
+      console.log(`${props.res_id}`)
+      setData(data)
     }
     getData()
   },[props.residenceId])
@@ -22,14 +79,17 @@ const InputField = (props) => {
     
 
     <ul className="list-unstyled">
-      {data.map((comm,i)=>(
+      {data.length===0 &&<div>
+        {data.message}
+        </div>}
+      {data.length>0 && data.map((comm,i)=>(
   
           <div  key={i} >
 
           {props.tab==="comments"&&comm.comment!==null &&
           <div>
-            <CommentSection data={comm} i={i} setData={setData} residenceId={props.residenceId}></CommentSection>
-            <span style={{color:"gray", fontSize:"0.9rem"}}>{new Date(comm.rate_date).toLocaleString('en-US', {
+            <CommentSection  data={comm} i={i} setData={setData}></CommentSection> 
+            <span style={{color:"gray", fontSize:"0.9rem"}}>{new Date(comm.rateDate).toLocaleString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
@@ -44,8 +104,8 @@ const InputField = (props) => {
           {props.tab==="issues" && comm.issues!==null&& 
           <div>
 
-            <IssueSection data={comm} i={i} setData={setData} residenceId={props.residenceId}></IssueSection>
-            <span style={{color:"gray", fontSize:"0.9rem"}}>{new Date(comm.rate_date).toLocaleString('en-US', {
+            <IssueSection  data={comm} i={i} setData={setData} ></IssueSection>
+            <span style={{color:"gray", fontSize:"0.9rem"}}>{new Date(comm.rateDate).toLocaleString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
@@ -62,7 +122,7 @@ const InputField = (props) => {
 
     </ul>
     
-      <InputAndSubmet content={props.content} tab={props.tab} data={data} setData={setData} residenceId={props.residenceId}></InputAndSubmet>
+      <InputAndSubmet res_id={props?.res_id} content={props.content} tab={props.tab} data={data} setData={setData} ></InputAndSubmet>
       
     </>
   )

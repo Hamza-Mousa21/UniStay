@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ContactSidebar = () => {
+const ContactSidebar = (props) => {
   const [data, setData] = useState({});
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
@@ -8,7 +8,7 @@ const ContactSidebar = () => {
 
   useEffect(() => {
     const getOwnerData = async () => {
-      const owner = await fetch(`http://localhost:3000/owner/1/info`);
+      const owner = await fetch(`http://localhost:3000/owner/${props.owner_id}/info`);
       const info = await owner.json();
       setData(info);
     };

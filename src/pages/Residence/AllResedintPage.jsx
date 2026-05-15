@@ -15,6 +15,11 @@ const AllResidence = () => {
 
     const token = localStorage.getItem("token")
 
+
+    const handleAISearch = (results) => {
+            setData(results);
+    };
+
     useEffect(() => {
 
         const getData = async () => {
@@ -136,7 +141,7 @@ const AllResidence = () => {
                 }}
             >
 
-                {smallScreen && <SideBar />}
+                {smallScreen && <SideBar onSearch={handleAISearch}/>}
 
                 <div className="col-12 col-md-12 col-lg-9">
 

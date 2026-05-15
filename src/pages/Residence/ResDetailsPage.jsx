@@ -35,7 +35,7 @@ const ResDetails = () => {
                 }
 
                 const data = await res.json()
-
+                console.log(data)
                 setHotel(data.residence)
 
             } catch (err) {
@@ -396,8 +396,8 @@ const ResDetails = () => {
                     {/* CONTACT */}
                     <div className="col-md-6 col-lg-4">
 
-                        {isMobile && <ContactSidebar />}
-                        {!isMobile && <MobileContactBar />}
+                        {isMobile && <ContactSidebar owner_id={hotel.owner_id}/>}
+                        {!isMobile && <MobileContactBar owner_id={hotel.owner_id}/>}
 
                     </div>
 
@@ -426,32 +426,47 @@ const ResDetails = () => {
                                 }}
                             >
                                 <p style={{ color: "gray" }}>شهريا/</p>
-                                <h2>300JD</h2>
+                                <h2>{hotel.rent_price}JD</h2>
                             </div>
 
                         </div>
 
                         {/* DESCRIPTION */}
-                        <h5 style={{ color: "#1b2a41" }}>
+                        <h4 style={{ color: "#1b2a41" }}>
                             الوصف
-                        </h5>
+                        </h4>
 
                         <p style={{ color: "gray" }}>
-                            A hotel is a commercial establishment that provides temporary
-                            accommodation, meals, and various services to guests
-                            such as travelers and tourists. Hotels typically offer a range
-                            of room types, from standard rooms to luxury suites, along with
-                            facilities like restaurants, reception services, housekeeping, Wi-Fi,
-                            and sometimes recreational amenities such as swimming pools, gyms, and
-                            conference halls. The main goal of a hotel is to ensure comfort,
-                            convenience, and a pleasant experience for its guests during their stay.
+                           {hotel.description}
                         </p>
 
-                        {/* AMENITIES */}
-                        <h5 style={{ color: "#1b2a41" }}>
-                            Amenities
-                        </h5>
+                         <h4 style={{ color: "#1b2a41" }}>
+                            العنوان
+                        </h4>
 
+                        
+                        <p style={{ color: "gray" }}>
+                           {hotel.address}
+                        </p>
+
+
+    
+                         <h4 style={{ color: "#1b2a41" }}>
+                         التقييم
+                        </h4>  
+                        <div className="d-flex">
+                                <i className="bi bi-star-fill" ></i>
+                                <i className="bi bi-star-fill" ></i>
+                                <i className="bi bi-star-fill" ></i>
+                                <i className="bi bi-star-fill" ></i>
+                                <i className="bi bi-star-fill" ></i>
+                        </div>                              
+
+                        {/* AMENITIES */}
+                        {/* <h5 style={{ color: "#1b2a41" }}>
+                            Amenities
+                        </h5> */}
+{/* 
                         <div
                             className="d-flex"
                             style={{ flexWrap: "wrap" }}
@@ -473,7 +488,7 @@ const ResDetails = () => {
 
                             ))}
 
-                        </div>
+                        </div> */}
 
                     </div>
 

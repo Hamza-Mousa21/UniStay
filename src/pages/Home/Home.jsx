@@ -47,27 +47,31 @@ function Home() {
   };
 
   const handleAISearch = async (event) => {
-    event.preventDefault();
-    const query = event.target.preferences.value.trim();
-    if (!query) {
-      alert("يرجى وصف السكن الذي تبحث عنه");
-      return;
+  event.preventDefault();
+  const query = event.target.preferences.value.trim();
+  if (!query) {
+    alert("يرجى وصف السكن الذي تبحث عنه");
+    return;
+  }
+  try {
+    setLoadingAI(true);
+    const res = await api.post("/residence/search", { query });
+    setAllProperties(res.data.residences || []);  // 👈 set the same state
+    setShowProperties(true);                       // 👈 show the grid
+    setTimeout(() => {
+      document.getElementById("results-section")?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  } catch (error) {
+    if (error.response?.status === 401) {
+      alert("يجب تسجيل الدخول أولاً لاستخدام البحث الذكي");
+      navigate("/student");
+    } else {
+      alert("فشل البحث الذكي، يرجى المحاولة لاحقاً");
     }
-    try {
-      setLoadingAI(true);
-      const res = await api.post("/residence/ai-search", { query });
-      navigate("/ai-results", { state: { results: res.data.results, query } });
-    } catch (error) {
-      if (error.response?.status === 401) {
-        alert("يجب تسجيل الدخول أولاً لاستخدام البحث الذكي");
-        navigate("/student");
-      } else {
-        alert("فشل البحث الذكي، يرجى المحاولة لاحقاً");
-      }
-    } finally {
-      setLoadingAI(false);
-    }
-  };
+  } finally {
+    setLoadingAI(false);
+  }
+};
 
   return (
     <>

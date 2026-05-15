@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { TextField } from "@mui/material";
 import ContactSidebar from "../../components/Contact/ContactSidebar.jsx";
 import MobileContactBar from "../../components/Contact/MobileContactBar.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import Feedback from "../../components/Comments/feedback.jsx";
 import ImagesCarousel from "../../components/Carousel/Carousel.jsx";
+import Header from '../../components/Header/Header.jsx'
 
 const ResDetails = () => {
+
     const { id } = useParams()
 
     const [hotel, setHotel] = useState(null)
@@ -21,8 +22,11 @@ const ResDetails = () => {
 
     // ================= GET HOTEL =================
     useEffect(() => {
+
         const getHotel = async () => {
+
             try {
+
                 const res = await fetch(`http://localhost:3000/residence/${id}`)
 
                 if (!res.ok) {
@@ -31,6 +35,7 @@ const ResDetails = () => {
                 }
 
                 const data = await res.json()
+
                 setHotel(data.residence)
 
             } catch (err) {
@@ -46,13 +51,16 @@ const ResDetails = () => {
 
     // ================= GET WISHLIST STATE =================
     useEffect(() => {
+
         if (id && token) {
             getLikedResidence()
         }
+
     }, [id])
 
-    // ================= MOBILE RESPONSIVE =================
+    // ================= RESPONSIVE =================
     useEffect(() => {
+
         const handleIsMobileState = () => {
             setIsMobile(window.innerWidth >= 768)
         }
@@ -67,6 +75,7 @@ const ResDetails = () => {
 
     // ================= ADD / REMOVE WISHLIST =================
     const addToWishList = async () => {
+
         try {
 
             const method = clicked ? "DELETE" : "POST"
@@ -89,6 +98,7 @@ const ResDetails = () => {
 
     // ================= CHECK IF LIKED =================
     const getLikedResidence = async () => {
+
         try {
 
             const res = await fetch(`http://localhost:3000/wishlist/${id}`, {
@@ -145,7 +155,10 @@ const ResDetails = () => {
     }
 
     return (
-        <>
+        <>  
+            <div style={{display:"block", marginBottom: "100px"}}>    
+                <Header></Header>
+            </div>
             {moreImagesButton && (
                 <div style={{
                     position: "absolute",
@@ -157,6 +170,7 @@ const ResDetails = () => {
                     left: "50%",
                     transform: "translate(-50%)"
                 }}>
+
                     <p
                         style={{
                             position: "absolute",
@@ -178,6 +192,7 @@ const ResDetails = () => {
                     }}>
                         <ImagesCarousel image={images[0]?.image_url} />
                     </div>
+
                 </div>
             )}
 
@@ -186,7 +201,9 @@ const ResDetails = () => {
                 style={{ backgroundColor: "white" }}
             >
 
+                {/* BACK BUTTON */}
                 <div className="mb-3">
+
                     <ArrowBackIcon sx={{ color: "#1b2a41" }} />
 
                     <a
@@ -199,10 +216,13 @@ const ResDetails = () => {
                     >
                         <b> العودة لكل السكنات</b>
                     </a>
+
                 </div>
 
+                {/* IMAGES SECTION */}
                 <div className="d-flex">
 
+                    {/* LEFT IMAGES */}
                     <div className="col-md-6 col-lg-5">
 
                         {isMobile && (
@@ -216,12 +236,14 @@ const ResDetails = () => {
                             }}>
 
                                 {images.slice(1, 4).map((img, index) => (
+
                                     <div
                                         className="card"
                                         key={index}
                                         style={{ cursor: "pointer" }}
                                         onClick={() => handleSelectedPic(index + 1)}
                                     >
+
                                         <img
                                             src={img?.image_url}
                                             style={{
@@ -230,6 +252,7 @@ const ResDetails = () => {
                                                 objectFit: "cover"
                                             }}
                                         />
+
                                     </div>
                                 ))}
 
@@ -242,6 +265,7 @@ const ResDetails = () => {
                                         }}
                                         onClick={() => handleSelectedPic(4)}
                                     >
+
                                         <img
                                             src={images[4]?.image_url}
                                             style={{
@@ -251,39 +275,44 @@ const ResDetails = () => {
                                             }}
                                         />
 
-                                        {restImages > 0 && (
-                                            <div
-                                                style={{
-                                                    position: "absolute",
-                                                    inset: 0,
-                                                    backgroundColor: "rgba(0,0,0,0.5)",
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                }}
-                                                onClick={(e) => {
-                                                    e.stopPropagation()
-                                                    handleMoreImagesButton()
-                                                }}
-                                            >
-                                                <p style={{
-                                                    color: "white",
-                                                    fontSize: "1.5rem",
-                                                    fontWeight: "bold"
-                                                }}>
-                                                    +{restImages}
-                                                </p>
-                                            </div>
-                                        )}
+                                        <div
+                                            style={{
+                                                position: "absolute",
+                                                inset: 0,
+                                                backgroundColor: "rgba(0,0,0,0.5)",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                            }}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                handleMoreImagesButton()
+                                            }}
+                                        >
+
+                                            <p style={{
+                                                color: "white",
+                                                fontSize: "1.5rem",
+                                                fontWeight: "bold"
+                                            }}>
+                                                +{restImages}
+                                            </p>
+
+                                        </div>
+
                                     </div>
                                 }
+
                             </div>
                         )}
+
                     </div>
 
+                    {/* MAIN IMAGE */}
                     <div className="col-12 col-md-6 col-lg-7 me-2">
 
                         <div className="card">
+
                             <img
                                 src={images[selected]?.image_url}
                                 style={{
@@ -309,20 +338,73 @@ const ResDetails = () => {
                                     {selected + 1}/{images.length}
                                 </p>
                             )}
+
                         </div>
 
+                        {!isMobile && (
+                            <div
+                                className="d-flex mt-2"
+                                style={{
+                                    width: "100%",
+                                    height: "150px",
+                                    overflowX: "auto",
+                                    scrollbarWidth: "none",
+                                    msOverflowStyle: "none",
+                                    gap: "6px",
+                                    cursor: "grab",
+                                }}
+                            >
+
+                                {images.map((img, i) => (
+
+                                    <div
+                                        key={i}
+                                        onClick={() => handleSelectedPic(i)}
+                                        style={{
+                                            flexShrink: 0,
+                                            height: "14vh",
+                                            border: selected === i
+                                                ? "3.5px solid #1b2a41"
+                                                : "none",
+                                            borderRadius: "8px",
+                                            overflow: "hidden",
+                                        }}
+                                    >
+
+                                        <img
+                                            src={img?.image_url}
+                                            className="card"
+                                            style={{
+                                                height: "100%",
+                                                pointerEvents: "none"
+                                            }}
+                                        />
+
+                                    </div>
+                                ))}
+
+                            </div>
+                        )}
+
                     </div>
+
                 </div>
 
+                {/* DETAILS SECTION */}
                 <div className="row mt-5">
 
+                    {/* CONTACT */}
                     <div className="col-md-6 col-lg-4">
+
                         {isMobile && <ContactSidebar />}
                         {!isMobile && <MobileContactBar />}
+
                     </div>
 
+                    {/* DETAILS */}
                     <div className="col-12 col-md-6 col-lg-8">
 
+                        {/* PRICE + HEART */}
                         <div className="d-flex justify-content-between">
 
                             <i
@@ -349,7 +431,52 @@ const ResDetails = () => {
 
                         </div>
 
+                        {/* DESCRIPTION */}
+                        <h5 style={{ color: "#1b2a41" }}>
+                            الوصف
+                        </h5>
+
+                        <p style={{ color: "gray" }}>
+                            A hotel is a commercial establishment that provides temporary
+                            accommodation, meals, and various services to guests
+                            such as travelers and tourists. Hotels typically offer a range
+                            of room types, from standard rooms to luxury suites, along with
+                            facilities like restaurants, reception services, housekeeping, Wi-Fi,
+                            and sometimes recreational amenities such as swimming pools, gyms, and
+                            conference halls. The main goal of a hotel is to ensure comfort,
+                            convenience, and a pleasant experience for its guests during their stay.
+                        </p>
+
+                        {/* AMENITIES */}
+                        <h5 style={{ color: "#1b2a41" }}>
+                            Amenities
+                        </h5>
+
+                        <div
+                            className="d-flex"
+                            style={{ flexWrap: "wrap" }}
+                        >
+
+                            {Amenities.map((A) => (
+
+                                <div
+                                    key={A}
+                                    className="bg-light p-2 m-2"
+                                    style={{
+                                        margin: "5",
+                                        borderRadius: "15px",
+                                        color: "#1b2a41"
+                                    }}
+                                >
+                                    {A}
+                                </div>
+
+                            ))}
+
+                        </div>
+
                     </div>
+
                 </div>
 
                 <Feedback res_id={id} />
@@ -357,6 +484,7 @@ const ResDetails = () => {
             </div>
 
             <Footer />
+
         </>
     )
 }

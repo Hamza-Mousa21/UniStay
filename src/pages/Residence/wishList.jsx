@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
+import Header from "../../components/Header/Header";
 
 const WishList = () => {
     const navigate = useNavigate()
@@ -40,7 +41,11 @@ const WishList = () => {
     }
 
     return (
-        <>
+        <> 
+        
+            <div style={{display:"block", marginBottom: "100px"}}>    
+                <Header></Header>
+            </div>
             <div className="row p-4">
                 <h3>العودة لكل السكنات</h3>
 

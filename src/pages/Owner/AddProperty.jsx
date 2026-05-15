@@ -44,7 +44,6 @@ function AddProperty() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -102,9 +101,7 @@ function AddProperty() {
       body.append("security", services.security);
       selectedFiles.forEach((file) => body.append("images", file));
 
-      await api.post("/residence/add", body, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await api.post("/residence/add", body);
 
       alert("تم نشر الإعلان بنجاح!");
       navigate("/all-residence");

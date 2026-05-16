@@ -9,6 +9,8 @@ import Feedback from "../../components/Comments/feedback.jsx";
 import ImagesCarousel from "../../components/Carousel/Carousel.jsx";
 import Header from '../../components/Header/Header.jsx'
 
+const BASE_URL = "http://localhost:3000"
+
 const ResDetailsPage = () => {
     const navigate = useNavigate()
     const { id } = useParams()
@@ -29,7 +31,7 @@ const ResDetailsPage = () => {
     useEffect(() => {
         const getHotel = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/residence/${id}`)
+                const res = await fetch(`${BASE_URL}/residence/${id}`)
                 if (!res.ok) { console.log("API error:", res.status); return }
                 const data = await res.json()
                 console.log(data)
@@ -46,7 +48,7 @@ const ResDetailsPage = () => {
     useEffect(() => {
         const getAverage = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/Ratings/residence/${id}/average`)
+                const res = await fetch(`${BASE_URL}/Ratings/residence/${id}/average`)
                 const data = await res.json()
                 setAverage(data.average)
                 setTotalRatings(data.total)
@@ -73,7 +75,7 @@ const ResDetailsPage = () => {
     const addToWishList = async () => {
         try {
             const method = clicked ? "DELETE" : "POST"
-            const res = await fetch(`http://localhost:3000/wishlist/${id}`, {
+            const res = await fetch(`${BASE_URL}/wishlist/${id}`, {
                 method: method,
                 headers: { "Authorization": `Bearer ${token}` }
             })
@@ -86,7 +88,7 @@ const ResDetailsPage = () => {
     // ================= CHECK IF LIKED =================
     const getLikedResidence = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/wishlist/${id}`, {
+            const res = await fetch(`${BASE_URL}/wishlist/${id}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             })
             if (!res.ok) { console.log("Error fetching wishlist state"); return }
@@ -195,13 +197,13 @@ const ResDetailsPage = () => {
 
                                 {images.length === 2 && (
                                     <div className="card" style={{ cursor: "pointer", gridColumn: "1 / -1", height: "50%" }} onClick={() => handleSelectedPic(1)}>
-                                        <img src={images[1]?.image_url} style={{ width: "100%", height: "50%", objectFit: "cover" }} />
+                                        <img src={`${BASE_URL}${images[1]?.image_url}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                                     </div>
                                 )}
 
                                 {images.length === 3 && images.slice(1, 3).map((img, index) => (
                                     <div className="card" key={index} style={{ cursor: "pointer" }} onClick={() => handleSelectedPic(index + 1)}>
-                                        <img src={img?.image_url} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                                        <img src={`${BASE_URL}${img?.image_url}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                                     </div>
                                 ))}
 
@@ -209,12 +211,12 @@ const ResDetailsPage = () => {
                                     <>
                                         {images.slice(1, 4).map((img, index) => (
                                             <div className="card" key={index} style={{ cursor: "pointer" }} onClick={() => handleSelectedPic(index + 1)}>
-                                                <img src={img?.image_url} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                                                <img src={`${BASE_URL}${img?.image_url}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                                             </div>
                                         ))}
                                         {restImages > 0 && (
                                             <div className="card overflow-hidden" style={{ position: "relative", cursor: "pointer" }} onClick={() => handleSelectedPic(4)}>
-                                                <img src={images[4]?.image_url} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                                                <img src={`${BASE_URL}${images[4]?.image_url}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                                                 <div
                                                     style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center" }}
                                                     onClick={(e) => { e.stopPropagation(); handleMoreImagesButton() }}
@@ -232,8 +234,8 @@ const ResDetailsPage = () => {
                     {/* MAIN IMAGE */}
                     <div className={`${images.length >= 2 && isMobile ? "col-md-6 col-lg-7" : "col-12"} me-2`}>
                         <div className="card">
-                            {isMobile && <img src={images[selected]?.image_url} style={{ aspectRatio: "5/4", height: "58vh" }} />}
-                            {!isMobile && <img src={images[mobileSelectedImage]?.image_url} style={{ aspectRatio: "5/4", height: "58vh" }} />}
+                            {isMobile && <img src={`${BASE_URL}${images[selected]?.image_url}`} style={{ aspectRatio: "5/4", height: "58vh" }} />}
+                            {!isMobile && <img src={`${BASE_URL}${images[mobileSelectedImage]?.image_url}`} style={{ aspectRatio: "5/4", height: "58vh" }} />}
                             {!isMobile && (
                                 <p style={{ position: "absolute", top: "20px", right: "20px", border: "1px solid transparent", padding: "5px", width: "auto", borderRadius: "8px", background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", color: "white" }}>
                                     {mobileSelectedImage + 1}/{images.length}
@@ -245,7 +247,7 @@ const ResDetailsPage = () => {
                             <div className="d-flex mt-2" style={{ width: "100%", height: "150px", overflowX: "auto", scrollbarWidth: "none", msOverflowStyle: "none", gap: "6px", cursor: "grab" }}>
                                 {images.map((img, i) => (
                                     <div key={i} onClick={() => setMobileSelectedImage(i)} style={{ flexShrink: 0, height: "14vh", border: mobileSelectedImage === i ? "3.5px solid #1b2a41" : "none", borderRadius: "8px", overflow: "hidden" }}>
-                                        <img src={img?.image_url} className="card" style={{ height: "100%", pointerEvents: "none" }} />
+                                        <img src={`${BASE_URL}${img?.image_url}`} className="card" style={{ height: "100%", pointerEvents: "none" }} />
                                     </div>
                                 ))}
                             </div>
@@ -327,7 +329,7 @@ const ResDetailsPage = () => {
                             <div className="col-3">
                                 <div className="p-2 rounded" style={{ backgroundColor: "#f8f9fa", color: "#1b2a41" }}>
                                     <i className="bi bi-mortarboard me-1" /><small>المسافة عن الجامعة</small>
-                                    <div><strong>{hotel.distance_from_university}م</strong></div>
+                                    <div><strong>{hotel.distance_from_university}د</strong></div>
                                 </div>
                             </div>
                             <div className="col-3">

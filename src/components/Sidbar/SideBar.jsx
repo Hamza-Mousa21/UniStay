@@ -86,9 +86,9 @@ const SideBar = ({ onSearch }) => {
           <h5 className="mt-4">المسافة</h5>
           <select className="form-select form-select-sm w-100" value={distance} onChange={(e) => setDistance(e.target.value)}>
             <option value="">اي مسافة</option>
-            <option value="1">200 متر</option>
-            <option value="2">500 متر</option>
-            <option value="3">1 كم</option>
+            <option value="1">10 د</option>
+            <option value="2">20 د</option>
+            <option value="3">+30 د</option>
           </select>
 
           <h5 className="mt-4">الميزات</h5>

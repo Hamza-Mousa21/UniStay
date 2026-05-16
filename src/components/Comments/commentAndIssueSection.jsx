@@ -10,7 +10,7 @@ const InputField = (props) => {
   const handleCommentSettings = (index) => {
     setCommentSetting(commentSetting === index ? null : index)
   }
-
+  console.log(props.res_id)
 
 // const handleDeleteComment=async(id)=>{
 //     try{
@@ -63,7 +63,7 @@ const InputField = (props) => {
     "stars"
   ]
   useEffect(()=>{
-    if (!props.residenceId) return
+    if (!props.res_id) return
     const getData=async()=>{
       const res=await fetch(`http://localhost:3000/Ratings/residence/${props.res_id}`)
       const data=await res.json()

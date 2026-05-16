@@ -19,6 +19,7 @@ const ResDetailsPage = () => {
     const [images, setImages] = useState([])                          // ✅ CHANGE 1: images as state
     const [isMobile, setIsMobile] = useState(window.innerWidth >= 768)
     const [selected, setSelected] = useState(0)
+    const [mobileSelectedImage,setMobileSelectedImage]=useState(0)
     const [moreImagesButton, setMoreImagesButton] = useState(false)
     const [clicked, setClicked] = useState(false)
 
@@ -338,13 +339,24 @@ const ResDetailsPage = () => {
                 <div className={`${images.length >= 2 && isMobile ? "col-md-6 col-lg-7" : "col-12"} me-2`}>
 
                 <div className="card">
-                    <img
+                    
+                    {isMobile&&<img
                     src={images[selected]?.image_url}
                     style={{
                         aspectRatio: "5/4",
                         height: "58vh"
                     }}
+                    />}
+
+                    {!isMobile&&
+                        <img
+                            src={images[mobileSelectedImage]?.image_url}
+                            style={{
+                                aspectRatio: "5/4",
+                                height: "58vh"
+                            }}
                     />
+                    }
 
                     {!isMobile && (
                     <p style={{
@@ -360,7 +372,7 @@ const ResDetailsPage = () => {
                         WebkitBackdropFilter: "blur(8px)",
                         color: "white",
                     }}>
-                        {selected + 1}/{images.length}
+                        {mobileSelectedImage + 1}/{images.length}
                     </p>
                     )}
                 </div>
@@ -381,11 +393,11 @@ const ResDetailsPage = () => {
                     {images.map((img, i) => (
                         <div
                         key={i}
-                        onClick={() => handleSelectedPic(i)}
+                        onClick={() => setMobileSelectedImage(i)}
                         style={{
                             flexShrink: 0,
                             height: "14vh",
-                            border: selected === i ? "3.5px solid #1b2a41" : "none",
+                            border: mobileSelectedImage === i ? "3.5px solid #1b2a41" : "none",
                             borderRadius: "8px",
                             overflow: "hidden",
                         }}

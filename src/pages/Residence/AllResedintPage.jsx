@@ -150,7 +150,7 @@ const AllResidence = () => {
                         {data.length} results
                     </p>
 
-                    {!smallScreen && <MobileSidebar />}
+                    {!smallScreen && <MobileSidebar onSearch={handleAISearch}/>}
 
                     <div className="row">
 

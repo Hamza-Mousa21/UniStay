@@ -7,20 +7,19 @@ const RatingStars = (props) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const token = localStorage.getItem("token")
-  const user = JSON.parse(localStorage.getItem("student"))
 
   useEffect(() => {
     const getStarRating = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/Ratings/star/${props.res_id}`, {
-          headers: {
-            "Authorization": `Bearer ${token}`
-          }
+        const res = await fetch(`http://localhost:3000/Ratings/residence/${props.res_id}/my-star`, {
+          headers: { "Authorization": `Bearer ${token}` }
         })
-        const data = await res.json()
 
+        if (res.status === 404) return // no rating yet, stay at default
+
+        const data = await res.json()
         if (data.starCount) {
-          setClicked(data.starCount - 1) 
+          setClicked(data.starCount - 1)
           setSubmitted(true)
         }
       } catch (error) {
@@ -55,7 +54,7 @@ const RatingStars = (props) => {
         },
         body: JSON.stringify({
           res_id: props.res_id,
-          starCount: index + 1, // 👈 convert 0-4 back to 1-5
+          starCount: index + 1,
         })
       })
     } catch (error) {
@@ -70,12 +69,17 @@ const RatingStars = (props) => {
 
   const handleDelete = async () => {
     try {
-      await fetch(`http://localhost:3000/Ratings/star/${props.res_id}`, {
-        method: "DELETE",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
+      // ✅ correct endpoint matching your router
+      const rating = await fetch(`http://localhost:3000/Ratings/residence/${props.res_id}/my-star`, {
+        headers: { "Authorization": `Bearer ${token}` }
       })
+      const data = await rating.json()
+
+      await fetch(`http://localhost:3000/Ratings/${data.id}/student/${JSON.parse(localStorage.getItem("student")).id}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+      })
+
       setClicked(-1);
       setSubmitted(false);
       setIsEditing(false);
@@ -85,10 +89,7 @@ const RatingStars = (props) => {
   };
 
   const activeIndex = hoveredIndex !== -1 ? hoveredIndex : clicked;
-
-  const getStarClass = (index) => {
-    return index <= activeIndex ? "bi bi-star-fill" : "bi bi-star";
-  };
+  const getStarClass = (index) => index <= activeIndex ? "bi bi-star-fill" : "bi bi-star";
 
   return (
     <>
@@ -121,15 +122,11 @@ const RatingStars = (props) => {
           <p style={{ color: "gray", fontSize: "0.9rem", margin: 0 }}>
             شكراً على تقييمك!
           </p>
-
-          {/* Edit Button */}
           <i
             className="bi bi-pencil"
             style={{ cursor: "pointer", color: "#1b2a41", fontSize: "1rem" }}
             onClick={handleEdit}
           />
-
-          {/* Delete Button */}
           <i
             className="bi bi-trash3"
             style={{ cursor: "pointer", color: "#1b2a41", fontSize: "1rem" }}

@@ -12,6 +12,9 @@ const InputAndSubmet=(props)=>{
 
       const token = localStorage.getItem("token")
       const user = JSON.parse(localStorage.getItem("student"))
+      // console.log(JSON.parse(localStorage.getItem("student")))
+      // console.log(user.id)
+      // console.log(props.data)
       if(props.tab==="comments"){
         const rate=await fetch(`http://localhost:3000/Ratings/residence/${props?.res_id}`,{
           method:"POST",
@@ -22,7 +25,7 @@ const InputAndSubmet=(props)=>{
 
           body: JSON.stringify({
             user_id: user.id,          
-            res_id: props?.res_id,     
+            res_id: parseInt(props?.res_id),     
             starCount: null,
             comment: inputValue,
             issues: null
@@ -32,6 +35,7 @@ const InputAndSubmet=(props)=>{
         
        
       )
+      
         const response=await rate.json()
         
         props.setData((prev) => [...prev, response]);
@@ -52,7 +56,7 @@ const InputAndSubmet=(props)=>{
 
            body: JSON.stringify({
             user_id: user.id,          
-            res_id: props?.res_id,     
+            res_id: parseInt(props?.res_id),     
             starCount: null,
             comment: null,
             issues: inputValue

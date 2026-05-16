@@ -9,6 +9,9 @@ const CommentSection = (props) => {
     setCommentSetting(commentSetting === index ? null : index)
   }
 
+const currentUser = JSON.parse(localStorage.getItem("student"))
+
+// In your JSX, only show the menu if it's their comment:
 
   const handleDeleteComment = async (id) => {
     try {
@@ -83,7 +86,7 @@ const CommentSection = (props) => {
           <li>{props.data?.comment}</li>                   
         )}
 
-        {!isEditing && (
+        {!isEditing && props.data.user_id === currentUser?.id&& (
           <i
             className="bi bi-three-dots-vertical"
             style={{ cursor: "pointer" }}

@@ -5,7 +5,7 @@ const IssueSection = (props) => {
   const [commentSetting, setCommentSetting] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(props.data?.issues);
-
+  const currentUser = JSON.parse(localStorage.getItem("student"))
   const token = localStorage.getItem("token")
 
   const handleCommentSettings = (index) => {
@@ -142,7 +142,7 @@ const IssueSection = (props) => {
           </li>
         )}
 
-        {!isEditing && (
+        {!isEditing && props.data.user_id === currentUser?.id&& (
           <div className="align-self-end align-self-sm-center">
             <i
               className="bi bi-three-dots-vertical"

@@ -177,19 +177,20 @@ const ResDetailsPage = () => {
                 <div style={{
                     position: "absolute",
                     width: "100%",
-                    backgroundColor: "black",
+                    backgroundColor: "#1b2a41",
                     zIndex: "555",
                     padding: "20px",
                     top: "3.5%",
                     left: "50%",
-                    transform: "translate(-50%)"
+                    transform: "translate(-50%)",
+                    marginTop:"65px"
                 }}>
 
                     <p
                         style={{
                             position: "absolute",
-                            top: 0,
-                            right: "18px",
+                            top: "18px",
+                            right: "25px",
                             color: "white",
                             cursor: "pointer"
                         }}
@@ -204,7 +205,8 @@ const ResDetailsPage = () => {
                         right: "5%",
                         transform: "translate(-5%)"
                     }}>
-                        <ImagesCarousel image={images[0]?.image_url} />
+                        
+                        <ImagesCarousel images={images.slice(4)} totalImages={images.length} startIndex={4} />
                     </div>
 
                 </div>

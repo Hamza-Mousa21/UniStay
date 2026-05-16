@@ -15,23 +15,21 @@ function StudentRegister() {
   const [email, setEmail] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [password, setPassword] = useState("");
-
-  const [confirmPassword, setConfirmPassword] = useState("");
+   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
-
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleStudentClick = () => {
-    window.location.href = "/student-register";
-  };
 
-  const handleOwnerClick = () => {
-    window.location.href = "/owner-register";
-  };
+  const handleStudentClick = () => { window.location.href = "/student-register"; };
+
+  const handleOwnerClick = () => { window.location.href = "/owner-register"; };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    
     /* ================= VALIDATION ================= */
     if (
       !firstName.trim() ||
@@ -59,17 +57,14 @@ function StudentRegister() {
     }
     try {
       /* ================= API REQUEST ================= */
-      const response = await api.post(
-        "/student/register",
-        {
-          first_name: firstName,
-          last_name: lastName,
-          student_id: studentId,
-          email,
-          password,
-          phone_num: phoneNum,
-        }
-      );
+      await api.post("/student/register", {
+        first_name: firstName,
+        last_name: lastName,
+        student_id: studentId,
+        email,
+        password,
+        phone_num: phoneNum,
+      });
       /* ================= SUCCESS ================= */
       setFirstName("");
       setLastName("");
@@ -81,10 +76,7 @@ function StudentRegister() {
       window.location.href = "/student";
     } catch (error) {
       console.error(error);
-      alert(
-        error.response?.data?.message ||
-          "حدث خطأ أثناء إنشاء الحساب"
-      );
+      alert(error.response?.data?.message || "حدث خطأ أثناء إنشاء الحساب");
     }
   };
 
@@ -130,121 +122,93 @@ function StudentRegister() {
                 {/* ================= FIRST NAME ================= */}
 
                 <div className="input-group">
-                  <label htmlFor="firstName">
-                    الاسم الأول
-                  </label>
+                  <label htmlFor="firstName">الاسم الأول</label>
 
                   <input
                     type="text"
                     id="firstName"
                     placeholder="أدخل الاسم الأول"
                     value={firstName}
-                    onChange={(event) =>
-                      setFirstName(event.target.value)
-                    }
+                    onChange={(event) => setFirstName(event.target.value)}
                   />
                 </div>
 
                 {/* ================= LAST NAME ================= */}
 
                 <div className="input-group">
-                  <label htmlFor="lastName">
-                    اسم العائلة
-                  </label>
+                  <label htmlFor="lastName">اسم العائلة</label>
 
                   <input
                     type="text"
                     id="lastName"
                     placeholder="أدخل اسم العائلة"
                     value={lastName}
-                    onChange={(event) =>
-                      setLastName(event.target.value)
-                    }
+                    onChange={(event) => setLastName(event.target.value)}
                   />
                 </div>
 
                 {/* ================= STUDENT ID ================= */}
 
                 <div className="input-group">
-                  <label htmlFor="studentId">
-                    الرقم الجامعي
-                  </label>
+                  <label htmlFor="studentId">الرقم الجامعي</label>
 
                   <input
                     type="text"
                     id="studentId"
                     placeholder="11912345"
                     value={studentId}
-                    onChange={(event) =>
-                      setStudentId(event.target.value)
-                    }
+                    onChange={(event) => setStudentId(event.target.value)}
                   />
                 </div>
 
                 {/* ================= EMAIL ================= */}
 
                 <div className="input-group">
-                  <label htmlFor="email">
-                    البريد الإلكتروني
-                  </label>
+                  <label htmlFor="email">البريد الإلكتروني</label>
 
                   <input
                     type="email"
                     id="email"
                     placeholder="example@student.najah.edu"
                     value={email}
-                    onChange={(event) =>
-                      setEmail(event.target.value)
-                    }
+                    onChange={(event) => setEmail(event.target.value)}
                   />
                 </div>
 
                 {/* ================= PHONE ================= */}
 
                 <div className="input-group">
-                  <label htmlFor="phone">
-                    رقم الهاتف
-                  </label>
+                  <label htmlFor="phone">رقم الهاتف</label>
 
                   <input
                     type="text"
                     id="phone"
                     placeholder="0599123456"
                     value={phoneNum}
-                    onChange={(event) =>
-                      setPhoneNum(event.target.value)
-                    }
+                    onChange={(event) => setPhoneNum(event.target.value)}
                   />
                 </div>
 
                 {/* ================= PASSWORD ================= */}
 
                 <div className="input-group">
-                  <label htmlFor="password">
-                    كلمة المرور
-                  </label>
+                  <label htmlFor="password">كلمة المرور</label>
 
                   <div className="password-box">
                     <button
                       type="button"
                       className="toggle-password"
-                      onClick={() =>
-                        setShowPassword((prev) => !prev)
-                      }
+                      onClick={() => setShowPassword((prev) => !prev)}
                     >
                       {showPassword ? "إخفاء" : "إظهار"}
                     </button>
 
                     <input
-                      type={
-                        showPassword ? "text" : "password"
-                      }
+                      type={showPassword ? "text" : "password"}
                       id="password"
                       placeholder="أدخل كلمة المرور"
                       value={password}
-                      onChange={(event) =>
-                        setPassword(event.target.value)
-                      }
+                      onChange={(event) => setPassword(event.target.value)}
                     />
                   </div>
                 </div>
@@ -252,38 +216,24 @@ function StudentRegister() {
                 {/* ================= CONFIRM PASSWORD ================= */}
 
                 <div className="input-group">
-                  <label htmlFor="confirmPassword">
-                    تأكيد كلمة المرور
-                  </label>
+                  <label htmlFor="confirmPassword">تأكيد كلمة المرور</label>
 
                   <div className="password-box">
                     <button
                       type="button"
                       className="toggle-password"
-                      onClick={() =>
-                        setShowConfirmPassword(
-                          (prev) => !prev
-                        )
-                      }
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
                     >
-                      {showConfirmPassword
-                        ? "إخفاء"
-                        : "إظهار"}
+                      {showConfirmPassword ? "إخفاء" : "إظهار"}
                     </button>
 
                     <input
-                      type={
-                        showConfirmPassword
-                          ? "text"
-                          : "password"
-                      }
+                      type={showConfirmPassword ? "text" : "password"}
                       id="confirmPassword"
                       placeholder="أعد إدخال كلمة المرور"
                       value={confirmPassword}
                       onChange={(event) =>
-                        setConfirmPassword(
-                          event.target.value
-                        )
+                        setConfirmPassword(event.target.value)
                       }
                     />
                   </div>
@@ -291,10 +241,7 @@ function StudentRegister() {
 
                 {/* ================= SUBMIT ================= */}
 
-                <button
-                  type="submit"
-                  className="submit-btn"
-                >
+                <button type="submit" className="submit-btn">
                   إنشاء حساب طالب
                 </button>
               </form>

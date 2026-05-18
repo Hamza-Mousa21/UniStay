@@ -150,7 +150,7 @@ const AllResidence = () => {
                         {data.length} results
                     </p>
 
-                    {!smallScreen && <MobileSidebar />}
+                    {!smallScreen && <MobileSidebar onSearch={handleAISearch}/>}
 
                     <div className="row">
 
@@ -176,7 +176,7 @@ const AllResidence = () => {
                                 >
 
                                     <img
-                                        src={hotel?.ResidenceImages[0]?.image_url}
+                                        src={`http://localhost:3000${hotel?.ResidenceImages[0]?.image_url}`}
                                         style={{ aspectRatio: "14/15" }}
                                         alt={hotel?.name}
                                     />
